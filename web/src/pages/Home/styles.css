@@ -1,0 +1,63 @@
+#imgFundo {
+	background-image: url(../../assets/fundoHome.webp);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	color: #fff;
+}
+
+div#centralInfo {
+	background-color: #00000073;
+	width: 650px;
+	height: 400px;
+	margin: 0px auto 0px auto;
+	text-align: center;
+	border-radius: 10px;
+	padding-top: 5px;
+	transition: background-color 0.5s;
+}
+
+div#centralInfo:hover {
+	background-color: #000000cc;
+}
+
+#logo {
+	width: 85px;
+	height: 100px;
+	margin: 0px auto 0px auto;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	width: 200px;
+	background-image: linear-gradient(to right, transparent, #fff, transparent);
+	margin: 10px auto 10px auto;
+}
+
+h1#titleSCJ {
+	font-family: Cookie, cursive;
+	font-size: 80px;
+	text-shadow: 2px 1px #000;
+}
+
+h2#semiTitleSCJ {
+	font-family: 'Cormorant Garamond', serif;
+	font-size: 26px;
+	margin: 20px auto 0px auto;
+	width: 150px;
+}
+
+div#teste {
+	text-align: center;
+	font-size: 40pt;
+	padding: 100px 0px 120px 0px;
+	transition: background-color 1s;
+}
+
+div#teste:hover {
+	background-color: #700000dd;
+}
