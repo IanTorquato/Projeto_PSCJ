@@ -19,7 +19,7 @@ const Home = () => {
             </div>
 
             <div className="divBotao">
-                <div className="btnCadastrar">Cadastrar Missa</div>
+                <a href="/cadastro-missa" className="btnCadastrar">Cadastrar Missa</a>
             </div>
 
             <div className="cronograma">
@@ -29,7 +29,7 @@ const Home = () => {
                     <div className="detalhesMissa">
                         <h1 className="tituloMissa">23/06 - 19:30</h1>
 
-                        <h2 className="subTituloMissa">SEGUNDA-FEIRA | CAPELA SANTO ANTÔNIO - TERMAS</h2>
+                        <h2 className="subTituloMissa">EU NÃO SEI EXATAMENTO O QUE TESTAR AQUI MAS EU SOU UM CARA MT LEGAL</h2>
                     </div>
 
                     <div className="detalhesMissa">
@@ -53,9 +53,6 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-
-            <footer className="cabecalho">
-            </footer>
         </div>
     )
 }
