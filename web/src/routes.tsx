@@ -2,13 +2,15 @@ import React from 'react'
 import { Route, BrowserRouter } from 'react-router-dom'
 
 import Home from './pages/Home'
-import CadastroMissa from './pages/CadastroMissa'
+import CadastrarMissa from './pages/CadastrarMissa'
+import EditarMissa from './pages/EditarMissa'
 
 const Routes = () => {
     return (
         <BrowserRouter>
             <Route component={Home} path="/" exact />
-            <Route component={CadastroMissa} path="/cadastro-missa" />
+            <Route component={CadastrarMissa} path="/cadastrar-missa" />
+            <Route component={EditarMissa} path='/editar-missa' />
         </BrowserRouter>
     )
 }
