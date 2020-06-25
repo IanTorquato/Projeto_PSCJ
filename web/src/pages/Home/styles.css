@@ -1,5 +1,7 @@
 body {
 	color: #fff;
+	background-color: #ccc;
+	font-size: 1.6rem;
 }
 
 div.imgFundo {
@@ -10,7 +12,7 @@ div.imgFundo {
 	background-attachment: fixed;
 }
 
-div.telaInicial {
+section.telaInicial {
 	height: 100vh;
 	display: flex;
 	align-items: center;
@@ -18,12 +20,11 @@ div.telaInicial {
 
 div.centralInfo {
 	background-color: #000000aa;
-	width: 650px;
-	height: 400px;
+	width: 40vw;
+	min-width: 255px;
+	height: 46vh;
 	margin: 0 auto 0 auto;
 	border-radius: 10px;
-	padding-top: 0.5%;
-	transition: background-color 0.5s;
 	text-align: center;
 }
 
@@ -32,7 +33,7 @@ div.centralInfo:hover {
 }
 
 div.centralInfo:hover hr {
-	width: 450px;
+	width: 28vw;
 }
 
 img.logo {
@@ -44,24 +45,25 @@ img.logo {
 hr.linha {
 	border: 0;
 	height: 2px;
-	width: 225px;
+	width: 18vw;
+	min-width: 100px;
 	background-image: linear-gradient(to right, transparent, #fff, transparent);
 	margin: 10px auto 10px auto;
 }
 
 h1.tituloSCJ {
 	font-family: Cookie, cursive;
-	font-size: 80px;
+	font-size: 10rem;
 	text-shadow: 2px 1px #000;
 }
 
 h2.subTituloSCJ {
 	font-family: 'Cormorant Garamond', serif;
-	font-size: 26px;
+	font-size: 2.6rem;
 	margin: 20px auto 0 auto;
 }
 
-div.divBotao {
+section.sectionBotao {
 	background-color: #000000aa;
 	display: flex;
 	align-items: center;
@@ -73,7 +75,7 @@ a.btnCadastrar {
 	color: #fff;
 	text-decoration: none;
 	background-color: #ffc32c;
-	font-size: 35px;
+	font-size: 3.5rem;
 	border-radius: 50px;
 	padding: 15px;
 	text-align: center;
@@ -81,7 +83,6 @@ a.btnCadastrar {
 	cursor: pointer;
 	box-shadow: 0 0 25px #00000044;
 	text-shadow: 0 0 5px #00000099;
-	transition: box-shadow 0.5s;
 }
 
 a.btnCadastrar:hover {
@@ -89,7 +90,7 @@ a.btnCadastrar:hover {
 	box-shadow: 0 0 20px #ffffffbb;
 }
 
-div.cronograma {
+section.cronograma {
 	background-color: #df0505a1;
 	display: flex;
 	align-items: center;
@@ -103,39 +104,38 @@ h1.proximasMissas {
 	background-color: #3e0001;
 	text-align: center;
 	font-family: 'Cinzel', serif;
-	font-size: 25px;
+	font-size: 2.5rem;
 	margin: 100px 0px 45px 0px;
 	padding: 5px;
 	border-radius: 3px;
 }
 
-div.doisItems {
+div.gridMissas {
 	width: 90%;
 	margin-bottom: 30px;
-	display: flex;
-	justify-content: space-between;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
 }
 
 div.detalhesMissa {
 	background-image: url('../../assets/fundoDetalhes.webp');
 	background-repeat: no-repeat;
-	background-size: cover;
+	background-size: contain;
 	background-position: center center;
-	width: 700px;
-	height: 300px;
+	height: 32vh;
 	display: flex;
 	align-items: center;
 	flex-direction: column;
 }
 
 h1.tituloMissa {
-	font-size: 50px;
+	font-size: 5rem;
 	font-family: 'Merriweather', serif;
-	margin-top: 90px;
+	margin-top: 10vh;
 }
 
 h2.subTituloMissa {
-	font-size: 16px;
+	font-size: 1.6rem;
 	color: #ddd;
 	font-family: 'Cinzel', serif;
 	margin-top: 20px;

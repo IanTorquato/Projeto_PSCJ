@@ -7,7 +7,7 @@ import logoYoutube from '../../assets/logoYoutube.webp'
 
 const Footer = () => {
     const dataAtual = new Date()
-    const anoAtual = dataAtual.getFullYear
+    const anoAtual = dataAtual.getFullYear()
 
     return (
         <footer className="cabecalho">
@@ -15,22 +15,22 @@ const Footer = () => {
                 <ul>
                     <li>
                         <a href="https://www.facebook.com/Paróquia-Santuário-Sagrado-Coração-de-Jesus-108271214142847"
-                            className="facebook" rel="noopener noreferrer"><img src={logoFacebook} className="icons"
-                                alt="Icone do Facebook" />
+                            className="facebook" target="_blank" rel="noopener noreferrer">
+                            <img src={logoFacebook} className="icons" alt="Icone do Facebook" />
                         </a>
                     </li>
 
                     <li>
-                        <a href="https://www.instagram.com/santuariogravatal" className="instagram" rel="noopener noreferrer"><img
-                            src={logoInstagram} className="icons"
-                            alt="Icone do Instagram" />
+                        <a href="https://www.instagram.com/santuariogravatal" className="instagram" target="_blank"
+                            rel="noopener noreferrer">
+                            <img src={logoInstagram} className="icons" alt="Icone do Instagram" />
                         </a>
                     </li>
 
                     <li>
                         <a href="https://www.youtube.com/channel/UCoWwECJDCgyMggNyKJ14jnA" className="youtube"
-                            rel="noopener noreferrer"><img src={logoYoutube} className="icons"
-                                alt="Icone do YouTube" />
+                            target="_blank" rel="noopener noreferrer">
+                            <img src={logoYoutube} className="icons" alt="Icone do YouTube" />
                         </a>
                     </li>
                 </ul>

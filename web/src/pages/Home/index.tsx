@@ -6,7 +6,7 @@ import logo from '../../assets/logo.webp'
 const Home = () => {
     return (
         <div className="imgFundo">
-            <div className="telaInicial">
+            <section className="telaInicial">
                 <div className="centralInfo">
                     <img className="logo" src={logo} alt="Brasão da Paróquia" />
                     <hr className="linha" />
@@ -16,16 +16,16 @@ const Home = () => {
                     <hr className="linha" />
                     <h2 className="subTituloSCJ">Gravatal - SC</h2>
                 </div>
-            </div>
+            </section>
 
-            <div className="divBotao">
+            <section className="sectionBotao">
                 <a href="/cadastro-missa" className="btnCadastrar">Cadastrar Missa</a>
-            </div>
+            </section>
 
-            <div className="cronograma">
+            <section className="cronograma">
                 <h1 className="proximasMissas">PRÓXIMAS MISSAS</h1>
 
-                <div className="doisItems">
+                <div className="gridMissas">
                     <div className="detalhesMissa">
                         <h1 className="tituloMissa">23/06 - 19:30</h1>
 
@@ -37,9 +37,7 @@ const Home = () => {
 
                         <h2 className="subTituloMissa">SEXTA-FEIRA | SANTUÁRIO SCJ - CENTRO</h2>
                     </div>
-                </div>
 
-                <div className="doisItems">
                     <div className="detalhesMissa">
                         <h1 className="tituloMissa">27/06 - 19:30</h1>
 
@@ -51,8 +49,20 @@ const Home = () => {
 
                         <h2 className="subTituloMissa">DOMINGO | SANTUÁRIO SCJ - CENTRO</h2>
                     </div>
+
+                    <div className="detalhesMissa">
+                        <h1 className="tituloMissa">28/06 - 19:00</h1>
+
+                        <h2 className="subTituloMissa">DOMINGO | SANTUÁRIO SCJ - CENTRO</h2>
+                    </div>
+
+                    <div className="detalhesMissa">
+                        <h1 className="tituloMissa">28/06 - 19:00</h1>
+
+                        <h2 className="subTituloMissa">DOMINGO | SANTUÁRIO SCJ - CENTRO</h2>
+                    </div>
                 </div>
-            </div>
+            </section>
         </div>
     )
 }
