@@ -1,14 +1,44 @@
-import React from 'react'
+import React, { FormEvent } from 'react'
 import './styles.css'
 
 import Footer from '../../components/Footer'
 
 const CadastrarMissa = () => {
+    function handleSubmit(event: FormEvent) {
+        console.log(event)
+    }
     return (
         <>
             <div className="imgFundo">
-                <section className="telaInicial">
-                    <h1>Cadastrar Missa!</h1>
+                <section className="telaInicialCadastro">
+                    <form onSubmit={(event) => handleSubmit(event)} >
+                        <h1>CADASTRAR MISSA</h1>
+                        <hr />
+
+                        <fieldset>
+                            <legend>
+                                <h2>Local</h2>
+                            </legend>
+
+                            <div className="field">
+                                <select name="local" id="local">
+                                    <option value="0">Selecione um Local</option>
+                                </select>
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>
+                                <h2>Data e Horário</h2>
+                            </legend>
+
+                            <div className="field">
+                                <input type="datetime-local" name="dataHora" id="dataHora" />
+                            </div>
+                        </fieldset>
+
+                        <button type="submit">Cadastrar Missa</button>
+                    </form>
                 </section>
             </div>
             <Footer />

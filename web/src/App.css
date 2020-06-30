@@ -22,12 +22,6 @@ div.imgFundo {
 	background-attachment: fixed;
 }
 
-section.telaInicial {
-	height: 100vh;
-	display: flex;
-	align-items: center;
-}
-
 ::-webkit-scrollbar {
 	width: 10px;
 	height: 10px;

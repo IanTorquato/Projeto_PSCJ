@@ -1,3 +1,9 @@
+section.telaInicial {
+	height: 100vh;
+	display: flex;
+	align-items: center;
+}
+
 div.centralInfo {
 	background-color: #000000aa;
 	width: 36vw;
@@ -5,6 +11,7 @@ div.centralInfo {
 	margin: 0 auto 0 auto;
 	border-radius: 10px;
 	text-align: center;
+	cursor: default;
 }
 
 div.centralInfo:hover {
@@ -102,6 +109,7 @@ section.cronograma {
 	flex-direction: column;
 	text-align: center;
 	padding-bottom: 8vh;
+	cursor: default;
 }
 
 h1.proximasMissas {

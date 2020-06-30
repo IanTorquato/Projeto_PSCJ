@@ -10,7 +10,7 @@ const Footer = () => {
     const anoAtual = dataAtual.getFullYear()
 
     return (
-        <footer className="cabecalho">
+        <footer className="rodape">
             <nav>
                 <ul>
                     <li>

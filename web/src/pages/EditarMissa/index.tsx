@@ -7,7 +7,7 @@ const EditarMissa = () => {
     return (
         <>
             <div className="imgFundo">
-                <section className="telaInicial">
+                <section className="telaInicialEditar">
                     <h1>Editar Missa!</h1>
                 </section>
             </div>
