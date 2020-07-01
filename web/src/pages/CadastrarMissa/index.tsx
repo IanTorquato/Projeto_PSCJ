@@ -4,14 +4,11 @@ import './styles.css'
 import Footer from '../../components/Footer'
 
 const CadastrarMissa = () => {
-    function handleSubmit(event: FormEvent) {
-        console.log(event)
-    }
     return (
         <>
             <div className="imgFundo">
                 <section className="telaInicialCadastro">
-                    <form onSubmit={(event) => handleSubmit(event)} >
+                    <form>
                         <h1>CADASTRAR MISSA</h1>
                         <hr />
 
