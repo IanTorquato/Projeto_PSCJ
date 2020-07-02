@@ -1,4 +1,4 @@
-import React, { FormEvent } from 'react'
+import React from 'react'
 import './styles.css'
 
 import Footer from '../../components/Footer'
@@ -7,12 +7,12 @@ const CadastrarMissa = () => {
     return (
         <>
             <div className="imgFundo">
-                <section className="telaInicialCadastro">
+                <section className="secCadastrar">
                     <form>
                         <h1>CADASTRAR MISSA</h1>
                         <hr />
 
-                        <fieldset>
+                        <fieldset className="fieldsetCadastrar">
                             <legend>
                                 <h2>Local</h2>
                             </legend>
@@ -24,7 +24,7 @@ const CadastrarMissa = () => {
                             </div>
                         </fieldset>
 
-                        <fieldset>
+                        <fieldset className="fieldsetCadastrar">
                             <legend>
                                 <h2>Data e Horário</h2>
                             </legend>
@@ -34,7 +34,7 @@ const CadastrarMissa = () => {
                             </div>
                         </fieldset>
 
-                        <button type="submit">Cadastrar Missa</button>
+                        <button type="submit" className="cadastrarMissa">Cadastrar Missa</button>
                     </form>
                 </section>
             </div>

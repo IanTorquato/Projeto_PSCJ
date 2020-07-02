@@ -9,7 +9,7 @@ const Home = () => {
     return (
         <>
             <div className="imgFundo">
-                <section className="telaInicial">
+                <section className="secHome">
                     <div className="centralInfo">
                         <img className="logo" src={logo} alt="Brasão da Paróquia" />
                         <hr className="linha" />

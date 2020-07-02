@@ -24,7 +24,7 @@ nav ul li {
 
 nav ul li:hover {
 	transform: translateY(-20px);
-	box-shadow: 4px 30px 16px 0px #000000;
+	box-shadow: 4px 30px 16px 0 #000000;
 }
 
 nav ul li a {
@@ -56,12 +56,21 @@ nav a.youtube {
 }
 
 p.copyright {
-	margin: 20px 0px 10px 0px;
+	margin-top: 20px;
 	font-size: 1.3rem;
 	cursor: default;
 }
 
-p.contato {
-	margin-bottom: 20px;
+a.contatos {
+	text-decoration: none;
 	font-size: 1.3rem;
+	font-weight: bold;
+	margin: 35px 0;
+	padding: 5px 10px;
+	border-radius: 10px;
+	background-color: #555;
+}
+
+a.contatos:hover {
+	background-color: #777;
 }

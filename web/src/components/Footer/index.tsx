@@ -36,9 +36,8 @@ const Footer = () => {
                 </ul>
             </nav>
 
-            <p className="copyright">&copy; 2020 - {anoAtual} por Ian da Conceição da Silva e
-            Ana Clara Vargas Rodrigues</p>
-            <p className="contato">Contato: iantorquato2@gmail.com | anaclaravargas16@gmail.com</p>
+            <p className="copyright">&copy; 2020 - {anoAtual} por Ian da Conceição da Silva e Ana Clara Vargas Rodrigues</p>
+            <a href="/contato" className="contatos">Contate os Desenvolvedores</a>
         </footer>
     )
 }

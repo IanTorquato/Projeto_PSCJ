@@ -1,4 +1,4 @@
-section.telaInicialCadastro {
+section.secCadastrar {
 	height: 100vh;
 	display: flex;
 	align-items: center;
@@ -40,13 +40,12 @@ form:hover hr {
 	width: 30vw;
 }
 
-form fieldset {
+form fieldset.fieldsetCadastrar {
 	width: 40vw;
 	margin-top: 4vh;
 	padding: 25px;
 	border: 0;
 	border: 2px dashed #e4af28;
-	/*min-inline-size: auto;*/
 }
 
 form h2 {
@@ -76,7 +75,7 @@ select {
 	cursor: pointer;
 }
 
-button {
+button.cadastrarMissa {
 	background-color: #ffc32c;
 	border: 0;
 	font-size: 2rem;
@@ -90,7 +89,7 @@ button {
 	text-shadow: 0 0 5px #00000099;
 }
 
-button:hover {
+button.cadastrarMissa:hover {
 	background-color: #e7ae1d;
 	box-shadow: 0 0 25px #ffffff44;
 }

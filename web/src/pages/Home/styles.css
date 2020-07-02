@@ -1,4 +1,4 @@
-section.telaInicial {
+section.secHome {
 	height: 100vh;
 	display: flex;
 	align-items: center;
@@ -53,7 +53,7 @@ section.sectionBotoes {
 	background-color: #000000aa;
 	display: flex;
 	flex-direction: row;
-	padding: 4vh 0px 4vh 0px;
+	padding: 4vh 0;
 }
 
 div.alinhaCentro {
