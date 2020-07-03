@@ -1,9 +1,6 @@
 import React from 'react'
 import './styles.css'
-
-import logoInstagram from '../../assets/logoInstagram.webp'
-import logoFacebook from '../../assets/logoFacebook.webp'
-import logoYoutube from '../../assets/logoYoutube.webp'
+import { FaFacebookF, FaInstagram, FaYoutube } from 'react-icons/fa'
 
 const Footer = () => {
     const dataAtual = new Date()
@@ -16,21 +13,21 @@ const Footer = () => {
                     <li>
                         <a href="https://www.facebook.com/Paróquia-Santuário-Sagrado-Coração-de-Jesus-108271214142847"
                             className="facebook" target="_blank" rel="noopener noreferrer">
-                            <img src={logoFacebook} className="icons" alt="Icone do Facebook" />
+                            <FaFacebookF size={40} />
                         </a>
                     </li>
 
                     <li>
                         <a href="https://www.instagram.com/santuariogravatal" className="instagram" target="_blank"
                             rel="noopener noreferrer">
-                            <img src={logoInstagram} className="icons" alt="Icone do Instagram" />
+                            <FaInstagram size={40} />
                         </a>
                     </li>
 
                     <li>
                         <a href="https://www.youtube.com/channel/UCoWwECJDCgyMggNyKJ14jnA" className="youtube"
                             target="_blank" rel="noopener noreferrer">
-                            <img src={logoYoutube} className="icons" alt="Icone do YouTube" />
+                            <FaYoutube size={40} />
                         </a>
                     </li>
                 </ul>
