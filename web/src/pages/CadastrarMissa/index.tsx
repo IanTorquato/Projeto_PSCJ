@@ -14,13 +14,15 @@ const CadastrarMissa = () => {
 
                         <fieldset className="fieldsetCadastrar">
                             <legend>
-                                <h2>Local</h2>
+                                <h2>Local e Quantidade Máxima de Pessoas</h2>
                             </legend>
 
                             <div className="field">
-                                <select name="local" id="local">
+                                <select name="local" className="local">
                                     <option value="0">Selecione um Local</option>
                                 </select>
+
+                                <input type="number" name="maxPessoas" className="maxPessoas" defaultValue={0} />
                             </div>
                         </fieldset>
 
@@ -30,7 +32,7 @@ const CadastrarMissa = () => {
                             </legend>
 
                             <div className="field">
-                                <input type="datetime-local" name="dataHora" id="dataHora" />
+                                <input type="datetime-local" name="dataHora" className="dataHora" />
                             </div>
                         </fieldset>
 

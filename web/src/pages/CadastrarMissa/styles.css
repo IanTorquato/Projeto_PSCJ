@@ -56,7 +56,6 @@ form h2 {
 
 form fieldset div.field {
 	display: flex;
-	flex-direction: column;
 }
 
 form fieldset input,
@@ -68,6 +67,16 @@ select {
 	font-size: 1.5rem;
 	color: #333;
 	font-family: 'Roboto Condensed', sans-serif;
+	width: 100%;
+}
+
+form fieldset select.local {
+	width: 80%;
+}
+
+form fieldset input.maxPessoas {
+	margin-left: 5%;
+	width: 15%;
 }
 
 input,
