@@ -5,6 +5,7 @@ export async function up(Knex: Knex) {
         table.increments('id').primary()
         table.integer('missa_id').notNullable().references('id').inTable('missas')
         table.integer('usuario_id').notNullable().references('id').inTable('usuarios')
+        table.integer('quantidade_pessoas').notNullable()
     })
 }
 
