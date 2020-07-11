@@ -1,16 +1,27 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+
 import './styles.css'
-
 import logo from '../../assets/logo.webp'
-
 import Footer from '../../components/Footer'
 
+function rolarScroll() {
+    const meiaTelaY = window.innerHeight
+    console.log(meiaTelaY)
+
+    window.scrollTo(0, window.innerHeight)
+}
+
 const Home = () => {
+    function voltarTopo() {
+        window.scrollTo(0, 0)
+    }
+
     return (
         <>
             <div className="imgFundo">
                 <section className="secHome">
-                    <div className="centralInfo">
+                    <div className="centralInfo" onClick={rolarScroll}>
                         <img className="logo" src={logo} alt="Brasão da Paróquia" />
                         <hr className="linha" />
 
@@ -23,8 +34,8 @@ const Home = () => {
 
                 <section className="sectionBotoes">
                     <div className="alinhaCentro">
-                        <a href="/cadastrar-missa" className="btnCadastrar">Cadastrar Missa</a>
-                        <a href="/editar-missa" className="btnEditar">Editar Missa</a>
+                        <Link to="/cadastrar-missa" className="btnCadastrar" onClick={voltarTopo}>Cadastrar Missa</Link>
+                        <Link to="/editar-missa" className="btnEditar" onClick={voltarTopo}>Editar Missa</Link>
                     </div>
                 </section>
 

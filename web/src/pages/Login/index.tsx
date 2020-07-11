@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
-import './styles.css'
 
+import './styles.css'
 import Footer from '../../components/Footer'
 import LoginContext from '../../contexts/login'
 

@@ -11,7 +11,7 @@ div.centralInfo {
 	margin: 0 auto 0 auto;
 	border-radius: 10px;
 	text-align: center;
-	cursor: default;
+	cursor: pointer;
 }
 
 div.centralInfo:hover {

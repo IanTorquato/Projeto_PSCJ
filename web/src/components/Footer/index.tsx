@@ -1,10 +1,17 @@
 import React from 'react'
-import './styles.css'
 import { FaFacebookF, FaInstagram, FaYoutube } from 'react-icons/fa'
+import { FiArrowUpCircle } from 'react-icons/fi'
+import { Link } from 'react-router-dom'
+
+import './styles.css'
 
 const Footer = () => {
     const dataAtual = new Date()
     const anoAtual = dataAtual.getFullYear()
+
+    function voltarTopo() {
+        window.scrollTo(0, 0)
+    }
 
     return (
         <footer className="rodape">
@@ -34,7 +41,12 @@ const Footer = () => {
             </nav>
 
             <p className="copyright">&copy; 2020 - {anoAtual} por Ian da Conceição da Silva e Ana Clara Vargas Rodrigues</p>
-            <a href="/contato" className="contatos">Contate os Desenvolvedores</a>
+
+            <Link to="/contato" className="contatos" onClick={voltarTopo}>Contate os Desenvolvedores</Link>
+
+            <p className="topoPagina"><abbr title="Voltar ao Topo" onClick={voltarTopo}>
+                <FiArrowUpCircle size={40} /></abbr>
+            </p>
         </footer>
     )
 }

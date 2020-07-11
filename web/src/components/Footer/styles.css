@@ -74,3 +74,15 @@ a.contatos {
 a.contatos:hover {
 	background-color: #777;
 }
+
+p.topoPagina {
+	margin-left: 98vh;
+	position: fixed;
+	bottom: 20px;
+	cursor: pointer;
+	border-radius: 50%;
+}
+
+p.topoPagina:hover {
+	transform: scale(1.3);
+}

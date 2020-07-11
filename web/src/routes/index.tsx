@@ -2,7 +2,6 @@ import React, { useContext } from 'react'
 
 import RoutesDeslogado from './deslogado.routes'
 import RoutesLogado from './logado.routes'
-
 import LoginContext from '../contexts/login'
 
 const Routes = () => {
