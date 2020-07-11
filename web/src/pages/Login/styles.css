@@ -1,0 +1,14 @@
+section.secLogin {
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+input.btnLogar {
+	background-color: #333;
+	font-size: 18rem;
+	border-radius: 20px;
+	cursor: pointer;
+	padding: 20px;
+}
