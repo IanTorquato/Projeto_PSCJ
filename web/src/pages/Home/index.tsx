@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 import './styles.css'
 import logo from '../../assets/logo.webp'
 import Footer from '../../components/Footer'
+import api from '../../services/api'
 
 function rolarScroll() {
     const meiaTelaY = window.innerHeight
@@ -12,7 +13,24 @@ function rolarScroll() {
     window.scrollTo(0, window.innerHeight)
 }
 
+interface Missa {
+    id: number
+    local_id: number
+    data: string
+    hora: string
+    max_pessoas: number
+    pessoas_cadastradas: number
+}
+
 const Home = () => {
+    const [missas, setMissas] = useState<Missa[]>([])
+
+    useEffect(() => {
+        api.get('missas').then(response => {
+            setMissas(response.data)
+        })
+    }, [])
+
     function voltarTopo() {
         window.scrollTo(0, 0)
     }
@@ -43,41 +61,23 @@ const Home = () => {
                     <h1 className="proximasMissas">PRÓXIMAS MISSAS</h1>
 
                     <div className="gridMissas">
-                        <div className="detalhesMissa">
-                            <h1 className="tituloMissa">23/06 - 19:30</h1>
+                        {missas.map(missa => {
+                            const diaMissa = new Date(Date.parse(`${missa.data}`))
 
-                            <h2 className="subTituloMissa">EU NÃO SEI EXATAMENTO O QUE TESTAR AQUI MAS EU SOU</h2>
-                        </div>
+                            const diasSemana = ['DOMINGO', 'SEGUNDA-FEIRA', 'TERÇA-FEIRA', 'QUARTA-FEIRA',
+                                'QUINTA-FEIRA', 'SEXTA-FEIRA', 'SÁBADO']
 
-                        <div className="detalhesMissa">
-                            <h1 className="tituloMissa">26/06 - 19:30</h1>
+                            return (
+                                <div key={missa.id} className="detalhesMissa">
+                                    <h1 className="tituloMissa">{missa.data.slice(5, 10)} - {missa.hora}</h1>
 
-                            <h2 className="subTituloMissa">SEXTA-FEIRA | SANTUÁRIO SCJ - CENTRO</h2>
-                        </div>
+                                    <h2 className="subTituloMissa">{diasSemana[diaMissa.getDay()]} | {
+                                        missa.local_id === 1 ? 'CENTRO' : 'TERMAS'
+                                    } </h2>
 
-                        <div className="detalhesMissa">
-                            <h1 className="tituloMissa">27/06 - 19:30</h1>
-
-                            <h2 className="subTituloMissa">SÁBADO | SANTUÁRIO SCJ - CENTRO</h2>
-                        </div>
-
-                        <div className="detalhesMissa">
-                            <h1 className="tituloMissa">28/06 - 19:00</h1>
-
-                            <h2 className="subTituloMissa">DOMINGO | SANTUÁRIO SCJ - CENTRO</h2>
-                        </div>
-
-                        <div className="detalhesMissa">
-                            <h1 className="tituloMissa">28/06 - 19:00</h1>
-
-                            <h2 className="subTituloMissa">DOMINGO | SANTUÁRIO SCJ - CENTRO</h2>
-                        </div>
-
-                        <div className="detalhesMissa">
-                            <h1 className="tituloMissa">28/06 - 19:00</h1>
-
-                            <h2 className="subTituloMissa">DOMINGO | SANTUÁRIO SCJ - CENTRO</h2>
-                        </div>
+                                </div>
+                            )
+                        })}
                     </div>
                 </section>
             </div>

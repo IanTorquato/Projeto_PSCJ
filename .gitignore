@@ -5,7 +5,7 @@ yarn.lock
 tsconfig.json
 
 server/uploads/*
-server/*.sqlite
+server/src/database/database.sqlite
 
 mobile/.expo/*
 mobile/.expo-shared/*

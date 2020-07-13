@@ -20,10 +20,16 @@ routes.get('/missas', missas.index)
 
 routes.get('/missas/:id', missas.show)
 
+routes.put('/missas/:id', missas.update)
+
+routes.delete('/missas/:id', missas.delete)
+
 routes.post('/usuarios', usuarios.create)
 
 routes.get('/usuarios', usuarios.index)
 
 routes.post('/missa_usuario', missaUsuario.create_update)
+
+routes.get('/missa_usuario', missaUsuario.index)
 
 export default routes

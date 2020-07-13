@@ -6,8 +6,7 @@ import { Link } from 'react-router-dom'
 import './styles.css'
 
 const Footer = () => {
-    const dataAtual = new Date()
-    const anoAtual = dataAtual.getFullYear()
+    const anoAtual = new Date().getFullYear()
 
     function voltarTopo() {
         window.scrollTo(0, 0)

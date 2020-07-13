@@ -12,6 +12,12 @@ class MissaUsuario {
 
         return response.json({ sucesso: true })
     }
+
+    async index(request: Request, response: Response) {
+        const missaUsuario = await knex('missa_usuario').select('*')
+
+        response.json(missaUsuario)
+    }
 }
 
 export default MissaUsuario

@@ -27,6 +27,24 @@ class Missas {
 
         return response.json(missa)
     }
+
+    async update(request: Request, response: Response) {
+        const { local_id, data, hora, max_pessoas } = request.body
+        const { id } = request.params
+
+        await knex('missas').where({ id }).update({ local_id, data, hora, max_pessoas })
+
+        response.json({ sucesso: true })
+    }
+
+    async delete(request: Request, response: Response) {
+        const { id } = request.params
+
+        await knex('missas').delete().where({ id })
+        // JOIN await knex('missa_usuario').delete().where({id:})
+
+        response.json({ sucesso: true })
+    }
 }
 
 export default Missas
