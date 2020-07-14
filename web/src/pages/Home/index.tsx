@@ -6,13 +6,6 @@ import logo from '../../assets/logo.webp'
 import Footer from '../../components/Footer'
 import api from '../../services/api'
 
-function rolarScroll() {
-    const meiaTelaY = window.innerHeight
-    console.log(meiaTelaY)
-
-    window.scrollTo(0, window.innerHeight)
-}
-
 interface Missa {
     id: number
     local_id: number
@@ -30,6 +23,15 @@ const Home = () => {
             setMissas(response.data)
         })
     }, [])
+
+    missas.sort((a, b) => ((a.data >= b.data ? 1 : -1)))
+
+    function rolarScroll() {
+        const meiaTelaY = window.innerHeight
+        console.log(meiaTelaY)
+
+        window.scrollTo(0, window.innerHeight)
+    }
 
     function voltarTopo() {
         window.scrollTo(0, 0)
