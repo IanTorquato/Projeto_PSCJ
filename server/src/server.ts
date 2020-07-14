@@ -6,10 +6,13 @@ import routes from './routes'
 const app = express()
 
 app.use(express.json())
+
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', '*');
   next();
 });
+
 app.use(routes)
 
 app.use('/uploads', express.static(path.resolve(__dirname, '..', 'uploads')))

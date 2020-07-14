@@ -70,8 +70,13 @@ select {
 	width: 100%;
 }
 
-form fieldset select.local {
+form fieldset select.local select {
 	width: 80%;
+}
+
+form fieldset select.local option {
+	background-color: #fff;
+	color: #333;
 }
 
 form fieldset input.maxPessoas {
