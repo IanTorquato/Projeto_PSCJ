@@ -40,8 +40,8 @@ class Missas {
     async delete(request: Request, response: Response) {
         const { id } = request.params
 
-        await knex('missas').delete().where({ id })
-        // JOIN await knex('missa_usuario').delete().where({id:})
+        await knex('missas').where({ id }).delete()
+        await knex('missa_usuario').where({ missa_id: id }).delete()
 
         response.json({ sucesso: true })
     }
