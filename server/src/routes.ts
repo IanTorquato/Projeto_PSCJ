@@ -20,7 +20,7 @@ routes.get('/missas', missas.index)
 
 routes.get('/missas/:id', missas.show)
 
-routes.put('/missas/:id', missas.update)
+routes.put('/missas', missas.update)
 
 routes.delete('/missas/:id', missas.delete)
 

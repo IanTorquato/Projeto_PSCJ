@@ -29,10 +29,9 @@ class Missas {
     }
 
     async update(request: Request, response: Response) {
-        const { local_id, data, hora, max_pessoas } = request.body
-        const { id } = request.params
+        const { missa_id, local_id, data, hora, max_pessoas } = request.body
 
-        await knex('missas').where({ id }).update({ local_id, data, hora, max_pessoas })
+        await knex('missas').where({ id: missa_id }).update({ local_id, data, hora, max_pessoas })
 
         response.json({ sucesso: true })
     }

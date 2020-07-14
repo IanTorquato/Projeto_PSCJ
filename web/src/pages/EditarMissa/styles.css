@@ -14,6 +14,11 @@ form fieldset.fieldsetEditar {
 	border: 2px dashed #4396df;
 }
 
+form fieldset select.missa option {
+	background-color: #fff;
+	color: #333;
+}
+
 button.editarMissa {
 	background-color: #3f92db;
 	border: 0;
