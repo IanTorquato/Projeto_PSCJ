@@ -7,7 +7,7 @@ import designer from '../../assets/designer.png'
 
 const Contato = () => {
     return (
-        <div className="imgFundo">
+        <div className="imgFundoContato">
             <section className="secContato">
                 <section className="pessoas">
                     <img src={programador} alt="Foto do desenvolvedor" className="imgContato" />
