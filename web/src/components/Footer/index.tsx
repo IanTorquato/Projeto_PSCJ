@@ -1,5 +1,5 @@
 import React from 'react'
-import { FaFacebookF, FaInstagram, FaYoutube } from 'react-icons/fa'
+import { FaFacebookF, FaInstagram, FaYoutube, FaWhatsapp } from 'react-icons/fa'
 import { FiArrowUpCircle } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 
@@ -16,6 +16,13 @@ const Footer = () => {
         <footer className="rodape">
             <nav>
                 <ul>
+                    <li>
+                        <a href="https://api.whatsapp.com/send?phone=554836422121" className="whatsapp"
+                            target="_blank" rel="noopener noreferrer">
+                            <FaWhatsapp size={40} />
+                        </a>
+                    </li>
+
                     <li>
                         <a href="https://www.facebook.com/Paróquia-Santuário-Sagrado-Coração-de-Jesus-108271214142847"
                             className="facebook" target="_blank" rel="noopener noreferrer">

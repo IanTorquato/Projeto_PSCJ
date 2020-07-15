@@ -24,7 +24,7 @@ nav ul li {
 
 nav ul li:hover {
 	transform: translateY(-20px);
-	box-shadow: 4px 30px 16px 0 #000000;
+	box-shadow: 0 30px 24px 0 #000000;
 }
 
 nav ul li a {
@@ -53,6 +53,10 @@ nav a.instagram {
 
 nav a.youtube {
 	background-color: #ff0000;
+}
+
+nav a.whatsapp {
+	background-color: #00e676;
 }
 
 p.copyright {
