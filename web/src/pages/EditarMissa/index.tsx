@@ -27,7 +27,7 @@ const EditarMissa = () => {
 
     useEffect(() => {
         api.get('missas').then(response => {
-            setMissas(response.data.sort((a: Missa, b: Missa) => ((a.data >= b.data ? 1 : -1))).map((missa: Missa) => {
+            setMissas(response.data.map((missa: Missa) => {
                 const dataCortada = missa.data.split('/')
                 missa.data = `${dataCortada[2]}/${dataCortada[1]}/${dataCortada[0]}`
 
@@ -61,6 +61,7 @@ const EditarMissa = () => {
 
         if (inputData !== null) {
             const dataCortada = data.split('/')
+
             inputData.value = `${dataCortada[2]}-${dataCortada[1]}-${dataCortada[0]}T${hora}`
         }
     }
@@ -99,7 +100,7 @@ const EditarMissa = () => {
         horaMissa = validaQuantNum(horaMissa)
         minutosMissa = validaQuantNum(minutosMissa)
 
-        setDataMissa({ data: `${anoMissa}/${mesMissa}/${diaMissa}`, hora: `${horaMissa}:${minutosMissa}` })
+        setDataMissa({ data: `${diaMissa}/${mesMissa}/${anoMissa}`, hora: `${horaMissa}:${minutosMissa}` })
     }
 
     async function handleSubmit(event: FormEvent) {
@@ -129,7 +130,6 @@ const EditarMissa = () => {
 
         const dataCortada = data.split('/')
         data = `${dataCortada[2]}/${dataCortada[1]}/${dataCortada[0]}`
-
         const dadosMissa = { missa_id, local_id, data, hora, max_pessoas }
 
         await api.put('missas', dadosMissa)

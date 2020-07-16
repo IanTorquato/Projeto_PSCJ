@@ -19,8 +19,8 @@ const Home = () => {
     const [missas, setMissas] = useState<Missa[]>([])
 
     useEffect(() => {
-        api.get('missas').then(response => {
-            setMissas(response.data.sort((a: Missa, b: Missa) => ((a.data >= b.data ? 1 : -1))).map((missa: Missa) => {
+        api.get('missas?quantMissas=6').then(response => {
+            setMissas(response.data.map((missa: Missa) => {
                 const dataCortada = missa.data.split('/')
                 missa.data = `${dataCortada[2]}/${dataCortada[1]}/${dataCortada[0]}`
 
@@ -67,7 +67,6 @@ const Home = () => {
                             const dataInvertida = `${dataCortada[2]}/${dataCortada[1]}/${dataCortada[0]}`
 
                             const diaMissa = new Date(Date.parse(`${dataInvertida}`))
-                            console.log(diaMissa)
 
                             const diasSemana = ['DOMINGO', 'SEGUNDA-FEIRA', 'TERÇA-FEIRA', 'QUARTA-FEIRA',
                                 'QUINTA-FEIRA', 'SEXTA-FEIRA', 'SÁBADO']

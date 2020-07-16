@@ -11,9 +11,46 @@ class Missas {
     }
 
     async index(request: Request, response: Response) {
-        const missas = await knex('missas').select('*')
+        const { local_id, quantMissas } = request.query
 
-        return response.json(missas)
+        function ordenaPelaData(missas: any[]) {
+            missas.sort((a: any, b: any) => a.data >= b.data ? 1 : -1)
+
+            return missas
+        }
+
+        if (Number(local_id)) {
+            if (Number(local_id) < 3 && Number(local_id) > 0) {
+                const missasLocal = ordenaPelaData(await knex('missas').select('*').where({ local_id }))
+
+                return response.json(missasLocal)
+            }
+            else {
+                return response.json({ erro: 'Erro na filtragem. Verifique os parâmetros!' })
+            }
+        }
+        else if (Number(quantMissas)) {
+            if (Number(quantMissas) > 0) {
+
+                const missas = ordenaPelaData(await knex('missas').select('*'))
+                const poucasMissas = []
+
+                for (let index = 0; index < Number(quantMissas); index++) {
+                    if (missas[index] !== undefined) {
+                        poucasMissas.push(missas[index])
+                    }
+                }
+
+                return response.json(poucasMissas)
+            }
+            else {
+                return response.json({ erro: 'Erro na filtragem. Verifique os parâmetros!' })
+            }
+        }
+        else {
+            const missas = ordenaPelaData(await knex('missas').select('*'))
+            return response.json(missas)
+        }
     }
 
     async show(request: Request, response: Response) {
@@ -39,8 +76,12 @@ class Missas {
     async delete(request: Request, response: Response) {
         const { id } = request.params
 
-        await knex('missas').where({ id }).delete()
-        await knex('missa_usuario').where({ missa_id: id }).delete()
+        const trx = await knex.transaction()
+
+        await trx('missas').where({ id }).delete()
+        await trx('missa_usuario').where({ missa_id: id }).delete()
+
+        await trx.commit()
 
         response.json({ sucesso: true })
     }
