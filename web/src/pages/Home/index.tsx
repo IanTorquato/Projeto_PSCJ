@@ -20,18 +20,16 @@ const Home = () => {
 
     useEffect(() => {
         api.get('missas').then(response => {
-            setMissas(response.data)
+            setMissas(response.data.sort((a: Missa, b: Missa) => ((a.data >= b.data ? 1 : -1))).map((missa: Missa) => {
+                const dataCortada = missa.data.split('/')
+                missa.data = `${dataCortada[2]}/${dataCortada[1]}/${dataCortada[0]}`
+
+                return missa
+            }))
         })
     }, [])
 
-    missas.sort((a, b) => ((a.data >= b.data ? 1 : -1)))
-
-    function rolarScroll() {
-        const meiaTelaY = window.innerHeight
-        console.log(meiaTelaY)
-
-        window.scrollTo(0, window.innerHeight)
-    }
+    function rolarScroll() { window.scrollTo(0, window.innerHeight) }
 
     function voltarTopo() {
         window.scrollTo(0, 0)
@@ -64,14 +62,19 @@ const Home = () => {
 
                     <div className="gridMissas">
                         {missas.map(missa => {
-                            const diaMissa = new Date(Date.parse(`${missa.data}`))
+
+                            const dataCortada = missa.data.split('/')
+                            const dataInvertida = `${dataCortada[2]}/${dataCortada[1]}/${dataCortada[0]}`
+
+                            const diaMissa = new Date(Date.parse(`${dataInvertida}`))
+                            console.log(diaMissa)
 
                             const diasSemana = ['DOMINGO', 'SEGUNDA-FEIRA', 'TERÇA-FEIRA', 'QUARTA-FEIRA',
                                 'QUINTA-FEIRA', 'SEXTA-FEIRA', 'SÁBADO']
 
                             return (
                                 <div key={missa.id} className="detalhesMissa">
-                                    <h1 className="tituloMissa">{missa.data.slice(5, 10)} - {missa.hora}</h1>
+                                    <h1 className="tituloMissa">{missa.data.slice(0, 5)} - {missa.hora}</h1>
 
                                     <h2 className="subTituloMissa">{diasSemana[diaMissa.getDay()]} | {
                                         missa.local_id === 1 ? 'CENTRO' : 'TERMAS'

@@ -27,14 +27,42 @@ const EditarMissa = () => {
 
     useEffect(() => {
         api.get('missas').then(response => {
-            setMissas(response.data)
+            setMissas(response.data.sort((a: Missa, b: Missa) => ((a.data >= b.data ? 1 : -1))).map((missa: Missa) => {
+                const dataCortada = missa.data.split('/')
+                missa.data = `${dataCortada[2]}/${dataCortada[1]}/${dataCortada[0]}`
+
+                return missa
+            }))
         })
     }, [])
 
-    missas.sort((a, b) => ((a.data >= b.data ? 1 : -1)))
-
     function clicouMissa(event: ChangeEvent<HTMLSelectElement>) {
         setMissa_id(Number(event.target.value))
+
+        const { local_id, max_pessoas, data, hora } = missas[event.target.selectedIndex - 1] ||
+            { local_id: 0, max_pessoas: 0, data: '01/01/0001', hora: '00:00' }
+
+        setLocal_id(local_id)
+        setMax_pessoas(max_pessoas)
+        const setarData = { data, hora }
+        setDataMissa(setarData)
+
+        const selectLocal = document.querySelector<HTMLSelectElement>('.local')
+        const inputMaxP = document.querySelector<HTMLInputElement>('.maxPessoas')
+        const inputData = document.querySelector<HTMLInputElement>('.dataHora')
+
+        if (selectLocal !== null) {
+            selectLocal.value = local_id.toString()
+        }
+
+        if (inputMaxP !== null) {
+            inputMaxP.value = max_pessoas.toString()
+        }
+
+        if (inputData !== null) {
+            const dataCortada = data.split('/')
+            inputData.value = `${dataCortada[2]}-${dataCortada[1]}-${dataCortada[0]}T${hora}`
+        }
     }
 
     function clicouLocal(event: ChangeEvent<HTMLSelectElement>) {
@@ -77,7 +105,7 @@ const EditarMissa = () => {
     async function handleSubmit(event: FormEvent) {
         event.preventDefault()
 
-        const { data, hora } = dataMissa
+        let { data, hora } = dataMissa
 
         // Verificações de Entrada de Dados
         if (missa_id === 0) {
@@ -98,6 +126,9 @@ const EditarMissa = () => {
             alert('[ERRO] O campo "Quantidade Máxima de Pessoas" não pode ser Nulo ou Negativo!')
             return
         }
+
+        const dataCortada = data.split('/')
+        data = `${dataCortada[2]}/${dataCortada[1]}/${dataCortada[0]}`
 
         const dadosMissa = { missa_id, local_id, data, hora, max_pessoas }
 
@@ -124,7 +155,7 @@ const EditarMissa = () => {
                                     <option value="0">Selecione uma Missa</option>
                                     {missas.map(missa => (
                                         <option value={missa.id} key={missa.id}>
-                                            {missa.local_id === 1 ? 'Centro' : 'Termas'} - {missa.data.slice(5, 10)} - {
+                                            {missa.local_id === 1 ? 'Centro' : 'Termas'} - {missa.data.slice(0, 5)} - {
                                                 missa.hora}
                                         </option>
                                     ))}
