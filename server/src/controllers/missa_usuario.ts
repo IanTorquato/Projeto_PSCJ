@@ -7,8 +7,12 @@ class MissaUsuario {
 
         const pessoas_cadastradas = pessoas_jacadastradas + quantidade_pessoas
 
-        await knex('missa_usuario').insert({ missa_id, usuario_id, quantidade_pessoas })
-        await knex('missas').where({ id: missa_id }).update({ pessoas_cadastradas })
+        const trx = await knex.transaction()
+
+        await trx('missa_usuario').insert({ missa_id, usuario_id, quantidade_pessoas })
+        await trx('missas').where({ id: missa_id }).update({ pessoas_cadastradas })
+
+        await trx.commit()
 
         return response.json({ sucesso: true })
     }

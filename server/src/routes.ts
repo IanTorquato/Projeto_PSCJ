@@ -12,8 +12,10 @@ const missaUsuario = new MissaUsuario()
 
 const routes = express.Router()
 
+// Locais
 routes.get('/locais', locais.index)
 
+// Missas
 routes.post('/missas', missas.create)
 
 routes.get('/missas', missas.index)
@@ -24,10 +26,12 @@ routes.put('/missas', missas.update)
 
 routes.delete('/missas/:id', missas.delete)
 
+// Usuários
 routes.post('/usuarios', usuarios.create)
 
 routes.get('/usuarios', usuarios.index)
 
+// Missa_Usuário
 routes.post('/missa_usuario', missaUsuario.create_update)
 
 routes.get('/missa_usuario', missaUsuario.index)
