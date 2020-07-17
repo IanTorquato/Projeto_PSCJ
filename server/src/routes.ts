@@ -1,16 +1,21 @@
 import express from 'express'
 
+import Login from './controllers/login'
 import Locais from './controllers/locais'
 import Missas from './controllers/missas'
 import Usuarios from './controllers/usuarios'
 import MissaUsuario from './controllers/missa_usuario'
 
+const login = new Login()
 const locais = new Locais()
 const missas = new Missas()
 const usuarios = new Usuarios()
 const missaUsuario = new MissaUsuario()
 
 const routes = express.Router()
+
+// Login
+routes.get('/login/:usuario/:senha', login.show)
 
 // Locais
 routes.get('/locais', locais.index)
