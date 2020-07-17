@@ -34,7 +34,7 @@ export const LoginProvider: React.FC = ({ children }) => {
       console.log(userr)
     }
     else {
-      const response = await api.get(`/login/${user.usuario}/${user.senha}`)
+      const response = await api.post(`/login`, user)
 
       if (response.data.user) {
         localStorage.setItem('@PSCJ:user', JSON.stringify(response.data.user))

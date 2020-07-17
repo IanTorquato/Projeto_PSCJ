@@ -9,8 +9,9 @@ const Login = () => {
 
   async function entrar(event: FormEvent) {
     event.preventDefault()
-    const usuario = document.querySelector<HTMLInputElement>('input#usuario')?.value
-    const senha = document.querySelector<HTMLInputElement>('input#senha')?.value
+
+    const usuario = document.querySelector<HTMLInputElement>('input#usuario')?.value.trim()
+    const senha = document.querySelector<HTMLInputElement>('input#senha')?.value.trim()
 
     if (usuario && senha) {
       const user = { usuario, senha }

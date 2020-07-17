@@ -15,7 +15,7 @@ const missaUsuario = new MissaUsuario()
 const routes = express.Router()
 
 // Login
-routes.get('/login/:usuario/:senha', login.show)
+routes.post('/login', login.login)
 
 // Locais
 routes.get('/locais', locais.index)

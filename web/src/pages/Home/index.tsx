@@ -37,7 +37,7 @@ const Home = () => {
 
     return (
         <>
-            <div className="imgFundo">
+            <div className="imgFundo" onDoubleClick={() => (localStorage.clear())}>
                 <section className="secHome">
                     <div className="centralInfo" onClick={rolarScroll}>
                         <img className="logo" src={logo} alt="Brasão da Paróquia" />
