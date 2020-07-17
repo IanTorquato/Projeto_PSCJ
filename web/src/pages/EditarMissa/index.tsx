@@ -2,6 +2,7 @@ import React, { useState, useEffect, FormEvent, ChangeEvent } from 'react'
 
 import './styles.css'
 import Footer from '../../components/Footer'
+import Sucesso from '../../components/Sucesso'
 import api from '../../services/api'
 
 interface Missa {
@@ -134,12 +135,16 @@ const EditarMissa = () => {
 
         await api.put('missas', dadosMissa)
 
-        alert('Missa Editada com Sucesso!')
+        window.scrollTo(0, 0)
+        window.onscroll = () => (window.scrollTo(0, 0))
+        const teste = document.body.querySelector<HTMLDivElement>('div.divSucesso')
+        if (teste) teste.style.zIndex = '1'
     }
 
     return (
         <>
             <div className="imgFundo">
+                <Sucesso />
                 <section className="secEditar">
                     <form onSubmit={handleSubmit}>
                         <h1>EDITAR MISSA</h1>

@@ -2,6 +2,7 @@ import React, { useState, FormEvent, ChangeEvent } from 'react'
 
 import './styles.css'
 import Footer from '../../components/Footer'
+import Sucesso from '../../components/Sucesso'
 import api from '../../services/api'
 
 interface DataMissa {
@@ -75,12 +76,16 @@ const CadastrarMissa = () => {
 
         await api.post('missas', dadosMissa)
 
-        alert('Missa Cadastrada com Sucesso!')
+        window.scrollTo(0, 0)
+        window.onscroll = () => (window.scrollTo(0, 0))
+        const teste = document.body.querySelector<HTMLDivElement>('div.divSucesso')
+        if (teste) teste.style.zIndex = '1'
     }
 
     return (
         <>
             <div className="imgFundo">
+                <Sucesso />
                 <section className="secCadastrar">
                     <form onSubmit={handleSubmit}>
                         <h1>CADASTRAR MISSA</h1>
