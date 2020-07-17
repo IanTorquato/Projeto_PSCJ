@@ -3,8 +3,7 @@
 	"version": "1.0.0",
 	"description": "Agendamento de missas da Paróquia Sagrado Coração de Jesus durante a Pandemia",
 	"main": "index.js",
-	"scripts":
-	{
+	"scripts": {
 		"dev": "ts-node-dev --transpileOnly --ignore-watch node_modules src/server.ts",
 		"knex:migrate": "knex --knexfile knexfile.ts migrate:latest",
 		"knex:seed": "knex --knexfile knexfile.ts seed:run"
@@ -12,15 +11,15 @@
 	"keywords": [],
 	"author": "IanTorquato",
 	"license": "ISC",
-	"dependencies":
-	{
+	"dependencies": {
+		"bcrypt": "^5.0.0",
 		"cors": "^2.8.5",
 		"express": "^4.17.1",
 		"knex": "^0.21.1",
 		"sqlite3": "^4.2.0"
 	},
-	"devDependencies":
-	{
+	"devDependencies": {
+		"@types/bcrypt": "^3.0.0",
 		"@types/cors": "^2.8.6",
 		"@types/express": "^4.17.6",
 		"install": "^0.13.0",
