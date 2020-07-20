@@ -9,8 +9,8 @@ const logo = require('../../../assets/icon.png')
 const Home = () => {
     const navigation = useNavigation()
 
-    function handleNavigateToDetalhesMissa() {
-        navigation.navigate('DetalhesMissa')
+    function toCadastrarUsuario() {
+        navigation.navigate('CadastrarUsuario')
     }
 
     return (
@@ -22,14 +22,15 @@ const Home = () => {
                     <Text style={styles.txtSagrado}>Paróquia Sagrado Coração de Jesus</Text>
                 </View>
 
-                <View style={styles.viewBtns}>
-                    <RectButton onPress={handleNavigateToDetalhesMissa}>
-                        <Text style={styles.textoBtns}>Entrar</Text>
+                <View style={styles.containerBtns}>
+                    <RectButton onPress={toCadastrarUsuario} style={styles.botao}>
+                        <Text style={styles.txtBotoes}>Entrar</Text>
                     </RectButton>
                 </View>
-                <View style={styles.viewBtns}>
-                    <RectButton onPress={handleNavigateToDetalhesMissa}>
-                        <Text style={styles.textoBtns}>Cadastrar</Text>
+
+                <View style={styles.containerBtns}>
+                    <RectButton onPress={toCadastrarUsuario} style={styles.botao}>
+                        <Text style={styles.txtBotoes}>Cadastrar</Text>
                     </RectButton>
                 </View>
             </ImageBackground>
@@ -39,7 +40,7 @@ const Home = () => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 1
     },
 
     fundoLogin: {
@@ -50,14 +51,14 @@ const styles = StyleSheet.create({
 
     imgLogo: {
         width: 130,
-        top: 80,
+        top: '10%',
         resizeMode: 'contain'
     },
 
     fundoTxtSagrado: {
         width: '85%',
-        paddingBottom: 5,
-        top: 70,
+        paddingBottom: 8,
+        top: '8%',
         backgroundColor: '#e41e2577',
         borderRadius: 25
     },
@@ -65,35 +66,42 @@ const styles = StyleSheet.create({
     txtSagrado: {
         fontFamily: 'Cookie_400Regular',
         fontSize: 42,
-        lineHeight: 53,
+        lineHeight: 50,
         textAlign: 'center',
         color: '#fff',
         textShadowColor: '#000',
         textShadowOffset: { width: 2, height: 4 },
-        textShadowRadius: 5,
+        textShadowRadius: 5
     },
 
-    viewBtns: {
+    containerBtns: {
         borderColor: '#fff',
         borderStyle: 'solid',
         borderWidth: 1,
-        borderRadius: 50,
-        top: 120,
+        borderRadius: 30,
+        top: '15%',
         marginTop: 30,
         backgroundColor: '#00000077',
         height: 50,
-        width: 170,
+        width: 170
+    },
+
+    botao: {
+        width: '100%',
+        borderRadius: 30,
         alignItems: 'center',
         justifyContent: 'center',
     },
 
-    textoBtns: {
+    txtBotoes: {
         fontFamily: 'Roboto_400Regular',
         color: '#fff',
         fontSize: 24,
         textShadowColor: '#00000088',
         textShadowOffset: { width: 1, height: 1 },
-        textShadowRadius: 2
+        textShadowRadius: 2,
+        height: 50,
+        top: 5
     }
 });
 
