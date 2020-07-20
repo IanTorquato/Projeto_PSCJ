@@ -1,8 +1,10 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, ImageBackground, Image } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler'
-import { Feather as Icon } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
+
+const fundoLogin = require('../../assets/fundoLogin.jpg')
+const logo = require('../../../assets/icon.png')
 
 const Home = () => {
     const navigation = useNavigation()
@@ -13,17 +15,24 @@ const Home = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>Tudo Funcionando!</Text>
+            <ImageBackground source={fundoLogin} style={styles.fundoLogin}>
+                <Image source={logo} style={styles.imgLogo} />
 
-            <RectButton style={styles.button} onPress={handleNavigateToDetalhesMissa}>
-                <View style={styles.buttonIcon}>
-                    <Icon name="arrow-right" color="#fff" size={26} />
+                <View style={styles.fundoTxtSagrado}>
+                    <Text style={styles.txtSagrado}>Paróquia Sagrado Coração de Jesus</Text>
                 </View>
 
-                <Text style={styles.buttonText}>
-                    Próxima Página
-                </Text>
-            </RectButton>
+                <View style={styles.viewBtns}>
+                    <RectButton onPress={handleNavigateToDetalhesMissa}>
+                        <Text style={styles.textoBtns}>Entrar</Text>
+                    </RectButton>
+                </View>
+                <View style={styles.viewBtns}>
+                    <RectButton onPress={handleNavigateToDetalhesMissa}>
+                        <Text style={styles.textoBtns}>Cadastrar</Text>
+                    </RectButton>
+                </View>
+            </ImageBackground>
         </View>
     );
 }
@@ -31,45 +40,57 @@ const Home = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
     },
 
-    text: {
-        fontSize: 32,
-        color: '#fff',
-        textShadowColor: '#000000aa',
-        textShadowOffset: { width: 1, height: 1 },
-        textShadowRadius: 5
-    },
-
-    button: {
-        backgroundColor: '#34cb79',
-        height: 60,
-        width: 235,
-        flexDirection: 'row',
-        borderRadius: 10,
-        overflow: 'hidden',
-        alignItems: 'center',
-        marginTop: 40
-    },
-
-    buttonIcon: {
-        height: 60,
-        width: 60,
-        padding: 5,
-        borderRadius: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#0000000a'
-    },
-
-    buttonText: {
+    fundoLogin: {
         flex: 1,
-        justifyContent: 'center',
+        resizeMode: 'cover',
+        alignItems: 'center',
+    },
+
+    imgLogo: {
+        width: 130,
+        top: 80,
+        resizeMode: 'contain'
+    },
+
+    fundoTxtSagrado: {
+        width: '85%',
+        paddingBottom: 5,
+        top: 70,
+        backgroundColor: '#e41e2577',
+        borderRadius: 25
+    },
+
+    txtSagrado: {
+        fontFamily: 'Cookie_400Regular',
+        fontSize: 42,
+        lineHeight: 53,
         textAlign: 'center',
         color: '#fff',
-        fontSize: 20,
+        textShadowColor: '#000',
+        textShadowOffset: { width: 2, height: 4 },
+        textShadowRadius: 5,
+    },
+
+    viewBtns: {
+        borderColor: '#fff',
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderRadius: 50,
+        top: 120,
+        marginTop: 30,
+        backgroundColor: '#00000077',
+        height: 50,
+        width: 170,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
+    textoBtns: {
+        fontFamily: 'Roboto_400Regular',
+        color: '#fff',
+        fontSize: 24,
         textShadowColor: '#00000088',
         textShadowOffset: { width: 1, height: 1 },
         textShadowRadius: 2

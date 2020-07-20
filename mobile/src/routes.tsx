@@ -11,9 +11,8 @@ const Routes = () => {
     return (
         <NavigationContainer>
             <AppStack.Navigator headerMode="none"
-                screenOptions={{
-                    cardStyle: { backgroundColor: '#62d9fb' }
-                }}>
+                screenOptions={{ cardStyle: { backgroundColor: '#000' } }}>
+
                 <AppStack.Screen name="Home" component={Home} />
                 <AppStack.Screen name="DetalhesMissa" component={DetalhesMissa} />
             </AppStack.Navigator>
