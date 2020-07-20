@@ -1,7 +1,7 @@
 import React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, ImageBackground, Image, TextInput } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, ImageBackground, Image, TextInput, UIManager } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler'
-import { Feather as Icon } from '@expo/vector-icons'
+import { FontAwesome5 as Fa } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 
 const fundoLogin = require('../../assets/fundoLogin.jpg')
@@ -20,7 +20,7 @@ const CadastrarUsuario = () => {
                 <Image source={logo} style={styles.imgLogo} />
 
                 <TouchableOpacity onPress={handleNavigateBack} style={styles.btnVoltar}>
-                    <Icon name="arrow-left" color="#fff" size={32} />
+                    <Fa name="arrow-circle-left" color="#fff" size={32} />
                 </TouchableOpacity>
 
                 <View style={styles.containerInputs}>
@@ -87,15 +87,17 @@ const styles = StyleSheet.create({
 
     botao: {
         top: '20%',
-        height: 50,
+        height: 55,
         backgroundColor: '#e41e25',
         justifyContent: 'center',
         borderRadius: 30,
-        paddingHorizontal: 15,
+        paddingHorizontal: 25
     },
 
     txtBotao: {
-        color: '#fff'
+        color: '#fff',
+        fontSize: 24,
+        top: -2
     }
 });
 
