@@ -38,7 +38,7 @@ const CadastrarUsuario = () => {
 				</RectButton>
 			</ImageBackground>
 		</View>
-	);
+	)
 }
 
 const styles = StyleSheet.create({
@@ -58,40 +58,40 @@ const styles = StyleSheet.create({
 	},
 
 	imgLogo: {
-		width: 130,
-		top: 75,
+		width: 128,
+		top: 24,
 		resizeMode: 'contain'
 	},
 
 	containerInputs: {
-		top: 60,
 		width: 280,
-		marginBottom: 15
+		top: '4%',
+		marginBottom: 16
 	},
 
 	txtInput: {
 		color: '#fff',
-		left: 10,
-		marginBottom: 5,
-		fontSize: 16
+		left: 4,
+		marginBottom: 4,
+		fontSize: 14
 	},
 
 	input: {
 		backgroundColor: '#fff',
 		color: '#000',
-		borderRadius: 30,
+		borderRadius: 8,
 		height: 50,
-		fontSize: 20,
+		fontSize: 18,
 		paddingLeft: 15
 	},
 
 	botao: {
-		top: 100,
-		height: 55,
+		top: '16%',
+		height: 50,
 		backgroundColor: '#e41e25',
 		justifyContent: 'center',
-		borderRadius: 30,
-		paddingHorizontal: 25
+		borderRadius: 8,
+		paddingHorizontal: 24
 	},
 
 	txtBotao: {
@@ -99,6 +99,6 @@ const styles = StyleSheet.create({
 		fontSize: 24,
 		top: -2
 	}
-});
+})
 
 export default CadastrarUsuario

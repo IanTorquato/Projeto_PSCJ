@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <View style={styles.viewContainer}>
       <ScrollView>
-        <Svg width="100%" height={330} viewBox="0 0 500 460" fill="none">
+        <Svg width="100%" height={336} viewBox="0 0 500 466" fill="none">
           <G>
             <Path
               d="M0 0h500v280.095a700.272 700.272 0 01-492.576 2.743L0 276.095V0z"
@@ -24,25 +24,28 @@ const Home = () => {
           </View>
         </Svg>
 
-        <Text style={styles.txtTituloFieis}>Orientação aos fiéis</Text>
-
-        <Text style={styles.txtOrientacaoFieis}>Em tempos difíceis como o que vivemos é preciso reinventar-se a todo instante. Por isso, pensando na segurança e na saúde, tanto física quanto espiritual, de nossos paroquianos, este app foi criado, afim de facilitar o controle e o seguimento de regras necessárias para garantir o melhor bem-estar de todos aqueles que participam de nossa comunidade paroquial.</Text>
-
         <View style={styles.viewParaParticipar}>
           <Text style={styles.txtTituloParticipar}>Para participar da Santa Missa, é necessário ao fiel:</Text>
           <View style={styles.viewParticipar}>
-            <Text style={styles.txtParaParticipar}>
-              <Icon name="circle" size={6} color="#fff" solid /> Uma regra longa qualquer
-            </Text>
-            <Text style={styles.txtParaParticipar}>
-              <Icon name="circle" size={6} color="#fff" solid /> Uma regra longa qualquer
-            </Text>
-            <Text style={styles.txtParaParticipar}>
-              <Icon name="circle" size={6} color="#fff" solid /> Uma regra longa qualquer
-            </Text>
-            <Text style={styles.txtParaParticipar}>
-              <Icon name="circle" size={6} color="#fff" solid /> Uma regra longa qualquer
-            </Text>
+            <View style={styles.viewRegras}>
+              <Icon name="circle" size={6} color="#fff" solid />
+              <Text style={styles.txtParaParticipar}>Uma regra longa qualquer</Text>
+            </View>
+
+            <View style={styles.viewRegras}>
+              <Icon name="circle" size={6} color="#fff" solid />
+              <Text style={styles.txtParaParticipar}>Uma regra longa qualquer</Text>
+            </View>
+
+            <View style={styles.viewRegras}>
+              <Icon name="circle" size={6} color="#fff" solid />
+              <Text style={styles.txtParaParticipar}>Uma regra longa qualquer</Text>
+            </View>
+
+            <View style={styles.viewRegras}>
+              <Icon name="circle" size={6} color="#fff" solid />
+              <Text style={styles.txtParaParticipar}>Uma regra longa qualquer</Text>
+            </View>
           </View>
         </View>
       </ScrollView>
@@ -63,55 +66,32 @@ const styles = StyleSheet.create({
   },
 
   imgLogo: {
-    height: 90,
-    marginBottom: 24,
-    top: '8%',
-    width: 80
+    height: 88,
+    marginBottom: 16,
+    top: 16,
+    resizeMode: 'contain'
   },
 
   txtSagrado: {
     color: '#fff',
     fontFamily: 'Cookie_400Regular',
     fontSize: 40,
-    marginHorizontal: 30,
+    marginHorizontal: 32,
     textAlign: 'center',
     textShadowColor: '#000',
     textShadowOffset: { width: 2, height: 4 },
-    textShadowRadius: 5
+    textShadowRadius: 4,
+    paddingVertical: 4
   },
 
-  txtTituloFieis: {
-    color: '#fff',
-    fontFamily: 'Lora_400Regular',
-    fontSize: 28,
-    fontStyle: 'italic',
-    fontWeight: 'bold',
-    textAlign: 'center'
-  },
-
-  txtOrientacaoFieis: {
-    color: '#fff',
-    fontFamily: 'Lora_400Regular',
-    fontSize: 15,
-    marginBottom: 64,
-    marginHorizontal: 32,
-    marginTop: 16,
-    textAlign: 'justify'
-  },
-
-  viewParaParticipar: {
-    backgroundColor: '#333',
-    marginTop: 25,
-    paddingVertical: 20
-  },
+  viewParaParticipar: {},
 
   txtTituloParticipar: {
     color: '#fff',
     fontFamily: 'Lora_400Regular',
-    fontSize: 18,
+    fontSize: 24,
     fontStyle: 'italic',
-    marginHorizontal: 35,
-    paddingBottom: 8,
+    paddingBottom: 16,
     textAlign: 'center'
   },
 
@@ -119,11 +99,17 @@ const styles = StyleSheet.create({
     paddingLeft: 20
   },
 
+  viewRegras: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 4
+  },
+
   txtParaParticipar: {
     color: '#fff',
     fontFamily: 'Lora_400Regular',
-    fontSize: 15,
-    paddingBottom: 8
+    fontSize: 16,
+    marginLeft: 8
   }
 })
 

@@ -34,7 +34,7 @@ const Main = () => {
 
 				<View style={styles.containerBtns}>
 					<RectButton onPress={paraCadastrarUsuario} style={styles.botao}>
-						<Text style={styles.txtBotoes}>Cadastrar</Text>
+						<Text style={styles.txtBotoes}>Cadastrar-se</Text>
 					</RectButton>
 				</View>
 			</ImageBackground>
@@ -49,62 +49,56 @@ const styles = StyleSheet.create({
 
 	fundoLogin: {
 		flex: 1,
-		resizeMode: 'cover',
 		alignItems: 'center',
 	},
 
 	imgLogo: {
-		width: 130,
-		top: '10%',
+		width: 128,
+		top: 24,
 		resizeMode: 'contain'
 	},
 
 	fundoTxtSagrado: {
-		width: '85%',
+		width: 312,
 		paddingBottom: 8,
-		top: '8%',
+		top: 32,
 		backgroundColor: '#e41e2577',
-		borderRadius: 25
+		borderRadius: 16
 	},
 
 	txtSagrado: {
 		fontFamily: 'Cookie_400Regular',
-		fontSize: 42,
-		lineHeight: 50,
+		fontSize: 40,
+		lineHeight: 48,
 		textAlign: 'center',
 		color: '#fff',
 		textShadowColor: '#000',
 		textShadowOffset: { width: 2, height: 4 },
-		textShadowRadius: 5
+		textShadowRadius: 4,
+		paddingVertical: 4
 	},
 
 	containerBtns: {
 		borderColor: '#fff',
 		borderStyle: 'solid',
 		borderWidth: 1,
-		borderRadius: 30,
-		top: '14%',
-		marginTop: 20,
-		backgroundColor: '#00000077',
-		height: 50,
-		width: 170
+		borderRadius: 8,
+		top: 96,
+		marginTop: 24,
+		backgroundColor: '#00000077'
 	},
 
 	botao: {
-		width: '100%',
-		borderRadius: 30,
-		alignItems: 'center',
-		justifyContent: 'center',
+		width: 184,
+		borderRadius: 8,
+		alignItems: 'center'
 	},
 
 	txtBotoes: {
 		fontFamily: 'Roboto_400Regular',
 		color: '#fff',
 		fontSize: 24,
-		textShadowColor: '#00000088',
-		textShadowOffset: { width: 1, height: 1 },
-		textShadowRadius: 2,
-		height: 50,
+		height: 48,
 		top: 5
 	}
 });
