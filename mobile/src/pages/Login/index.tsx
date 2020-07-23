@@ -10,8 +10,12 @@ const logo = require('../../../assets/icon.png')
 const Login = () => {
   const navigation = useNavigation()
 
-  function handleNavigateBack() {
+  function paraAnterior() {
     navigation.goBack()
+  }
+
+  function paraHomeDoApp() {
+    navigation.navigate('Home')
   }
 
   return (
@@ -19,7 +23,7 @@ const Login = () => {
       <ImageBackground source={fundoLogin} style={styles.fundoLogin}>
         <Image source={logo} style={styles.imgLogo} />
 
-        <TouchableOpacity onPress={handleNavigateBack} style={styles.btnVoltar}>
+        <TouchableOpacity onPress={paraAnterior} style={styles.btnVoltar}>
           <Fa name="arrow-circle-left" color="#fff" size={32} />
         </TouchableOpacity>
 
@@ -33,7 +37,7 @@ const Login = () => {
           <TextInput style={styles.input} placeholder="Digite seu e-mail" />
         </View>
 
-        <RectButton style={styles.botao}>
+        <RectButton style={styles.botao} onPress={paraHomeDoApp}>
           <Text style={styles.txtBotao}>Entrar</Text>
         </RectButton>
       </ImageBackground>

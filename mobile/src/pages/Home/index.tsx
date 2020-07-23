@@ -1,112 +1,122 @@
-import React from 'react';
-import { Text, View, StyleSheet, ImageBackground, Image } from 'react-native';
-import { RectButton } from 'react-native-gesture-handler'
-import { useNavigation } from '@react-navigation/native'
+import React from 'react'
+import { View, Text, StyleSheet, Image, ScrollView } from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome5'
 
-const fundoLogin = require('../../assets/fundoLogin.jpg')
 const logo = require('../../../assets/icon.png')
 
 const Home = () => {
-	const navigation = useNavigation()
+  return (
+    <View style={styles.viewContainer}>
+      <ScrollView>
+        <View style={styles.viewTopoVermelho}>
+          <Image source={logo} style={styles.imgLogo} />
+          <Text style={styles.txtSagrado}>Paróquia Sagrado Coração de Jesus</Text>
+        </View>
 
-	function toLogin() {
-		navigation.navigate('Login')
-	}
+        <Text style={styles.txtTituloFieis}>Orientação aos fiéis</Text>
 
-	function toCadastrarUsuario() {
-		navigation.navigate('CadastrarUsuario')
-	}
+        <Text style={styles.txtOrientacaoFieis}>Em tempos difíceis como o que vivemos é preciso reinventar-se a todo instante. Por isso, pensando na segurança e na saúde, tanto física quanto espiritual, de nossos paroquianos, este app foi criado, afim de facilitar o controle e o seguimento de regras necessárias para garantir o melhor bem-estar de todos aqueles que participam de nossa comunidade paroquial.</Text>
 
-	return (
-		<View style={styles.container}>
-			<ImageBackground source={fundoLogin} style={styles.fundoLogin}>
-				<Image source={logo} style={styles.imgLogo} />
-
-				<View style={styles.fundoTxtSagrado}>
-					<Text style={styles.txtSagrado}>Paróquia Sagrado Coração de Jesus</Text>
-				</View>
-
-				<View style={styles.containerBtns}>
-					<RectButton onPress={toLogin} style={styles.botao}>
-						<Text style={styles.txtBotoes}>Entrar</Text>
-					</RectButton>
-				</View>
-
-				<View style={styles.containerBtns}>
-					<RectButton onPress={toCadastrarUsuario} style={styles.botao}>
-						<Text style={styles.txtBotoes}>Cadastrar</Text>
-					</RectButton>
-				</View>
-			</ImageBackground>
-		</View>
-	);
+        <View style={styles.viewParaParticipar}>
+          <Text style={styles.txtTituloParticipar}>Para participar da Santa Missa, é necessário ao fiel:</Text>
+          <View style={styles.viewParticipar}>
+            <Text style={styles.txtParaParticipar}>
+              <Icon name="circle" size={6} color="#fff" solid /> Uma regra longa qualquer
+            </Text>
+            <Text style={styles.txtParaParticipar}>
+              <Icon name="circle" size={6} color="#fff" solid /> Uma regra longa qualquer
+            </Text>
+            <Text style={styles.txtParaParticipar}>
+              <Icon name="circle" size={6} color="#fff" solid /> Uma regra longa qualquer
+            </Text>
+            <Text style={styles.txtParaParticipar}>
+              <Icon name="circle" size={6} color="#fff" solid /> Uma regra longa qualquer
+            </Text>
+          </View>
+        </View>
+      </ScrollView>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1
-	},
+  viewContainer: {
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: '#444'
+  },
 
-	fundoLogin: {
-		flex: 1,
-		resizeMode: 'cover',
-		alignItems: 'center',
-	},
+  viewTopoVermelho: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#e41e2555',
+    paddingHorizontal: 20,
+    paddingBottom: 10
+  },
 
-	imgLogo: {
-		width: 130,
-		top: '10%',
-		resizeMode: 'contain'
-	},
+  imgLogo: {
+    width: 80,
+    height: 90,
+    top: '8%',
+    marginBottom: 16
+  },
 
-	fundoTxtSagrado: {
-		width: '85%',
-		paddingBottom: 8,
-		top: '8%',
-		backgroundColor: '#e41e2577',
-		borderRadius: 25
-	},
+  txtSagrado: {
+    color: '#fff',
+    fontFamily: 'Cookie_400Regular',
+    fontSize: 40,
+    textShadowColor: '#000',
+    textShadowOffset: { width: 0, height: 4 },
+    textShadowRadius: 5,
+    textAlign: 'center'
+  },
 
-	txtSagrado: {
-		fontFamily: 'Cookie_400Regular',
-		fontSize: 42,
-		lineHeight: 50,
-		textAlign: 'center',
-		color: '#fff',
-		textShadowColor: '#000',
-		textShadowOffset: { width: 2, height: 4 },
-		textShadowRadius: 5
-	},
+  txtTituloFieis: {
+    color: '#fff',
+    fontSize: 28,
+    textAlign: 'center',
+    fontFamily: 'Lora_400Regular',
+    fontWeight: 'bold',
+    fontStyle: 'italic',
+    marginTop: 130
+  },
 
-	containerBtns: {
-		borderColor: '#fff',
-		borderStyle: 'solid',
-		borderWidth: 1,
-		borderRadius: 30,
-		top: '14%',
-		marginTop: 20,
-		backgroundColor: '#00000077',
-		height: 50,
-		width: 170
-	},
+  txtOrientacaoFieis: {
+    color: '#fff',
+    fontSize: 15,
+    textAlign: 'justify',
+    fontFamily: 'Lora_400Regular',
+    marginBottom: 64,
+    marginHorizontal: 32,
+    marginTop: 16
+  },
 
-	botao: {
-		width: '100%',
-		borderRadius: 30,
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
+  viewParaParticipar: {
+    backgroundColor: '#333',
+    marginTop: 25,
+    paddingVertical: 20
+  },
 
-	txtBotoes: {
-		fontFamily: 'Roboto_400Regular',
-		color: '#fff',
-		fontSize: 24,
-		textShadowColor: '#00000088',
-		textShadowOffset: { width: 1, height: 1 },
-		textShadowRadius: 2,
-		height: 50,
-		top: 5
-	}
-});
+  txtTituloParticipar: {
+    color: '#fff',
+    fontFamily: 'Lora_400Regular',
+    fontStyle: 'italic',
+    fontSize: 18,
+    textAlign: 'center',
+    marginHorizontal: 35,
+    paddingBottom: 8
+  },
+
+  viewParticipar: {
+    paddingLeft: 20,
+  },
+
+  txtParaParticipar: {
+    color: '#fff',
+    fontFamily: 'Lora_400Regular',
+    fontSize: 15,
+    paddingBottom: 8
+  }
+})
 
 export default Home
