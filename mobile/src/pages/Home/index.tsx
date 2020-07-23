@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet, Image, ScrollView } from 'react-native'
+import Svg, { G, Path } from "react-native-svg"
 import Icon from 'react-native-vector-icons/FontAwesome5'
 
 const logo = require('../../../assets/icon.png')
@@ -8,10 +9,20 @@ const Home = () => {
   return (
     <View style={styles.viewContainer}>
       <ScrollView>
-        <View style={styles.viewTopoVermelho}>
-          <Image source={logo} style={styles.imgLogo} />
-          <Text style={styles.txtSagrado}>Paróquia Sagrado Coração de Jesus</Text>
-        </View>
+        <Svg width="100%" height={330} viewBox="0 0 500 460" fill="none">
+          <G>
+            <Path
+              d="M0 0h500v280.095a700.272 700.272 0 01-492.576 2.743L0 276.095V0z"
+              fill="#710b0e"
+              fillOpacity={0.8}
+            />
+          </G>
+
+          <View style={styles.viewTopoVermelho}>
+            <Image source={logo} style={styles.imgLogo} />
+            <Text style={styles.txtSagrado}>Paróquia Sagrado Coração de Jesus</Text>
+          </View>
+        </Svg>
 
         <Text style={styles.txtTituloFieis}>Orientação aos fiéis</Text>
 
@@ -41,54 +52,51 @@ const Home = () => {
 
 const styles = StyleSheet.create({
   viewContainer: {
-    flex: 1,
     alignItems: 'center',
-    backgroundColor: '#444'
+    backgroundColor: '#444',
+    flex: 1
   },
 
   viewTopoVermelho: {
-    justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#e41e2555',
-    paddingHorizontal: 20,
-    paddingBottom: 10
+    justifyContent: 'center'
   },
 
   imgLogo: {
-    width: 80,
     height: 90,
+    marginBottom: 24,
     top: '8%',
-    marginBottom: 16
+    width: 80
   },
 
   txtSagrado: {
     color: '#fff',
     fontFamily: 'Cookie_400Regular',
     fontSize: 40,
+    marginHorizontal: 30,
+    textAlign: 'center',
     textShadowColor: '#000',
-    textShadowOffset: { width: 0, height: 4 },
-    textShadowRadius: 5,
-    textAlign: 'center'
+    textShadowOffset: { width: 2, height: 4 },
+    textShadowRadius: 5
   },
 
   txtTituloFieis: {
     color: '#fff',
-    fontSize: 28,
-    textAlign: 'center',
     fontFamily: 'Lora_400Regular',
-    fontWeight: 'bold',
+    fontSize: 28,
     fontStyle: 'italic',
-    marginTop: 130
+    fontWeight: 'bold',
+    textAlign: 'center'
   },
 
   txtOrientacaoFieis: {
     color: '#fff',
-    fontSize: 15,
-    textAlign: 'justify',
     fontFamily: 'Lora_400Regular',
+    fontSize: 15,
     marginBottom: 64,
     marginHorizontal: 32,
-    marginTop: 16
+    marginTop: 16,
+    textAlign: 'justify'
   },
 
   viewParaParticipar: {
@@ -100,15 +108,15 @@ const styles = StyleSheet.create({
   txtTituloParticipar: {
     color: '#fff',
     fontFamily: 'Lora_400Regular',
-    fontStyle: 'italic',
     fontSize: 18,
-    textAlign: 'center',
+    fontStyle: 'italic',
     marginHorizontal: 35,
-    paddingBottom: 8
+    paddingBottom: 8,
+    textAlign: 'center'
   },
 
   viewParticipar: {
-    paddingLeft: 20,
+    paddingLeft: 20
   },
 
   txtParaParticipar: {
