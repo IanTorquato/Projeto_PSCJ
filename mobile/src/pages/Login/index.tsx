@@ -51,51 +51,52 @@ const styles = StyleSheet.create({
   },
 
   fundoLogin: {
-    flex: 1,
-    alignItems: 'center'
+    alignItems: 'center',
+    flex: 1
   },
 
   btnVoltar: {
-    position: 'absolute',
     left: 16,
+    position: 'absolute',
     top: 16
   },
 
   imgLogo: {
-    width: 128,
-    top: 24,
-    resizeMode: 'contain'
+    height: 112,
+    resizeMode: 'contain',
+    top: 48,
+    width: 112
   },
 
   containerInputs: {
-    width: 280,
-    top: '4%',
-    marginBottom: 16
+    marginBottom: 16,
+    top: 120,
+    width: 280
   },
 
   txtInput: {
     color: '#fff',
+    fontSize: 14,
     left: 4,
-    marginBottom: 4,
-    fontSize: 14
+    marginBottom: 4
   },
 
   input: {
     backgroundColor: '#fff',
-    color: '#000',
     borderRadius: 8,
-    height: 50,
+    color: '#000',
     fontSize: 18,
+    height: 50,
     paddingLeft: 15
   },
 
   botao: {
-    top: '16%',
-    height: 50,
     backgroundColor: '#e41e25',
-    justifyContent: 'center',
     borderRadius: 8,
-    paddingHorizontal: 32
+    height: 50,
+    justifyContent: 'center',
+    paddingHorizontal: 24,
+    top: 200
   },
 
   txtBotao: {

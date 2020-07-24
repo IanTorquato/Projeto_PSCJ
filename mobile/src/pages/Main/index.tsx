@@ -48,55 +48,56 @@ const styles = StyleSheet.create({
 	},
 
 	fundoLogin: {
-		flex: 1,
 		alignItems: 'center',
+		flex: 1
 	},
 
 	imgLogo: {
-		width: 128,
-		top: 24,
-		resizeMode: 'contain'
+		height: 112,
+		resizeMode: 'contain',
+		top: 48,
+		width: 112
 	},
 
 	fundoTxtSagrado: {
-		width: 312,
-		paddingBottom: 8,
-		top: 32,
 		backgroundColor: '#e41e2577',
-		borderRadius: 16
+		borderRadius: 16,
+		paddingBottom: 8,
+		top: 96,
+		width: 312
 	},
 
 	txtSagrado: {
+		color: '#fff',
 		fontFamily: 'Cookie_400Regular',
 		fontSize: 40,
 		lineHeight: 48,
+		paddingVertical: 4,
 		textAlign: 'center',
-		color: '#fff',
 		textShadowColor: '#000',
 		textShadowOffset: { width: 2, height: 4 },
-		textShadowRadius: 4,
-		paddingVertical: 4
+		textShadowRadius: 4
 	},
 
 	containerBtns: {
+		backgroundColor: '#00000077',
 		borderColor: '#fff',
+		borderRadius: 8,
 		borderStyle: 'solid',
 		borderWidth: 1,
-		borderRadius: 8,
-		top: 96,
 		marginTop: 24,
-		backgroundColor: '#00000077'
+		top: 180
 	},
 
 	botao: {
-		width: 184,
+		alignItems: 'center',
 		borderRadius: 8,
-		alignItems: 'center'
+		width: 184
 	},
 
 	txtBotoes: {
-		fontFamily: 'Roboto_400Regular',
 		color: '#fff',
+		fontFamily: 'Roboto_400Regular',
 		fontSize: 24,
 		height: 48,
 		top: 5

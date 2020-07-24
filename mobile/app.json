@@ -1,23 +1,22 @@
 {
 	"expo": {
-		"name": "Missas PSCJ",
-		"slug": "Missas-PSCJ",
-		"version": "1.0.0",
-		"orientation": "portrait",
+		"assetBundlePatterns": ["**/*"],
+		"backgroundColor": "#000000",
+		"githubUrl": "https://github.com/IanTorquato",
 		"icon": "./assets/icon.png",
+		"name": "Missas PSCJ",
+		"orientation": "portrait",
+		"platforms": ["android"],
+		"primaryColor": "#000000",
+		"slug": "PSCJ",
 		"splash": {
-			"image": "./assets/splash.png",
-			"resizeMode": "contain",
-			"backgroundColor": "#000"
+			"backgroundColor": "#000000",
+			"image": "./assets/load.png",
+			"resizeMode": "cover"
 		},
 		"updates": {
 			"fallbackToCacheTimeout": 0
 		},
-		"assetBundlePatterns": [
-			"**/*"
-		],
-		"ios": {
-			"supportsTablet": true
-		}
+		"version": "1.0"
 	}
 }

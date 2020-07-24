@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <View style={styles.viewContainer}>
       <ScrollView>
-        <Svg width="100%" height={336} viewBox="0 0 500 466" fill="none">
+        <Svg width="100%" height={360} viewBox="0 0 500 500" fill="none">
           <G>
             <Path
               d="M0 0h500v280.095a700.272 700.272 0 01-492.576 2.743L0 276.095V0z"
@@ -66,10 +66,11 @@ const styles = StyleSheet.create({
   },
 
   imgLogo: {
-    height: 88,
+    height: 92,
     marginBottom: 16,
+    resizeMode: 'contain',
     top: 16,
-    resizeMode: 'contain'
+    width: 92
   },
 
   txtSagrado: {
@@ -77,11 +78,11 @@ const styles = StyleSheet.create({
     fontFamily: 'Cookie_400Regular',
     fontSize: 40,
     marginHorizontal: 32,
+    paddingVertical: 4,
     textAlign: 'center',
     textShadowColor: '#000',
     textShadowOffset: { width: 2, height: 4 },
-    textShadowRadius: 4,
-    paddingVertical: 4
+    textShadowRadius: 4
   },
 
   viewParaParticipar: {},
@@ -100,8 +101,8 @@ const styles = StyleSheet.create({
   },
 
   viewRegras: {
-    flexDirection: 'row',
     alignItems: 'center',
+    flexDirection: 'row',
     marginVertical: 4
   },
 
