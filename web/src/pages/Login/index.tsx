@@ -14,8 +14,9 @@ const Login = () => {
     const senha = document.querySelector<HTMLInputElement>('input#senha')?.value.trim()
 
     if (usuario && senha) {
-      const user = { usuario, senha }
-      logar(user)
+      logar({ usuario, senha })
+    } else {
+      alert('Preencha todos os campos para logar!')
     }
   }
 

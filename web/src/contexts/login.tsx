@@ -9,7 +9,6 @@ interface User {
 
 interface LoginContextData {
   logado: boolean
-  userr: object | null
   loading: boolean
   logar(user: User): Promise<void>
 }
@@ -17,37 +16,32 @@ interface LoginContextData {
 const LoginContext = createContext<LoginContextData>({} as LoginContextData)
 
 export const LoginProvider: React.FC = ({ children }) => {
-  const [userr, setUserr] = useState<object | null>(null)
+  const [usuario, setUsuario] = useState<object | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const storagedUser = localStorage.getItem('@PSCJ:user')
 
     if (storagedUser) {
-      setUserr(JSON.parse(storagedUser))
+      setUsuario(JSON.parse(storagedUser))
     }
     setLoading(false)
   }, [])
 
   async function logar(user: User) {
-    if (userr) {
-      console.log(userr)
+    const response = await api.post(`/login`, user)
+
+    if (response.data.user) {
+      localStorage.setItem('@PSCJ:user', JSON.stringify(response.data.user))
+      setUsuario(response.data)
     }
     else {
-      const response = await api.post(`/login`, user)
-
-      if (response.data.user) {
-        localStorage.setItem('@PSCJ:user', JSON.stringify(response.data.user))
-        setUserr(response.data)
-      }
-      else {
-        alert(response.data.erro)
-      }
+      alert(response.data.erro)
     }
   }
 
   return (
-    <LoginContext.Provider value={{ logado: !!userr, userr, loading, logar }}>
+    <LoginContext.Provider value={{ logado: !!usuario, loading, logar }}>
       {children}
     </LoginContext.Provider>
   )
