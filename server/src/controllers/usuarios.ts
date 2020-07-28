@@ -5,15 +5,38 @@ class Usuarios {
     async create(request: Request, response: Response) {
         const { nome, email } = request.body
 
-        await knex('usuarios').insert({ nome, email })
+        try {
+            await knex('usuarios').insert({ nome, email })
 
-        return response.json({ sucesso: true })
+            return response.json({ info: 'Usuário criado com sucesso!' })
+        } catch (error) {
+            return response.json({ erro: 'Falha ao criar usuário' }).status(500)
+        }
+    }
+
+    async loginUsuario(request: Request, response: Response) {
+        const { nome, email } = request.body
+
+        try {
+            const user = await knex('usuarios').where({ email, nome }).first()
+
+            if (!user) {
+                return response.json({ erro: 'Usuário não encontrado!' }).status(400)
+            }
+            return response.json(user)
+        } catch (error) {
+            return response.json({ erro: 'Falha no servidor ao tentar logar' }).status(500)
+        }
     }
 
     async index(request: Request, response: Response) {
-        const usuarios = await knex('usuarios').select('*')
+        try {
+            const usuarios = await knex('usuarios').select('*')
 
-        return response.json(usuarios)
+            return response.json(usuarios)
+        } catch (error) {
+            return response.json({ erro: 'Algo inesperado aconteceu...' }).status(400)
+        }
     }
 }
 
