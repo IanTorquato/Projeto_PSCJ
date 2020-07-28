@@ -1,8 +1,8 @@
 import { Request, Response } from 'express'
 import bcrypt from 'bcrypt'
 
-class Login {
-  async login(request: Request, response: Response) {
+class LoginPascom {
+  async loginPascom(request: Request, response: Response) {
     const user = { usuario: 'ian', senha: 'ian' }
     const { usuario, senha } = request.body
 
@@ -17,4 +17,4 @@ class Login {
   }
 }
 
-export default Login
+export default LoginPascom

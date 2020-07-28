@@ -1,12 +1,14 @@
 import express from 'express'
 
-import Login from './controllers/login'
+import LoginPascom from './controllers/loginPascom'
+import LoginUsuario from './controllers/loginUsuario'
 import Locais from './controllers/locais'
 import Missas from './controllers/missas'
 import Usuarios from './controllers/usuarios'
 import MissaUsuario from './controllers/missa_usuario'
 
-const login = new Login()
+const loginPascom = new LoginPascom()
+const loginUsuario = new LoginUsuario()
 const locais = new Locais()
 const missas = new Missas()
 const usuarios = new Usuarios()
@@ -14,8 +16,9 @@ const missaUsuario = new MissaUsuario()
 
 const routes = express.Router()
 
-// Login
-routes.post('/login', login.login)
+// Login's
+routes.post('/login', loginPascom.loginPascom)
+routes.post('/login', loginUsuario.loginUsuario)
 
 // Locais
 routes.get('/locais', locais.index)
