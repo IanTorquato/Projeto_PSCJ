@@ -36,6 +36,9 @@ export const LoginProvider: React.FC = ({ children }) => {
         localStorage.setItem('@PSCJ:user', JSON.stringify(response.data.user))
         setUsuario(response.data)
       }
+      else (
+        alert(response.data.erro)
+      )
     } catch (erro) {
       alert(erro)
     }

@@ -5,9 +5,13 @@ class Missas {
     async create(request: Request, response: Response) {
         const { local_id, data, hora, max_pessoas } = request.body
 
-        await knex('missas').insert({ local_id, data, hora, max_pessoas })
+        try {
+            await knex('missas').insert({ local_id, data, hora, max_pessoas })
 
-        return response.json({ sucesso: true })
+            return response.json({ mensagem: 'Missa criada com sucesso!' })
+        } catch (error) {
+            return response.json({ erro: 'Falha no servidor ao tentar criar missa.' }).status(500)
+        }
     }
 
     async index(request: Request, response: Response) {
@@ -19,71 +23,89 @@ class Missas {
             return missas
         }
 
-        if (Number(local_id)) {
-            if (Number(local_id) < 3 && Number(local_id) > 0) {
-                const missasLocal = ordenaPelaData(await knex('missas').select('*').where({ local_id }))
+        try {
+            // Filtrar missas por Local
+            if (Number(local_id)) {
+                if (Number(local_id) < 3 && Number(local_id) > 0) {
+                    const missasLocal = ordenaPelaData(await knex('missas').select('*').where({ local_id }))
 
-                return response.json(missasLocal)
-            }
-            else {
-                return response.json({ erro: 'Erro na filtragem. Verifique os parâmetros!' })
-            }
-        }
-        else if (Number(quantMissas)) {
-            if (Number(quantMissas) > 0) {
-
-                const missas = ordenaPelaData(await knex('missas').select('*'))
-                const poucasMissas = []
-
-                for (let index = 0; index < Number(quantMissas); index++) {
-                    if (missas[index] !== undefined) {
-                        poucasMissas.push(missas[index])
-                    }
+                    return response.json(missasLocal)
                 }
 
-                return response.json(poucasMissas)
+                return response.json({ erro: 'Erro na filtragem. Verifique os parâmetros!' }).status(400)
             }
+
+            // Filtrar missas por quantidade
+            else if (Number(quantMissas)) {
+                if (Number(quantMissas) > 0) {
+
+                    const missas = ordenaPelaData(await knex('missas').select('*'))
+                    const poucasMissas = []
+
+                    for (let index = 0; index < Number(quantMissas); index++) {
+                        if (missas[index] !== undefined) {
+                            poucasMissas.push(missas[index])
+                        }
+                    }
+
+                    return response.json(poucasMissas)
+                }
+
+                return response.json({ erro: 'Erro na filtragem. Verifique os parâmetros!' }).status(400)
+            }
+
+            // Listar todas as missas
             else {
-                return response.json({ erro: 'Erro na filtragem. Verifique os parâmetros!' })
+                const missas = ordenaPelaData(await knex('missas').select('*'))
+                return response.json(missas)
             }
-        }
-        else {
-            const missas = ordenaPelaData(await knex('missas').select('*'))
-            return response.json(missas)
+        } catch (error) {
+            return response.json({ erro: 'Falha no servidor ao tentar listar dados da tabela "missas".' }).status(500)
         }
     }
 
     async show(request: Request, response: Response) {
         const { id } = request.params
 
-        const missa = await knex('missas').where({ id }).first()
+        try {
+            const missa = await knex('missas').where({ id }).first()
 
-        if (!missa) {
-            return response.status(400).json({ message: 'Missa não encontrada!' })
+            if (!missa) {
+                return response.json({ erro: 'Missa não encontrada!' }).status(400)
+            }
+            return response.json(missa)
+        } catch (error) {
+            return response.json({ erro: 'Falha no servidor ao tentar listar uma única missa.' }).status(500)
         }
-
-        return response.json(missa)
     }
 
     async update(request: Request, response: Response) {
         const { missa_id, local_id, data, hora, max_pessoas } = request.body
 
-        await knex('missas').where({ id: missa_id }).update({ local_id, data, hora, max_pessoas })
+        try {
+            await knex('missas').where({ id: missa_id }).update({ local_id, data, hora, max_pessoas })
 
-        response.json({ sucesso: true })
+            response.json({ mensagem: 'Missa atualizada com sucesso!' })
+        } catch (error) {
+            return response.json({ erro: 'Falha no servidor ao tentar atualizar missa.' }).status(500)
+        }
     }
 
     async delete(request: Request, response: Response) {
         const { id } = request.params
 
-        const trx = await knex.transaction()
+        try {
+            const trx = await knex.transaction()
 
-        await trx('missas').where({ id }).delete()
-        await trx('missa_usuario').where({ missa_id: id }).delete()
+            await trx('missas').where({ id }).delete()
+            await trx('missa_usuario').where({ missa_id: id }).delete()
 
-        await trx.commit()
+            await trx.commit()
 
-        response.json({ sucesso: true })
+            response.json({ mensagem: 'Missa deletada com sucesso!' })
+        } catch (error) {
+            return response.json({ erro: 'Falha no servidor ao tentar deletar missa.' }).status(500)
+        }
     }
 }
 

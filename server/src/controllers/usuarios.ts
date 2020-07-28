@@ -8,9 +8,9 @@ class Usuarios {
         try {
             await knex('usuarios').insert({ nome, email })
 
-            return response.json({ info: 'Usuário criado com sucesso!' })
+            return response.json({ mensagem: 'Usuário criado com sucesso!' })
         } catch (error) {
-            return response.json({ erro: 'Falha ao criar usuário' }).status(500)
+            return response.json({ erro: 'Falha no servidor ao tentar criar usuário.' }).status(500)
         }
     }
 
@@ -25,7 +25,7 @@ class Usuarios {
             }
             return response.json(user)
         } catch (error) {
-            return response.json({ erro: 'Falha no servidor ao tentar logar' }).status(500)
+            return response.json({ erro: 'Falha no servidor ao tentar logar.' }).status(500)
         }
     }
 
@@ -35,7 +35,7 @@ class Usuarios {
 
             return response.json(usuarios)
         } catch (error) {
-            return response.json({ erro: 'Algo inesperado aconteceu...' }).status(400)
+            return response.json({ erro: 'Falha no servidor ao tentar listar usuários.' }).status(500)
         }
     }
 }
