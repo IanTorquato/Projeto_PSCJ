@@ -29,14 +29,15 @@ export const LoginProvider: React.FC = ({ children }) => {
   }, [])
 
   async function logar(user: User) {
-    const response = await api.post(`/login`, user)
+    try {
+      const response = await api.post(`/login`, user)
 
-    if (response.data.user) {
-      localStorage.setItem('@PSCJ:user', JSON.stringify(response.data.user))
-      setUsuario(response.data)
-    }
-    else {
-      alert(response.data.erro)
+      if (response.data.user) {
+        localStorage.setItem('@PSCJ:user', JSON.stringify(response.data.user))
+        setUsuario(response.data)
+      }
+    } catch (erro) {
+      alert(erro)
     }
   }
 

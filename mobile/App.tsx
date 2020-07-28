@@ -23,5 +23,5 @@ export default function App() {
       <StatusBar barStyle="light-content" backgroundColor="#000" />
       <Routes />
     </>
-  );
+  )
 }
