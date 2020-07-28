@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react'
+import React, { createContext, useState } from 'react'
 
 import api from '../services/api'
 
@@ -9,24 +9,13 @@ interface User {
 
 interface LoginContextData {
   logado: boolean
-  loading: boolean
   logar(user: User): Promise<void>
 }
 
 const LoginContext = createContext<LoginContextData>({} as LoginContextData)
 
 export const LoginProvider: React.FC = ({ children }) => {
-  const [usuario, setUsuario] = useState<object | null>(null)
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    const storagedUser = localStorage.getItem('@PSCJ:user')
-
-    if (storagedUser) {
-      setUsuario(JSON.parse(storagedUser))
-    }
-    setLoading(false)
-  }, [])
+  const [usuario, setUsuario] = useState(localStorage.getItem('@PSCJ:user'))
 
   async function logar(user: User) {
     try {
@@ -45,7 +34,7 @@ export const LoginProvider: React.FC = ({ children }) => {
   }
 
   return (
-    <LoginContext.Provider value={{ logado: !!usuario, loading, logar }}>
+    <LoginContext.Provider value={{ logado: !!usuario, logar }}>
       {children}
     </LoginContext.Provider>
   )

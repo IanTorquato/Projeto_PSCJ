@@ -15,21 +15,6 @@ body {
 	background-color: #eee;
 }
 
-div.carregando {
-	align-items: center;
-	display: flex;
-	height: 100vh;
-	justify-content: center;
-	margin: 0 auto;
-	width: 30vw;
-}
-
-div.carregando h1 {
-	background-color: #333;
-	border-radius: 10px;
-	padding: 10px;
-}
-
 div.imgFundo {
 	background-attachment: fixed;
 	background-image: url('./assets/fundoHome.webp');

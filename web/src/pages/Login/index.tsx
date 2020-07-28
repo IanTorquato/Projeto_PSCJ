@@ -7,7 +7,7 @@ import logo from '../../assets/logo.webp'
 const Login = () => {
   const { logar } = useContext(LoginContext)
 
-  async function entrar(event: FormEvent) {
+  function entrar(event: FormEvent) {
     event.preventDefault()
 
     const usuario = document.querySelector<HTMLInputElement>('input#usuario')?.value.trim()
