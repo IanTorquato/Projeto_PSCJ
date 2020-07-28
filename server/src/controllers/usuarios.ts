@@ -18,12 +18,12 @@ class Usuarios {
         const { nome, email } = request.body
 
         try {
-            const user = await knex('usuarios').where({ email, nome }).first()
+            const usuario = await knex('usuarios').where({ nome, email }).first()
 
-            if (!user) {
+            if (!usuario) {
                 return response.json({ erro: 'Usuário não encontrado!' }).status(400)
             }
-            return response.json(user)
+            return response.json(usuario)
         } catch (error) {
             return response.json({ erro: 'Falha no servidor ao tentar logar.' }).status(500)
         }

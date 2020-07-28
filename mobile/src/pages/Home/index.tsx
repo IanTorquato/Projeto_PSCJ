@@ -1,11 +1,14 @@
 import React from 'react'
-import { View, Text, StyleSheet, Image, ScrollView } from 'react-native'
+import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native'
 import Svg, { G, Path } from "react-native-svg"
 import Icon from 'react-native-vector-icons/FontAwesome5'
+
+import { useContextLogin } from '../../contexts/login'
 
 const logo = require('../../../assets/icon.png')
 
 const Home = () => {
+  const { deslogar } = useContextLogin()
   return (
     <View style={styles.viewContainer}>
       <ScrollView>
@@ -23,6 +26,10 @@ const Home = () => {
             <Text style={styles.txtSagrado}>Paróquia Sagrado Coração de Jesus</Text>
           </View>
         </Svg>
+
+        <TouchableOpacity onPress={deslogar}>
+          <Text>DESLOGAR</Text>
+        </TouchableOpacity>
 
         <View style={styles.viewParaParticipar}>
           <Text style={styles.txtTituloParticipar}>Para participar da Santa Missa, é necessário ao fiel:</Text>
