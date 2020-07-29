@@ -6,9 +6,15 @@ class Usuarios {
         const { nome, email } = request.body
 
         try {
-            await knex('usuarios').insert({ nome, email })
+            const usuarioExistente = await knex('usuarios').where({ email }).first()
 
-            return response.json({ mensagem: 'Usuário criado com sucesso!' })
+            if (usuarioExistente) {
+                return response.json({ erro: 'Este e-mail já está em uso. Tente novamente com um e-mail diferente!' })
+            } else {
+                await knex('usuarios').insert({ nome, email })
+
+                return response.json({ mensagem: 'Usuário criado com sucesso!' })
+            }
         } catch (error) {
             return response.json({ erro: 'Falha no servidor ao tentar criar usuário.' }).status(500)
         }
