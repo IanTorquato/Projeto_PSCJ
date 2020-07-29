@@ -44,8 +44,11 @@ const CadastrarUsuario = () => {
 			if (erro instanceof Yup.ValidationError) {
 				Alert.alert('Erro', erro.errors[0])
 			}
+			else if (String(erro) === 'Error: Network Error') {
+				Alert.alert('Erro', 'Erro na conexão... Verifique sua internet')
+			}
 			else {
-				Alert.alert('Erro', erro)
+				Alert.alert('Erro', String(erro))
 			}
 		}
 	}

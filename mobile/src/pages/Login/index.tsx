@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, ImageBackground, Image, TextInput } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, ImageBackground, Image, TextInput, Alert } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler'
 import { FontAwesome5 as Fa } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
+import * as Yup from 'yup'
 
 import { useContextLogin } from '../../contexts/login'
 
@@ -20,9 +21,18 @@ const Login = () => {
     navigation.goBack()
   }
 
-  function entrar() {
-    const usuario = { id: 0, nome, email }
-    logar(usuario)
+  async function entrar() {
+    try {
+      const schemaDadosCadastro = Yup.object().shape({
+        nome: Yup.string().trim().required('O campo Nome é obrigatório!').min(3, 'O nome deve conter ao menos 3 caracteres!'),
+        email: Yup.string().trim().required('O campo E-mail é obrigatório!').email('Digite um E-mail válido!')
+      })
+
+      await schemaDadosCadastro.validate({ nome, email })
+      logar({ id: 0, nome, email })
+    } catch (erro) {
+      Alert.alert('Erro', erro.errors[0])
+    }
   }
 
   return (

@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from 'react'
 import AsyncStorage from '@react-native-community/async-storage'
+import { Alert } from 'react-native'
 
 import api from '../services/api'
 
@@ -40,15 +41,24 @@ export const LoginProvider: React.FC = ({ children }) => {
   }, [])
 
   async function logar(usuario: Usuario) {
-    const response = await api.post(`/usuarios/login`, usuario)
+    try {
+      const response = await api.post(`/usuarios/login`, usuario)
 
-    if (response.data.nome && response.data.email) {
-      setStateUsuario(response.data)
-      await AsyncStorage.setItem('@PSCJ:user', JSON.stringify(response.data))
+      if (response.data.nome && response.data.email) {
+        setStateUsuario(response.data)
+        await AsyncStorage.setItem('@PSCJ:user', JSON.stringify(response.data))
+      }
+      else (
+        Alert.alert('Erro', response.data.erro)
+      )
+    } catch (erro) {
+      if (String(erro) === 'Error: Network Error') {
+        Alert.alert('Erro', 'Erro na conexão... Verifique sua internet')
+      }
+      else {
+        Alert.alert('Erro', String(erro))
+      }
     }
-    else (
-      alert(response.data.erro)
-    )
   }
 
   async function deslogar() {
