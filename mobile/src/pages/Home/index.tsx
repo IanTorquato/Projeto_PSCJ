@@ -27,8 +27,8 @@ const Home = () => {
           </View>
         </Svg>
 
-        <TouchableOpacity onPress={deslogar}>
-          <Text>DESLOGAR</Text>
+        <TouchableOpacity onPress={deslogar} style={styles.btnDeslogar}>
+          <Text style={styles.txtDeslogar}>DESLOGAR</Text>
         </TouchableOpacity>
 
         <View style={styles.viewParaParticipar}>
@@ -90,6 +90,22 @@ const styles = StyleSheet.create({
     textShadowColor: '#000',
     textShadowOffset: { width: 2, height: 4 },
     textShadowRadius: 4
+  },
+
+  btnDeslogar: {
+    alignItems: 'center',
+    backgroundColor: '#333',
+    borderRadius: 10,
+    left: 96,
+    marginBottom: 24,
+    padding: 5,
+    width: 160
+  },
+
+  txtDeslogar: {
+    color: '#eee',
+    fontSize: 24,
+    fontStyle: 'italic'
   },
 
   viewParaParticipar: {},
