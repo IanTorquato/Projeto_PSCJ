@@ -4,9 +4,10 @@ import { RectButton } from 'react-native-gesture-handler'
 import { FontAwesome5 as Fa } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 
+import { useContextLogin } from '../../contexts/login'
+
 const fundoLogin = require('../../assets/fundoLogin.jpg')
 const logo = require('../../../assets/icon.png')
-import { useContextLogin } from '../../contexts/login'
 
 const Login = () => {
   const [nome, setNome] = useState('')
@@ -17,14 +18,6 @@ const Login = () => {
 
   function paraAnterior() {
     navigation.goBack()
-  }
-
-  async function digitouNome(event: any) {
-    setNome(event.nativeEvent.text)
-  }
-
-  async function digitouEmail(event: any) {
-    setEmail(event.nativeEvent.text)
   }
 
   function entrar() {
@@ -43,12 +36,14 @@ const Login = () => {
 
         <View style={styles.containerInputs}>
           <Text style={styles.txtInput}>Nome:</Text>
-          <TextInput style={styles.input} placeholder="Digite seu nome" onChange={digitouNome} />
+          <TextInput style={styles.input} placeholder="Digite seu nome"
+            onChange={event => setNome(event.nativeEvent.text)} />
         </View>
 
         <View style={styles.containerInputs}>
           <Text style={styles.txtInput}>E-mail:</Text>
-          <TextInput style={styles.input} placeholder="Digite seu e-mail" onChange={digitouEmail} />
+          <TextInput style={styles.input} placeholder="Digite seu e-mail"
+            onChange={event => setEmail(event.nativeEvent.text)} />
         </View>
 
         <RectButton style={styles.botao} onPress={entrar}>
