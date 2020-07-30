@@ -32,8 +32,6 @@ export const LoginProvider: React.FC = ({ children }) => {
         setStateUsuario(JSON.parse(usuarioLogado))
       }
 
-      await new Promise(resolve => setTimeout(resolve, 2000))
-
       setStateLoading(false)
     }
 
@@ -53,7 +51,7 @@ export const LoginProvider: React.FC = ({ children }) => {
       )
     } catch (erro) {
       if (String(erro) === 'Error: Network Error') {
-        Alert.alert('Erro', 'Erro na conexão... Verifique sua internet')
+        Alert.alert('Erro', 'Erro na conexão..')
       }
       else {
         Alert.alert('Erro', String(erro))

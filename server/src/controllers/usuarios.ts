@@ -9,7 +9,7 @@ class Usuarios {
             const usuarioExistente = await knex('usuarios').where({ email }).first()
 
             if (usuarioExistente) {
-                return response.json({ erro: 'Este e-mail já está em uso. Tente novamente com um e-mail diferente!' })
+                return response.json({ erro: 'Este e-mail já está em uso!' })
             } else {
                 await knex('usuarios').insert({ nome, email })
 
