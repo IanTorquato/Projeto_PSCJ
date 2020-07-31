@@ -30,15 +30,25 @@ const Missas: React.FC = () => {
 
       const { data } = await api.get('missas')
 
-      setMissas(data.map((missa: Missa) => {
-        const dataCortada = missa.data.split('/')
+      if (!data.erro) {
+        setMissas(data.map((missa: Missa) => {
+          const dataCortada = missa.data.split('/')
 
-        missa.data = `${dataCortada[2]}/${dataCortada[1]}/${dataCortada[0]}`
+          missa.data = `${dataCortada[2]}/${dataCortada[1]}/${dataCortada[0]}`
 
-        return missa
-      }))
+          return missa
+        }))
+      }
+      else {
+        Alert.alert('Erro', data.erro)
+      }
     } catch (erro) {
-      Alert.alert('Erro', String(erro))
+      if (String(erro) === 'Error: Network Error') {
+        Alert.alert('Erro', 'Erro na conexão...')
+      }
+      else {
+        Alert.alert('Erro', String(erro))
+      }
     }
   }
 
@@ -52,16 +62,26 @@ const Missas: React.FC = () => {
 
         const { data } = await api.get(`missas?local_id=${localId}`)
 
-        setMissas(data.map((missa: Missa) => {
-          const dataCortada = missa.data.split('/')
+        if (!data.erro) {
+          setMissas(data.map((missa: Missa) => {
+            const dataCortada = missa.data.split('/')
 
-          missa.data = `${dataCortada[2]}/${dataCortada[1]}/${dataCortada[0]}`
+            missa.data = `${dataCortada[2]}/${dataCortada[1]}/${dataCortada[0]}`
 
-          return missa
-        }))
+            return missa
+          }))
+        }
+        else {
+          Alert.alert('Erro', data.erro)
+        }
       }
     } catch (erro) {
-      Alert.alert('Erro', erro)
+      if (String(erro) === 'Error: Network Error') {
+        Alert.alert('Erro', 'Erro na conexão...')
+      }
+      else {
+        Alert.alert('Erro', String(erro))
+      }
     }
   }
 

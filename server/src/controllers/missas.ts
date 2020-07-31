@@ -26,32 +26,41 @@ class Missas {
         try {
             // Filtrar missas por Local
             if (Number(local_id)) {
-                if (Number(local_id) < 3 && Number(local_id) > 0) {
-                    const missasLocal = ordenaPelaData(await knex('missas').select('*').where({ local_id }))
+                try {
+                    console.log('aqui 1')
+                    if (Number(local_id) < 3 && Number(local_id) > 0) {
+                        const missasLocal = ordenaPelaData(await knex('missas').select('*').where({ local_id }))
 
-                    return response.json(missasLocal)
+                        return response.json(missasLocal)
+                    } else {
+                        return response.json({ erro: 'Local inexistente!' }).status(400)
+                    }
+                } catch (erro) {
+                    return response.json({ erro: 'Erro na filtragem de missas pelo Local!' }).status(400)
                 }
-
-                return response.json({ erro: 'Erro na filtragem. Verifique os parâmetros!' }).status(400)
             }
 
             // Filtrar missas por quantidade
             else if (Number(quantMissas)) {
-                if (Number(quantMissas) > 0) {
+                try {
+                    if (Number(quantMissas) > 0) {
 
-                    const missas = ordenaPelaData(await knex('missas').select('*'))
-                    const poucasMissas = []
+                        const missas = ordenaPelaData(await knex('missas').select('*'))
+                        const poucasMissas = []
 
-                    for (let index = 0; index < Number(quantMissas); index++) {
-                        if (missas[index] !== undefined) {
-                            poucasMissas.push(missas[index])
+                        for (let index = 0; index < Number(quantMissas); index++) {
+                            if (missas[index] !== undefined) {
+                                poucasMissas.push(missas[index])
+                            }
                         }
+
+                        return response.json(poucasMissas)
+                    } else {
+                        return response.json({ erro: 'Número de missas inválido!' }).status(400)
                     }
-
-                    return response.json(poucasMissas)
+                } catch (erro) {
+                    return response.json({ erro: 'Erro na filtragem de missas por Quantidade!' }).status(400)
                 }
-
-                return response.json({ erro: 'Erro na filtragem. Verifique os parâmetros!' }).status(400)
             }
 
             // Listar todas as missas
@@ -60,7 +69,7 @@ class Missas {
                 return response.json(missas)
             }
         } catch (error) {
-            return response.json({ erro: 'Falha no servidor ao tentar listar dados da tabela "missas".' }).status(500)
+            return response.json({ erro: 'Falha no servidor ao tentar listar dados da tabela "missas"!' }).status(500)
         }
     }
 
