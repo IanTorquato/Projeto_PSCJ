@@ -45,7 +45,7 @@ const CadastrarUsuario = () => {
 				Alert.alert('Erro', erro.errors[0])
 			}
 			else if (String(erro) === 'Error: Network Error') {
-				Alert.alert('Erro', 'Erro na conexão... Verifique sua internet')
+				Alert.alert('Erro', 'Erro na conexão...')
 			}
 			else {
 				Alert.alert('Erro', String(erro))

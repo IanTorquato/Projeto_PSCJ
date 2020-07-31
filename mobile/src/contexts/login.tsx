@@ -40,18 +40,19 @@ export const LoginProvider: React.FC = ({ children }) => {
 
   async function logar(usuario: Usuario) {
     try {
-      const response = await api.post(`/usuarios/login`, usuario)
-
-      if (response.data.nome && response.data.email) {
-        setStateUsuario(response.data)
-        await AsyncStorage.setItem('@PSCJ:user', JSON.stringify(response.data))
-      }
-      else (
-        Alert.alert('Erro', response.data.erro)
-      )
+      // const response = await api.post(`/usuarios/login`, usuario)
+      const response = { data: { id: 0, nome: 'Ian Torquato', email: 'iantorquato2@gmail.com' } }
+      // if (response.data.nome && response.data.email) {
+      //   setStateUsuario(response.data)
+      await AsyncStorage.setItem('@PSCJ:user', JSON.stringify(response.data))
+      // }
+      // else (
+      //   Alert.alert('Erro', response.data.erro)
+      // )
+      setStateUsuario(response.data)
     } catch (erro) {
       if (String(erro) === 'Error: Network Error') {
-        Alert.alert('Erro', 'Erro na conexão..')
+        Alert.alert('Erro', 'Erro na conexão...')
       }
       else {
         Alert.alert('Erro', String(erro))

@@ -8,7 +8,7 @@ import { useContextLogin } from '../../contexts/login'
 const logo = require('../../../assets/icon.png')
 
 const Home = () => {
-  const { deslogar } = useContextLogin()
+  const { deslogar, usuario } = useContextLogin()
   return (
     <View style={styles.viewContainer}>
       <ScrollView>
@@ -36,7 +36,12 @@ const Home = () => {
           <View style={styles.viewParticipar}>
             <View style={styles.viewRegras}>
               <Icon name="circle" size={6} color="#fff" solid />
-              <Text style={styles.txtParaParticipar}>Uma regra longa qualquer</Text>
+              <Text style={styles.txtParaParticipar}>Olá, {usuario?.nome} :)</Text>
+            </View>
+
+            <View style={styles.viewRegras}>
+              <Icon name="circle" size={6} color="#fff" solid />
+              <Text style={styles.txtParaParticipar}>E-mail: {usuario?.email}</Text>
             </View>
 
             <View style={styles.viewRegras}>
@@ -46,12 +51,7 @@ const Home = () => {
 
             <View style={styles.viewRegras}>
               <Icon name="circle" size={6} color="#fff" solid />
-              <Text style={styles.txtParaParticipar}>Uma regra longa qualquer</Text>
-            </View>
-
-            <View style={styles.viewRegras}>
-              <Icon name="circle" size={6} color="#fff" solid />
-              <Text style={styles.txtParaParticipar}>Uma regra longa qualquer</Text>
+              <Text style={styles.txtParaParticipar}>Outra regra longa qualquer</Text>
             </View>
           </View>
         </View>
