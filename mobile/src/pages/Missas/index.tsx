@@ -2,8 +2,45 @@ import React, { useEffect, useState } from 'react'
 import { View, Text, StyleSheet, ScrollView, Image, Alert } from 'react-native'
 import { RadioButton } from 'react-native-paper'
 
+import api from '../../services/api'
+
+const imgCentro = require('../../assets/igrejaCentro.png')
+const imgTermas = require('../../assets/igrejaTermas.png')
+
+interface Missa {
+  id: number
+  local_id: number
+  data: string
+  hora: string
+  max_pessoas: number
+  pessoas_cadastradas: number
+}
+
 const Missas: React.FC = () => {
+  const [missas, setMissas] = useState<Missa[]>([])
   const [valorSelecionado, setValorSelecionado] = useState('')
+
+  useEffect(() => {
+    buscarMissasApi()
+  }, [])
+
+  async function buscarMissasApi() {
+    try {
+      setValorSelecionado('')
+
+      const { data } = await api.get('missas')
+
+      setMissas(data.map((missa: Missa) => {
+        const dataCortada = missa.data.split('/')
+
+        missa.data = `${dataCortada[2]}/${dataCortada[1]}/${dataCortada[0]}`
+
+        return missa
+      }))
+    } catch (erro) {
+      Alert.alert('Erro', String(erro))
+    }
+  }
 
   return (
     <ScrollView style={styles.scrollView}>
@@ -25,6 +62,25 @@ const Missas: React.FC = () => {
             </View>
           </RadioButton.Group>
         </View>
+
+        {missas.map(missa => (
+          <View style={styles.viewMissa} key={missa.id}>
+            <Image source={missa.local_id === 1 ? imgCentro : imgTermas} style={styles.imgLocal}></Image>
+
+            <View style={styles.viewDadosMissa}>
+              <Text style={styles.txtLocal}>{missa.local_id === 1 ? 'Centro' : 'Termas'}</Text>
+
+              <View style={styles.viewDataHora}>
+                <Text style={styles.txtDataHora}>Data: {missa.data.slice(0, 5)}</Text>
+                <Text style={styles.txtDataHora}>Hora: {missa.hora}</Text>
+              </View>
+
+              <View style={styles.viewQuantPessoas}>
+                <Text style={styles.txtQuantPessoas}>Quant. Pessoas: {missa.pessoas_cadastradas}/{missa.max_pessoas}</Text>
+              </View>
+            </View>
+          </View>
+        ))}
       </View>
     </ScrollView>
   )
@@ -74,6 +130,62 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontFamily: 'Roboto_400Regular',
     fontSize: 16
+  },
+
+  viewMissa: {
+    borderRadius: 10,
+    flexDirection: 'row',
+    height: 88,
+    marginVertical: 4,
+    width: 328
+  },
+
+  imgLocal: {
+    borderBottomLeftRadius: 10,
+    borderTopLeftRadius: 10,
+    height: 88,
+    resizeMode: 'cover',
+    width: 120
+  },
+
+  viewDadosMissa: {
+    alignItems: 'center',
+    backgroundColor: '#eee',
+    borderBottomRightRadius: 10,
+    borderTopRightRadius: 10,
+    justifyContent: 'center',
+    width: 208
+  },
+
+  txtLocal: {
+    fontFamily: 'Roboto_400Regular',
+    fontSize: 20,
+    fontWeight: 'bold'
+  },
+
+  viewDataHora: {
+    alignItems: 'center',
+    flexDirection: 'row'
+  },
+
+  txtDataHora: {
+    color: '#555',
+    fontFamily: 'Roboto_400Regular',
+    fontSize: 15,
+    fontWeight: 'bold',
+    marginHorizontal: 4
+  },
+
+  viewQuantPessoas: {
+    alignItems: 'center',
+    flexDirection: 'row'
+  },
+
+  txtQuantPessoas: {
+    color: '#e41e25',
+    fontFamily: 'Roboto_400Regular',
+    fontSize: 15,
+    fontWeight: '500'
   }
 })
 
