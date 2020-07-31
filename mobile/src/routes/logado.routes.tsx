@@ -5,6 +5,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 
 import Home from '../pages/Home'
+import Missas from '../pages/Missas'
+import Perfil from '../pages/Perfil'
 
 const App = createBottomTabNavigator()
 
@@ -37,8 +39,8 @@ const RoutesLogado = () => {
 			>
 
 				<App.Screen name="Home" component={Home} />
-				<App.Screen name="Missas" component={Home} />
-				<App.Screen name="Perfil" component={Home} />
+				<App.Screen name="Missas" component={Missas} />
+				<App.Screen name="Perfil" component={Perfil} />
 			</App.Navigator>
 		</NavigationContainer>
 	)
