@@ -42,6 +42,29 @@ const Missas: React.FC = () => {
     }
   }
 
+  async function listarMissasPorLocal(localId: string) {
+    try {
+      if (localId === valorSelecionado) {
+        buscarMissasApi()
+      }
+      else {
+        setValorSelecionado(localId)
+
+        const { data } = await api.get(`missas?local_id=${localId}`)
+
+        setMissas(data.map((missa: Missa) => {
+          const dataCortada = missa.data.split('/')
+
+          missa.data = `${dataCortada[2]}/${dataCortada[1]}/${dataCortada[0]}`
+
+          return missa
+        }))
+      }
+    } catch (erro) {
+      Alert.alert('Erro', erro)
+    }
+  }
+
   return (
     <ScrollView style={styles.scrollView}>
       <View style={styles.viewContainer}>
@@ -50,7 +73,7 @@ const Missas: React.FC = () => {
         <View style={styles.viewFiltro}>
           <Text style={styles.txtFiltro}>Filtro:</Text>
 
-          <RadioButton.Group onValueChange={localId => setValorSelecionado(localId)} value={valorSelecionado}>
+          <RadioButton.Group onValueChange={localId => listarMissasPorLocal(localId)} value={valorSelecionado}>
             <View style={styles.viewRadio}>
               <RadioButton value="1" color="#ffb02c" />
               <Text style={styles.txtFiltro}>Centro</Text>
