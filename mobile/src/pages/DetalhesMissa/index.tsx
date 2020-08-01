@@ -26,12 +26,16 @@ const DetalhesMissa = () => {
         <View style={styles.viewDadosMissa}>
           <Text style={styles.txtLocal}></Text>
 
-          <View style={styles.viewDataHora}>
-            <Text style={styles.txtDataHora}>Data: {}</Text>
-          </View>
+          <View style={styles.viewContainDataHora}>
+            <View style={styles.viewDataHora}>
+              <FontAwesome5 name="circle" size={6} color="#fff" solid />
+              <Text style={styles.txtDataHora}>Data: {}</Text>
+            </View>
 
-          <View style={styles.viewDataHora}>
-            <Text style={styles.txtDataHora}>Hora: {}</Text>
+            <View style={styles.viewDataHora}>
+              <FontAwesome5 name="circle" size={6} color="#fff" solid />
+              <Text style={styles.txtDataHora}>Hora: {}</Text>
+            </View>
           </View>
         </View>
       </View>
@@ -51,33 +55,103 @@ const DetalhesMissa = () => {
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    alignItems: 'center',
+    flex: 1
+  },
 
-  btnVoltar: {},
+  btnVoltar: {
+    left: 16,
+    position: 'absolute',
+    top: 16
+  },
 
-  viewDetalhesMissa: {},
+  viewDetalhesMissa: {
+    height: 304,
+    width: 312
+  },
 
-  imgLocal: {},
+  imgLocal: {
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
+    height: 216,
+    resizeMode: 'cover',
+    width: 312
+  },
 
-  viewDadosMissa: {},
+  viewDadosMissa: {
+    alignItems: 'center',
+    backgroundColor: '#333',
+    borderBottomLeftRadius: 16,
+    borderBottomRightRadius: 16,
+    height: 88,
+    width: 312
+  },
 
-  txtLocal: {},
+  txtLocal: {
+    color: '#fff',
+    fontFamily: 'Lora_400Regular',
+    fontSize: 24
+  },
 
-  viewDataHora: {},
+  viewContainDataHora: {
+    alignItems: 'center',
+    flexDirection: 'row'
+  },
 
-  txtDataHora: {},
+  viewDataHora: {
+    alignItems: 'center',
+    flexDirection: 'row'
+  },
 
-  txtReserveVaga: {},
+  txtDataHora: {
+    color: '#fff',
+    fontFamily: 'Roboto_400Regular',
+    fontSize: 16,
+    fontWeight: 'bold'
+  },
 
-  viewQuantPessoas: {},
+  txtReserveVaga: {
+    borderBottomColor: '#44a4eb',
+    borderBottomWidth: 1,
+    borderTopColor: '#44a4eb',
+    borderTopWidth: 1,
+    color: '#44a4eb',
+    fontFamily: 'Cinzel_400Regular',
+    fontSize: 32,
+    marginTop: 48,
+    paddingVertical: 8,
+    textAlign: 'center',
+    textShadowColor: '#000000dd',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 15,
+    width: '100%'
+  },
 
-  txtQuantPessoas: {},
+  viewQuantPessoas: {
+    alignItems: 'center',
+    flexDirection: 'row'
+  },
+
+  txtQuantPessoas: {
+    color: '#fff',
+    fontFamily: 'Roboto_400Regular'
+  },
 
   inputNumberQuantPessoas: {},
 
-  btnPronto: {},
+  btnPronto: {
+    backgroundColor: '#44a4eb',
+    borderRadius: 15,
+    height: 50,
+    paddingHorizontal: 24
+  },
 
-  txtPronto: {}
+  txtPronto: {
+    color: '#fff',
+    fontFamily: 'Roboto_400Regular',
+    fontSize: 24
+  }
 })
 
 export default DetalhesMissa
