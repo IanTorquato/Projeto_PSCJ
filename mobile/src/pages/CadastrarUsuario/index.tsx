@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, ImageBackground, Image, TextInput, Alert } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler'
-import { FontAwesome5 as Fa } from '@expo/vector-icons'
+import { FontAwesome5 } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import * as Yup from 'yup'
 
@@ -59,7 +59,7 @@ const CadastrarUsuario = () => {
 				<Image source={logo} style={styles.imgLogo} />
 
 				<TouchableOpacity onPress={handleNavigateBack} style={styles.btnVoltar}>
-					<Fa name="arrow-circle-left" color="#fff" size={32} />
+					<FontAwesome5 name="arrow-circle-left" color="#fff" size={32} />
 				</TouchableOpacity>
 
 				<View style={styles.containerInputs}>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native'
 import Svg, { G, Path } from "react-native-svg"
-import Icon from 'react-native-vector-icons/FontAwesome5'
+import { FontAwesome5 } from '@expo/vector-icons'
 
 import { useContextLogin } from '../../contexts/login'
 
@@ -35,22 +35,22 @@ const Home = () => {
           <Text style={styles.txtTituloParticipar}>Para participar da Santa Missa, é necessário ao fiel:</Text>
           <View style={styles.viewParticipar}>
             <View style={styles.viewRegras}>
-              <Icon name="circle" size={6} color="#fff" solid />
+              <FontAwesome5 name="circle" size={6} color="#fff" solid />
               <Text style={styles.txtParaParticipar}>Olá, {usuario?.nome} :)</Text>
             </View>
 
             <View style={styles.viewRegras}>
-              <Icon name="circle" size={6} color="#fff" solid />
+              <FontAwesome5 name="circle" size={6} color="#fff" solid />
               <Text style={styles.txtParaParticipar}>E-mail: {usuario?.email}</Text>
             </View>
 
             <View style={styles.viewRegras}>
-              <Icon name="circle" size={6} color="#fff" solid />
+              <FontAwesome5 name="circle" size={6} color="#fff" solid />
               <Text style={styles.txtParaParticipar}>Uma regra longa qualquer</Text>
             </View>
 
             <View style={styles.viewRegras}>
-              <Icon name="circle" size={6} color="#fff" solid />
+              <FontAwesome5 name="circle" size={6} color="#fff" solid />
               <Text style={styles.txtParaParticipar}>Outra regra longa qualquer</Text>
             </View>
           </View>

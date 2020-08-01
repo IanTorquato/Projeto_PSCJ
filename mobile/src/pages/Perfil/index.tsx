@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, ScrollView, Image, Alert } from 'react-native'
 import Svg, { G, Path } from 'react-native-svg'
-import FontAwesome from 'react-native-vector-icons/FontAwesome5'
+import { FontAwesome5 } from '@expo/vector-icons'
 import { BaseButton } from 'react-native-gesture-handler'
 
 import api from '../../services/api'
@@ -64,11 +64,11 @@ const Perfil: React.FC = () => {
           <View style={styles.viewPerfilUsuario}>
             <View style={styles.viewEditarUsuario}>
               <BaseButton onPress={() => { Alert.alert('Foooi', 'Editando...') }}>
-                <FontAwesome name="user-edit" size={25} color="#fff" />
+                <FontAwesome5 name="user-edit" size={25} color="#fff" />
               </BaseButton>
             </View>
 
-            <FontAwesome name="user-circle" size={80} color="#e41e25" style={styles.imgUsuario}></FontAwesome>
+            <FontAwesome5 name="user-circle" size={80} color="#e41e25" style={styles.imgUsuario}></FontAwesome5>
 
             <Text style={styles.txtNomeUsuario}>Ana Clara V. Rodrigues</Text>
             <Text style={styles.txtEmailUsuario}>anaclaravargas16@gmail.com</Text>
@@ -84,7 +84,7 @@ const Perfil: React.FC = () => {
             <View style={styles.viewDadosMissa}>
               <View style={styles.viewEditarMissa}>
                 <BaseButton onPress={() => { Alert.alert('Foooi', 'Editando...') }}>
-                  <FontAwesome name="edit" size={16} color="#000" />
+                  <FontAwesome5 name="edit" size={16} color="#000" />
                 </BaseButton>
               </View>
 
