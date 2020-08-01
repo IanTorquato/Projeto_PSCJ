@@ -101,6 +101,15 @@ const Perfil: React.FC = () => {
             </View>
           </View>
         ))}
+
+        {missas === [] ? <></> : (
+          <View style={styles.viewNadaDeMissas}>
+            <FontAwesome5 name="sad-tear" size={80} />
+
+            <Text style={styles.txtNadaDeMissas}>Você não possui</Text>
+            <Text style={styles.txtNadaDeMissas}>Missas cadastradas...</Text>
+          </View>
+        )}
       </View>
     </ScrollView>
   )
@@ -226,6 +235,21 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto_400Regular',
     fontSize: 15,
     fontWeight: '500'
+  },
+
+  viewNadaDeMissas: {
+    alignItems: 'center',
+    backgroundColor: '#444',
+    borderRadius: 24,
+    borderStyle: 'solid',
+    borderWidth: 2,
+    marginTop: 16,
+    padding: 16
+  },
+
+  txtNadaDeMissas: {
+    fontFamily: 'Roboto_400Regular',
+    fontSize: 24
   }
 })
 

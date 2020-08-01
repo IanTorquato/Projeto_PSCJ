@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, StyleSheet, ScrollView, Image, Alert } from 'react-native'
 import { RadioButton } from 'react-native-paper'
+import { FontAwesome5 } from '@expo/vector-icons'
 
 import api from '../../services/api'
 
@@ -124,6 +125,15 @@ const Missas: React.FC = () => {
             </View>
           </View>
         ))}
+
+        {missas === [] ? <></> : (
+          <View style={styles.viewNadaDeMissas}>
+            <FontAwesome5 name="sad-tear" size={80} />
+
+            <Text style={styles.txtNadaDeMissas}>Não nenhuma missa</Text>
+            <Text style={styles.txtNadaDeMissas}>Para listar aqui...</Text>
+          </View>
+        )}
       </View>
     </ScrollView>
   )
@@ -229,6 +239,21 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto_400Regular',
     fontSize: 15,
     fontWeight: '500'
+  },
+
+  viewNadaDeMissas: {
+    alignItems: 'center',
+    backgroundColor: '#444',
+    borderRadius: 24,
+    borderStyle: 'solid',
+    borderWidth: 2,
+    marginTop: 16,
+    padding: 16
+  },
+
+  txtNadaDeMissas: {
+    fontFamily: 'Roboto_400Regular',
+    fontSize: 24
   }
 })
 
