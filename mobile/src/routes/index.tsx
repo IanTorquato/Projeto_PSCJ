@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import { View, ActivityIndicator, StyleSheet } from 'react-native'
 
 import { useContextLogin } from '../contexts/login'
@@ -27,4 +27,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Routes;
+export default Routes

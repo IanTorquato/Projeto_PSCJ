@@ -1,5 +1,5 @@
-import React from 'react';
-import { Text, View, StyleSheet, ImageBackground, Image } from 'react-native';
+import React from 'react'
+import { Text, View, StyleSheet, ImageBackground, Image } from 'react-native'
 import { RectButton } from 'react-native-gesture-handler'
 import { useNavigation } from '@react-navigation/native'
 
@@ -39,7 +39,7 @@ const Main = () => {
 				</View>
 			</ImageBackground>
 		</View>
-	);
+	)
 }
 
 const styles = StyleSheet.create({
@@ -102,6 +102,6 @@ const styles = StyleSheet.create({
 		height: 48,
 		top: 5
 	}
-});
+})
 
 export default Main
