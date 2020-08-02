@@ -91,8 +91,15 @@ const Perfil: React.FC = () => {
               <Text style={styles.txtLocal}>{missa.local_id === 1 ? 'Centro' : 'Termas'}</Text>
 
               <View style={styles.viewDataHora}>
-                <Text style={styles.txtDataHora}>Data: {missa.data.slice(0, 5)}</Text>
-                <Text style={styles.txtDataHora}>Hora: {missa.hora}</Text>
+                <View style={styles.viewValueDataHora}>
+                  <Text style={styles.txtDataHora}>Data: </Text>
+                  <Text style={styles.txtValueDataHora}>{missa.data.slice(0, 5)}</Text>
+                </View>
+
+                <View style={styles.viewValueDataHora}>
+                  <Text style={styles.txtDataHora}>Hora: </Text>
+                  <Text style={styles.txtValueDataHora}>{missa.hora}</Text>
+                </View>
               </View>
 
               <View style={styles.viewPessoasCadastradas}>
@@ -102,7 +109,7 @@ const Perfil: React.FC = () => {
           </View>
         ))}
 
-        {missas === [] ? <></> : (
+        {missas !== [] ? <></> : (
           <View style={styles.viewNadaDeMissas}>
             <FontAwesome5 name="sad-tear" size={80} />
 
@@ -213,16 +220,26 @@ const styles = StyleSheet.create({
   },
 
   viewDataHora: {
-    alignItems: 'center',
     flexDirection: 'row'
+  },
+
+  viewValueDataHora: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginHorizontal: 4
   },
 
   txtDataHora: {
     color: '#555',
     fontFamily: 'Roboto_400Regular',
     fontSize: 15,
-    fontWeight: 'bold',
-    marginHorizontal: 4
+    fontWeight: 'bold'
+  },
+
+  txtValueDataHora: {
+    color: '#555',
+    fontFamily: 'Roboto_400Regular',
+    fontSize: 15
   },
 
   viewPessoasCadastradas: {
