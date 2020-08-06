@@ -68,10 +68,6 @@ const EditarMissa = () => {
     }
 
     function clicouLocal(event: ChangeEvent<HTMLSelectElement>) {
-        if (Number(event.target.value) === 0) {
-            alert('[ERRO] O campo "Local" é obrigatório!')
-        }
-
         setLocal_id(Number(event.target.value))
     }
 
@@ -175,7 +171,7 @@ const EditarMissa = () => {
 
                             <div className="field">
                                 <select name="local" className="local" onChange={clicouLocal}>
-                                    <option value="0">Selecione um Local</option>
+                                    <option value="0" disabled selected hidden>Selecione um Local</option>
                                     <option value="1">Centro</option>
                                     <option value="2">Termas</option>
                                 </select>

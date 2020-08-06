@@ -3,12 +3,13 @@ import knex from '../database/connection'
 
 class MissaUsuario {
     async create_update(request: Request, response: Response) {
+        const trx = await knex.transaction()
+
         try {
             const { missa_id, usuario_id, quantidade_pessoas, pessoas_jacadastradas } = request.body
 
             const pessoas_cadastradas = pessoas_jacadastradas + quantidade_pessoas
 
-            const trx = await knex.transaction()
 
             await trx('missa_usuario').insert({ missa_id, usuario_id, quantidade_pessoas })
             await trx('missas').where({ id: missa_id }).update({ pessoas_cadastradas })
@@ -17,6 +18,8 @@ class MissaUsuario {
 
             return response.json({ mensagem: 'Relacionamento criado com sucesso!' })
         } catch (error) {
+            await trx.rollback()
+
             return response.json({ erro: 'Falha no servidor ao tentar criar o relacionamento missa-usuario.' }).status(500)
         }
     }

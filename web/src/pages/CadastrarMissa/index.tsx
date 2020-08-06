@@ -16,10 +16,6 @@ const CadastrarMissa = () => {
     const [dataMissa, setDataMissa] = useState<DataMissa>({} as DataMissa)
 
     function clicouLocal(event: ChangeEvent<HTMLSelectElement>) {
-        if (event.target.selectedIndex === 0) {
-            alert('[ERRO] O campo "Local" é obrigatório!')
-        }
-
         setLocal_id(event.target.selectedIndex)
     }
 
@@ -98,7 +94,7 @@ const CadastrarMissa = () => {
 
                             <div className="field">
                                 <select name="local" className="local" onChange={clicouLocal}>
-                                    <option value="0">Selecione um Local</option>
+                                    <option value="0" disabled selected hidden>Selecione um Local</option>
                                     <option value="1">Centro</option>
                                     <option value="2">Termas</option>
                                 </select>

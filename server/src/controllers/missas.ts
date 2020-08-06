@@ -27,7 +27,6 @@ class Missas {
             // Filtrar missas por Local
             if (Number(local_id)) {
                 try {
-                    console.log('aqui 1')
                     if (Number(local_id) < 3 && Number(local_id) > 0) {
                         const missasLocal = ordenaPelaData(await knex('missas').select('*').where({ local_id }))
 
@@ -102,9 +101,9 @@ class Missas {
 
     async delete(request: Request, response: Response) {
         const { id } = request.params
+        const trx = await knex.transaction()
 
         try {
-            const trx = await knex.transaction()
 
             await trx('missas').where({ id }).delete()
             await trx('missa_usuario').where({ missa_id: id }).delete()
@@ -113,6 +112,8 @@ class Missas {
 
             response.json({ mensagem: 'Missa deletada com sucesso!' })
         } catch (error) {
+            await trx.rollback()
+
             return response.json({ erro: 'Falha no servidor ao tentar deletar missa.' }).status(500)
         }
     }

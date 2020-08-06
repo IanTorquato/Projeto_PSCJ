@@ -20,7 +20,7 @@
 	"main": "index.js",
 	"name": "server",
 	"scripts": {
-		"dev": "ts-node-dev --transpileOnly --ignore-watch node_modules src/server.ts",
+		"start": "tsnd --transpile-only --ignore-watch node_modules src/server.ts",
 		"knex:migrate": "knex --knexfile knexfile.ts migrate:latest",
 		"knex:seed": "knex --knexfile knexfile.ts seed:run"
 	},
