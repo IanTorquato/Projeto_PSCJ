@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, StyleSheet, ScrollView, Image, Alert } from 'react-native'
+import { RectButton } from 'react-native-gesture-handler'
 import { RadioButton } from 'react-native-paper'
 import { FontAwesome5 } from '@expo/vector-icons'
 
 import api from '../../services/api'
+import { useNavigation } from '@react-navigation/native'
 
 const imgCentro = require('../../assets/igrejaCentro.png')
 const imgTermas = require('../../assets/igrejaTermas.png')
@@ -18,6 +20,7 @@ interface Missa {
 }
 
 const Missas: React.FC = () => {
+  const { navigate } = useNavigation()
   const [missas, setMissas] = useState<Missa[]>([])
   const [valorSelecionado, setValorSelecionado] = useState('')
 
@@ -108,7 +111,7 @@ const Missas: React.FC = () => {
         </View>
 
         {missas.map(missa => (
-          <View style={styles.viewMissa} key={missa.id}>
+          <RectButton style={styles.viewMissa} key={missa.id} onPress={() => { navigate('DetalhesMissa') }}>
             <Image source={missa.local_id === 1 ? imgCentro : imgTermas} style={styles.imgLocal}></Image>
 
             <View style={styles.viewDadosMissa}>
@@ -130,7 +133,7 @@ const Missas: React.FC = () => {
                 <Text style={styles.txtQuantPessoas}>Quant. Pessoas: {missa.pessoas_cadastradas}/{missa.max_pessoas}</Text>
               </View>
             </View>
-          </View>
+          </RectButton>
         ))}
 
         {missas !== [] ? <></> : (

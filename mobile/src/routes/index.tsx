@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavigationContainer } from '@react-navigation/native'
 import { View, ActivityIndicator, StyleSheet } from 'react-native'
 
 import { useContextLogin } from '../contexts/login'
@@ -16,7 +17,11 @@ const Routes = () => {
     )
   }
 
-  return logado ? <RoutesLogado /> : <RoutesDeslogado />
+  return (
+    <NavigationContainer>
+      {logado ? <RoutesLogado /> : <RoutesDeslogado />}
+    </NavigationContainer>
+  )
 }
 
 const styles = StyleSheet.create({
