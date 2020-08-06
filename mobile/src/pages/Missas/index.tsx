@@ -111,7 +111,7 @@ const Missas: React.FC = () => {
         </View>
 
         {missas.map(missa => (
-          <RectButton style={styles.viewMissa} key={missa.id} onPress={() => { navigate('DetalhesMissa') }}>
+          <RectButton style={styles.viewMissa} key={missa.id} onPress={() => { navigate('DetalhesMissa', missa) }}>
             <Image source={missa.local_id === 1 ? imgCentro : imgTermas} style={styles.imgLocal}></Image>
 
             <View style={styles.viewDadosMissa}>

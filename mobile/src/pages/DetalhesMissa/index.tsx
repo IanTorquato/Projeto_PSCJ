@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Text, View, StyleSheet, TouchableOpacity, Image, Alert } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity, Image, TextInput, Alert } from 'react-native'
 import { FontAwesome5 } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import { RectButton } from 'react-native-gesture-handler'
@@ -7,34 +7,67 @@ import { RectButton } from 'react-native-gesture-handler'
 const imgCentro = require('../../assets/igrejaCentro.png')
 const imgTermas = require('../../assets/igrejaTermas.png')
 
-const DetalhesMissa = () => {
-  const navigation = useNavigation()
+interface Missa {
+  id: number
+  local_id: number
+  data: string
+  hora: string
+  max_pessoas: number
+  pessoas_cadastradas: number
+}
 
-  function paraAnterior() {
-    navigation.goBack()
+const DetalhesMissa = ({ route }: any) => {
+  const { goBack } = useNavigation()
+
+  const [missa, setMissa] = useState<Missa>(route.params)
+  const [numPessoas, setNumPessoas] = useState(1)
+
+  async function atualizarNumPessoas() {
+    console.log(numPessoas)
+
+    if (String(numPessoas) === 'NaN') {
+      Alert.alert('Erro', 'Não banque o esperto :v\nDigite um número!')
+    }
+    else {
+      if (numPessoas + missa.pessoas_cadastradas > missa.max_pessoas) {
+        Alert.alert('Erro', `Restam apenas ${missa.max_pessoas - missa.pessoas_cadastradas} vagas nesta missa.`)
+      } else {
+        try {
+          await new Promise(resolve => setTimeout(resolve, 1000))
+
+          Alert.alert('Sucesso', 'Você foi contabilizado com sucesso!!')
+        } catch (erro) {
+          Alert.alert('Erro', erro)
+        }
+      }
+    }
   }
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={paraAnterior} style={styles.btnVoltar}>
+      <TouchableOpacity onPress={goBack} style={styles.btnVoltar}>
         <FontAwesome5 name="arrow-circle-left" color="#fff" size={32} />
       </TouchableOpacity>
 
       <View style={styles.viewDetalhesMissa}>
-        <Image source={imgCentro} style={styles.imgLocal} />
+        <Image source={missa.local_id === 1 ? imgCentro : imgTermas} style={styles.imgLocal} />
 
         <View style={styles.viewDadosMissa}>
-          <Text style={styles.txtLocal}></Text>
+          <Text style={styles.txtLocal}>{missa.local_id === 1 ? 'Centro' : 'Termas'}</Text>
 
           <View style={styles.viewContainDataHora}>
             <View style={styles.viewDataHora}>
-              <FontAwesome5 name="circle" size={6} color="#fff" solid />
-              <Text style={styles.txtDataHora}>Data: {}</Text>
+              <FontAwesome5 name="circle" size={6} color="#ddd" solid />
+              <Text style={[styles.txtDataHora, styles.txtData]}>Data:
+                <Text style={styles.txtValueDataHora}> {missa.data.slice(0, 5)}</Text>
+              </Text>
             </View>
 
             <View style={styles.viewDataHora}>
-              <FontAwesome5 name="circle" size={6} color="#fff" solid />
-              <Text style={styles.txtDataHora}>Hora: {}</Text>
+              <FontAwesome5 name="circle" size={6} color="#ddd" solid />
+              <Text style={styles.txtDataHora}>Hora:
+                <Text style={styles.txtValueDataHora}> {missa.hora}</Text>
+              </Text>
             </View>
           </View>
         </View>
@@ -43,11 +76,12 @@ const DetalhesMissa = () => {
       <Text style={styles.txtReserveVaga}>Reserve sua vaga</Text>
 
       <View style={styles.viewQuantPessoas}>
-        <Text style={styles.txtQuantPessoas}>Quantidade de pessoas:</Text>
-        <View style={styles.inputNumberQuantPessoas}></View>
+        <Text style={styles.txtQuantPessoas}>Quantidade de pessoas: </Text>
+        <TextInput style={styles.inputNumberQuantPessoas} maxLength={2} autoCorrect={false} defaultValue="1"
+          keyboardType="numeric" onChangeText={text => setNumPessoas(Number(text))} />
       </View>
 
-      <RectButton>
+      <RectButton style={styles.btnPronto} onPress={atualizarNumPessoas}>
         <Text style={styles.txtPronto}>Pronto!</Text>
       </RectButton>
     </View>
@@ -57,8 +91,8 @@ const DetalhesMissa = () => {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    flex: 1,
-    justifyContent: 'center'
+    backgroundColor: '#595959',
+    flex: 1
   },
 
   btnVoltar: {
@@ -69,6 +103,7 @@ const styles = StyleSheet.create({
 
   viewDetalhesMissa: {
     height: 304,
+    marginTop: 72,
     width: 312
   },
 
@@ -102,14 +137,24 @@ const styles = StyleSheet.create({
 
   viewDataHora: {
     alignItems: 'center',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    paddingHorizontal: 0
+  },
+
+  txtData: {
+    marginRight: 16
   },
 
   txtDataHora: {
     color: '#fff',
     fontFamily: 'Roboto_400Regular',
     fontSize: 16,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    marginLeft: 4
+  },
+
+  txtValueDataHora: {
+    fontWeight: 'normal'
   },
 
   txtReserveVaga: {
@@ -120,7 +165,7 @@ const styles = StyleSheet.create({
     color: '#44a4eb',
     fontFamily: 'Cinzel_400Regular',
     fontSize: 32,
-    marginTop: 48,
+    marginTop: 40,
     paddingVertical: 8,
     textAlign: 'center',
     textShadowColor: '#000000dd',
@@ -130,28 +175,42 @@ const styles = StyleSheet.create({
   },
 
   viewQuantPessoas: {
-    alignItems: 'center',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    //justifyContent: 'center',
+    marginTop: 32
   },
 
   txtQuantPessoas: {
     color: '#fff',
-    fontFamily: 'Roboto_400Regular'
+    fontFamily: 'Roboto_400Regular',
+    fontSize: 18
   },
 
-  inputNumberQuantPessoas: {},
+  inputNumberQuantPessoas: {
+    backgroundColor: '#ddd',
+    borderRadius: 8,
+    fontSize: 16,
+    height: 32,
+    textAlign: 'center',
+    width: 40
+  },
 
   btnPronto: {
+    alignItems: 'center',
     backgroundColor: '#44a4eb',
     borderRadius: 15,
+    elevation: 12,
     height: 50,
-    paddingHorizontal: 24
+    justifyContent: 'center',
+    marginTop: 32,
+    width: 120
   },
 
   txtPronto: {
     color: '#fff',
     fontFamily: 'Roboto_400Regular',
-    fontSize: 24
+    fontSize: 24,
+    marginBottom: 4
   }
 })
 
