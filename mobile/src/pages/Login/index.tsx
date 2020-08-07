@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Text, View, StyleSheet, TouchableOpacity, ImageBackground, Image, TextInput, Alert } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity, ImageBackground, Image, TextInput, Alert, KeyboardAvoidingView } from 'react-native'
 import { RectButton } from 'react-native-gesture-handler'
 import { FontAwesome5 } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
@@ -32,7 +32,7 @@ const Login = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container}>
       <ImageBackground source={fundoLogin} style={styles.fundoLogin}>
         <Image source={logo} style={styles.imgLogo} />
 
@@ -41,22 +41,24 @@ const Login = () => {
         </TouchableOpacity>
 
         <View style={styles.containerInputs}>
-          <Text style={styles.txtInput}>Nome:</Text>
-          <TextInput style={styles.input} placeholder="Digite seu nome"
-            onChange={event => setNome(event.nativeEvent.text)} />
-        </View>
+          <View style={styles.containerInput}>
+            <Text style={styles.txtInput}>Nome:</Text>
+            <TextInput style={styles.input} placeholder="Digite seu nome"
+              onChange={event => setNome(event.nativeEvent.text)} />
+          </View>
 
-        <View style={styles.containerInputs}>
-          <Text style={styles.txtInput}>E-mail:</Text>
-          <TextInput style={styles.input} placeholder="Digite seu e-mail"
-            onChange={event => setEmail(event.nativeEvent.text)} />
+          <View style={styles.containerInput}>
+            <Text style={styles.txtInput}>E-mail:</Text>
+            <TextInput style={styles.input} placeholder="Digite seu e-mail"
+              onChange={event => setEmail(event.nativeEvent.text)} />
+          </View>
         </View>
 
         <RectButton style={styles.botao} onPress={entrar}>
           <Text style={styles.txtBotao}>Entrar</Text>
         </RectButton>
       </ImageBackground>
-    </View>
+    </KeyboardAvoidingView>
   )
 }
 
@@ -67,7 +69,9 @@ const styles = StyleSheet.create({
 
   fundoLogin: {
     alignItems: 'center',
-    flex: 1
+    flex: 1,
+    justifyContent: 'center',
+    paddingBottom: 48
   },
 
   btnVoltar: {
@@ -79,13 +83,16 @@ const styles = StyleSheet.create({
   imgLogo: {
     height: 112,
     resizeMode: 'contain',
-    top: 48,
+    marginTop: -80,
     width: 112
   },
 
   containerInputs: {
+    marginTop: 120
+  },
+
+  containerInput: {
     marginBottom: 16,
-    top: 120,
     width: 280
   },
 
@@ -111,13 +118,13 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
     paddingHorizontal: 24,
-    top: 200
+    marginTop: 80
   },
 
   txtBotao: {
     color: '#fff',
     fontSize: 24,
-    top: -2
+    marginTop: -2
   }
 })
 
