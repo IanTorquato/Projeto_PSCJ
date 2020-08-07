@@ -7,15 +7,7 @@ const fundoLogin = require('../../assets/fundoLogin.jpg')
 const logo = require('../../../assets/icon.png')
 
 const Main = () => {
-	const navigation = useNavigation()
-
-	function paraLogin() {
-		navigation.navigate('Login')
-	}
-
-	function paraCadastrarUsuario() {
-		navigation.navigate('CadastrarUsuario')
-	}
+	const { navigate } = useNavigation()
 
 	return (
 		<View style={styles.container}>
@@ -27,13 +19,13 @@ const Main = () => {
 				</View>
 
 				<View style={styles.containerBtns}>
-					<RectButton onPress={paraLogin} style={styles.botao}>
+					<RectButton onPress={() => { navigate('Login') }} style={styles.botao}>
 						<Text style={styles.txtBotoes}>Entrar</Text>
 					</RectButton>
 				</View>
 
 				<View style={styles.containerBtns}>
-					<RectButton onPress={paraCadastrarUsuario} style={styles.botao}>
+					<RectButton onPress={() => { navigate('CadastrarUsuario') }} style={styles.botao}>
 						<Text style={styles.txtBotoes}>Cadastrar-se</Text>
 					</RectButton>
 				</View>

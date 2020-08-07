@@ -14,12 +14,8 @@ const Login = () => {
   const [nome, setNome] = useState('')
   const [email, setEmail] = useState('')
 
-  const navigation = useNavigation()
+  const { goBack } = useNavigation()
   const { logar } = useContextLogin()
-
-  function paraAnterior() {
-    navigation.goBack()
-  }
 
   async function entrar() {
     try {
@@ -40,7 +36,7 @@ const Login = () => {
       <ImageBackground source={fundoLogin} style={styles.fundoLogin}>
         <Image source={logo} style={styles.imgLogo} />
 
-        <TouchableOpacity onPress={paraAnterior} style={styles.btnVoltar}>
+        <TouchableOpacity onPress={goBack} style={styles.btnVoltar}>
           <FontAwesome5 name="arrow-circle-left" color="#fff" size={32} />
         </TouchableOpacity>
 
