@@ -15,7 +15,7 @@ class Missas {
     }
 
     async index(request: Request, response: Response) {
-        const { local_id, quantMissas } = request.query
+        const { local_id, quantMissas, usuario_id } = request.query
 
         const localId = Number(local_id)
         const quantidadeMissas = Number(quantMissas)
@@ -26,8 +26,25 @@ class Missas {
             return missas
         }
 
+        // Filtrar missas de um usuário
+        if (usuario_id) {
+            try {
+                const missas = ordenaPelaData(await knex('missas')
+                    .join('missa_usuario', 'missas.id', '=', 'missa_usuario.missa_id')
+                    .select('missas.id', 'missas.local_id', 'missas.data', 'missas.hora', 'missa_usuario.quantidade_pessoas')
+                    .where({ usuario_id }))
+
+                if (missas[0]) { return response.json(missas) }
+
+                return response.json({ mensagem: 'Ainda não há nenhum dado para ser listado.' })
+            } catch (error) {
+                console.log(error)
+                return response.json({ erro: 'Erro na filtragem de missas pelo usuário!' }).status(400)
+            }
+        }
+
         // Filtrar missas por Local
-        if (localId) {
+        else if (localId) {
             try {
                 if (localId > 0 && localId < 3) {
                     const missasLocal = ordenaPelaData(await knex('missas').select('*').where({ local_id }))
