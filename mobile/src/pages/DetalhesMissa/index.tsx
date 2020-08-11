@@ -4,6 +4,9 @@ import { FontAwesome5 } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import { RectButton } from 'react-native-gesture-handler'
 
+import api from '../../services/api'
+import { useContextLogin } from '../../contexts/login'
+
 const imgCentro = require('../../assets/igrejaCentro.png')
 const imgTermas = require('../../assets/igrejaTermas.png')
 
@@ -20,22 +23,26 @@ const DetalhesMissa = ({ route }: any) => {
   const { goBack } = useNavigation()
 
   const [missa, setMissa] = useState<Missa>(route.params)
-  const [numPessoas, setNumPessoas] = useState(1)
+  const [quantidade_pessoas, setQuantidadePessoas] = useState(1)
 
-  async function atualizarNumPessoas() {
-    console.log(numPessoas)
+  const { usuario } = useContextLogin()
 
-    if (String(numPessoas) === 'NaN') {
+  async function atualizarQuantPessoas() {
+    if (String(quantidade_pessoas) === 'NaN') {
       Alert.alert('Erro', 'Não banque o esperto :v\nDigite um número!')
     }
     else {
-      if (numPessoas + missa.pessoas_cadastradas > missa.max_pessoas) {
+      if (quantidade_pessoas + missa.pessoas_cadastradas > missa.max_pessoas) {
         Alert.alert('Erro', `Restam apenas ${missa.max_pessoas - missa.pessoas_cadastradas} vagas nesta missa.`)
       } else {
         try {
-          await new Promise(resolve => setTimeout(resolve, 1000))
+          const { id, pessoas_cadastradas } = missa
+          const dadosMissaUsuario = { missa_id: id, usuario_id: usuario?.id, quantidade_pessoas, pessoas_cadastradas }
 
-          Alert.alert('Sucesso', 'Você foi contabilizado com sucesso!!')
+          const { data } = await api.post('missa_usuario', dadosMissaUsuario)
+          const { erro, mensagem } = data
+
+          erro ? Alert.alert('Erro', erro) : Alert.alert('Sucesso', mensagem)
         } catch (erro) {
           Alert.alert('Erro', erro)
         }
@@ -78,10 +85,10 @@ const DetalhesMissa = ({ route }: any) => {
       <View style={styles.viewQuantPessoas}>
         <Text style={styles.txtQuantPessoas}>Quantidade de pessoas: </Text>
         <TextInput style={styles.inputNumberQuantPessoas} maxLength={2} autoCorrect={false} defaultValue="1"
-          keyboardType="numeric" onChangeText={text => setNumPessoas(Number(text))} />
+          keyboardType="numeric" onChangeText={text => setQuantidadePessoas(Number(text))} />
       </View>
 
-      <RectButton style={styles.btnPronto} onPress={atualizarNumPessoas}>
+      <RectButton style={styles.btnPronto} onPress={atualizarQuantPessoas}>
         <Text style={styles.txtPronto}>Pronto!</Text>
       </RectButton>
     </View>

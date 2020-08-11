@@ -41,7 +41,7 @@ export const LoginProvider: React.FC = ({ children }) => {
   async function logar(usuario: Usuario) {
     try {
       // const response = await api.post(`/usuarios/login`, usuario)
-      const response = { data: { id: 0, nome: 'Ian Torquato', email: 'iantorquato2@gmail.com' } }
+      const response = { data: { id: 2, nome: 'Ian Torquato', email: 'iantorquato2@gmail.com' } }
       // if (response.data.nome && response.data.email) {
       //   setStateUsuario(response.data)
       await AsyncStorage.setItem('@PSCJ:user', JSON.stringify(response.data))

@@ -33,7 +33,7 @@ routes.post('/usuarios/login', usuarios.loginUsuario)
 routes.get('/usuarios', usuarios.index)
 
 // Missa_Usuário
-routes.post('/missa_usuario', missaUsuario.create_update)
+routes.post('/missa_usuario', missaUsuario.create)
 routes.get('/missa_usuario', missaUsuario.index)
 
 export default routes
