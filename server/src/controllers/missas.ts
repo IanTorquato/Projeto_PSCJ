@@ -49,7 +49,7 @@ class Missas {
                 if (localId > 0 && localId < 3) {
                     const missasLocal = ordenaPelaData(await knex('missas').select('*').where({ local_id }))
 
-                    if (missasLocal) { return response.json(missasLocal) }
+                    if (missasLocal[0]) { return response.json(missasLocal) }
 
                     return response.json({ mensagem: 'Ainda não há nenhum dado para ser listado.' })
                 }
@@ -67,7 +67,7 @@ class Missas {
 
                     const missas = ordenaPelaData(await knex('missas').select('*'))
 
-                    if (missas) { return response.json(missas.slice(0, quantidadeMissas)) }
+                    if (missas[0]) { return response.json(missas.slice(0, quantidadeMissas)) }
 
                     return response.json({ mensagem: 'Ainda não há nenhum dado para ser listado.' })
                 }
@@ -83,7 +83,7 @@ class Missas {
             try {
                 const missas = ordenaPelaData(await knex('missas').select('*'))
 
-                if (missas) { return response.json(missas) }
+                if (missas[0]) { return response.json(missas) }
 
                 return response.json({ mensagem: 'Ainda não há nenhum dado para ser listado.' })
             } catch (error) {

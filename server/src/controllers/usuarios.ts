@@ -36,7 +36,7 @@ class Usuarios {
         try {
             const usuarios = await knex('usuarios').select('*')
 
-            if (usuarios) { return response.json(usuarios) }
+            if (usuarios[0]) { return response.json(usuarios) }
 
             return response.json({ mensagem: 'Ainda não há nenhum dado para ser listado.' })
         } catch (error) {

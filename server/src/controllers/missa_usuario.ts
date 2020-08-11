@@ -35,7 +35,7 @@ class MissaUsuario {
         try {
             const missaUsuario = await knex('missa_usuario').select('*')
 
-            if (missaUsuario) { response.json(missaUsuario) }
+            if (missaUsuario[0]) { response.json(missaUsuario) }
 
             return response.json({ mensagem: 'Ainda não há nenhum dado para ser listado.' })
         } catch (error) {

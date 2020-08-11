@@ -6,7 +6,7 @@ class Locais {
         try {
             const locais = await knex('locais').select('*')
 
-            if (locais) {
+            if (locais[0]) {
                 const locaisSerializados = locais.map(local => ({
                     id: local.id, nome: local.nome, imagem_url: `http://localhost:3333/uploads/${local.imagem}`
                 }))
