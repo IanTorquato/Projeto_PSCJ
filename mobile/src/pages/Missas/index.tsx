@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { View, Text, StyleSheet, ScrollView, Image, Alert } from 'react-native'
 import { RectButton } from 'react-native-gesture-handler'
 import { RadioButton } from 'react-native-paper'
 import { FontAwesome5 } from '@expo/vector-icons'
+import { useNavigation, useFocusEffect } from '@react-navigation/native'
 
 import api from '../../services/api'
-import { useNavigation } from '@react-navigation/native'
 
 const imgCentro = require('../../assets/igrejaCentro.png')
 const imgTermas = require('../../assets/igrejaTermas.png')
+
 
 interface Missa {
   id: number
@@ -24,9 +25,11 @@ const Missas: React.FC = () => {
   const [missas, setMissas] = useState<Missa[]>([])
   const [valorSelecionado, setValorSelecionado] = useState('')
 
-  useEffect(() => {
-    buscarMissasApi()
-  }, [])
+  useFocusEffect(
+    React.useCallback(() => {
+      buscarMissasApi()
+    }, [])
+  )
 
   async function buscarMissasApi() {
     try {

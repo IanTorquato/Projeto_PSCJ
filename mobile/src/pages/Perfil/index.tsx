@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { View, Text, StyleSheet, ScrollView, Image, Alert } from 'react-native'
 import Svg, { G, Path } from 'react-native-svg'
 import { FontAwesome5 } from '@expo/vector-icons'
 import { BaseButton } from 'react-native-gesture-handler'
+import { useFocusEffect } from '@react-navigation/native'
 
 import api from '../../services/api'
+import { useContextLogin } from '../../contexts/login'
 
 const imgCentro = require('../../assets/igrejaCentro.png')
 const imgTermas = require('../../assets/igrejaTermas.png')
@@ -14,18 +16,23 @@ interface Missa {
   local_id: number
   data: string
   hora: string
-  max_pessoas: number
-  pessoas_cadastradas: number
+  quantidade_pessoas: number
 }
 
 const Perfil: React.FC = () => {
   const [missas, setMissas] = useState<Missa[]>([])
 
-  useEffect(() => { buscarMissasDoUsuario() }, [])
+  const { usuario } = useContextLogin()
+
+  useFocusEffect(
+    React.useCallback(() => {
+      buscarMissasDoUsuario()
+    }, [])
+  )
 
   async function buscarMissasDoUsuario() {
     try {
-      const { data } = await api.get('missas?quantMissas=6')
+      const { data } = await api.get(`missas?usuario_id=${usuario?.id}`)
 
       if (!data.erro) {
         setMissas(data.map((missa: Missa) => {
@@ -63,7 +70,10 @@ const Perfil: React.FC = () => {
 
           <View style={styles.viewPerfilUsuario}>
             <View style={styles.viewEditarUsuario}>
-              <BaseButton onPress={() => { Alert.alert('Foooi', 'Editando...') }}>
+              <BaseButton onPress={() => {
+                Alert.alert('Erro',
+                  'Infelizmente esta funcionalidade ainda não está disponivel')
+              }}>
                 <FontAwesome5 name="user-edit" size={25} color="#fff" />
               </BaseButton>
             </View>
@@ -83,7 +93,10 @@ const Perfil: React.FC = () => {
 
             <View style={styles.viewDadosMissa}>
               <View style={styles.viewEditarMissa}>
-                <BaseButton onPress={() => { Alert.alert('Foooi', 'Editando...') }}>
+                <BaseButton onPress={() => {
+                  Alert.alert('Erro',
+                    'Infelizmente esta funcionalidade ainda não está disponivel')
+                }}>
                   <FontAwesome5 name="edit" size={16} color="#000" />
                 </BaseButton>
               </View>
@@ -103,7 +116,7 @@ const Perfil: React.FC = () => {
               </View>
 
               <View style={styles.viewPessoasCadastradas}>
-                <Text style={styles.txtPessoasCadastradas}>Pessoas Cadastradas: {missa.pessoas_cadastradas}</Text>
+                <Text style={styles.txtPessoasCadastradas}>Pessoas Cadastradas: {missa.quantidade_pessoas}</Text>
               </View>
             </View>
           </View>
