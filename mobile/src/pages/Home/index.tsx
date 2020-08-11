@@ -5,6 +5,8 @@ import { FontAwesome5 } from '@expo/vector-icons'
 
 import { useContextLogin } from '../../contexts/login'
 
+import styles from './styles'
+
 const logo = require('../../../assets/icon.png')
 
 const Home = () => {
@@ -59,82 +61,5 @@ const Home = () => {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  viewContainer: {
-    alignItems: 'center',
-    backgroundColor: '#444',
-    flex: 1
-  },
-
-  viewTopoVermelho: {
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-
-  imgLogo: {
-    height: 92,
-    marginBottom: 16,
-    resizeMode: 'contain',
-    top: 16,
-    width: 92
-  },
-
-  txtSagrado: {
-    color: '#fff',
-    fontFamily: 'Cookie_400Regular',
-    fontSize: 40,
-    marginHorizontal: 32,
-    paddingVertical: 4,
-    textAlign: 'center',
-    textShadowColor: '#000',
-    textShadowOffset: { width: 2, height: 4 },
-    textShadowRadius: 4
-  },
-
-  btnDeslogar: {
-    alignItems: 'center',
-    backgroundColor: '#333',
-    borderRadius: 10,
-    left: 96,
-    marginBottom: 24,
-    padding: 5,
-    width: 160
-  },
-
-  txtDeslogar: {
-    color: '#eee',
-    fontSize: 24,
-    fontStyle: 'italic'
-  },
-
-  viewParaParticipar: {},
-
-  txtTituloParticipar: {
-    color: '#fff',
-    fontFamily: 'Lora_400Regular',
-    fontSize: 24,
-    fontStyle: 'italic',
-    paddingBottom: 16,
-    textAlign: 'center'
-  },
-
-  viewParticipar: {
-    paddingLeft: 20
-  },
-
-  viewRegras: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    marginVertical: 4
-  },
-
-  txtParaParticipar: {
-    color: '#fff',
-    fontFamily: 'Lora_400Regular',
-    fontSize: 16,
-    marginLeft: 8
-  }
-})
 
 export default Home
