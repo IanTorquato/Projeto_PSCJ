@@ -12,19 +12,18 @@ class MissaUsuario {
 
             if (relacionamentoExistente) {
                 return response.json({
-                    erro:
-                        'Você já está cadastrado nesta missa! Se deseja alterar a quantidade de pessoas, vá até "Perfil".'
+                    erro: 'Você já está cadastrado nesta missa! Se deseja alterar a quantidade de pessoas, vá até "Perfil".'
                 }).status(400)
-            } else {
-                const pessoasCadastradas = pessoas_cadastradas + quantidade_pessoas
-
-                await trx('missa_usuario').insert({ missa_id, usuario_id, quantidade_pessoas })
-                await trx('missas').where({ id: missa_id }).update({ pessoas_cadastradas: pessoasCadastradas })
-
-                await trx.commit()
-
-                return response.json({ mensagem: 'Você foi contabilizado com sucesso!!' })
             }
+
+            const pessoasCadastradas = pessoas_cadastradas + quantidade_pessoas
+
+            await trx('missa_usuario').insert({ missa_id, usuario_id, quantidade_pessoas })
+            await trx('missas').where({ id: missa_id }).update({ pessoas_cadastradas: pessoasCadastradas })
+
+            await trx.commit()
+
+            return response.json({ mensagem: 'Você foi contabilizado com sucesso!!' })
         } catch (error) {
             await trx.rollback()
 
@@ -36,7 +35,9 @@ class MissaUsuario {
         try {
             const missaUsuario = await knex('missa_usuario').select('*')
 
-            response.json(missaUsuario)
+            if (missaUsuario) { response.json(missaUsuario) }
+
+            return response.json({ mensagem: 'Ainda não há nenhum dado para ser listado.' })
         } catch (error) {
             return response.json({ erro: 'Falha no servidor ao tentar listar o relacionamento missa-usuario.' }).status(500)
         }

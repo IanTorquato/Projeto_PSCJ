@@ -8,13 +8,11 @@ class Usuarios {
         try {
             const usuarioExistente = await knex('usuarios').where({ email }).first()
 
-            if (usuarioExistente) {
-                return response.json({ erro: 'Este e-mail já está em uso!' })
-            } else {
-                await knex('usuarios').insert({ nome, email })
+            if (usuarioExistente) { return response.json({ erro: 'Este e-mail já está em uso!' }).status(400) }
 
-                return response.json({ mensagem: 'Usuário criado com sucesso!' })
-            }
+            await knex('usuarios').insert({ nome, email })
+
+            return response.json({ mensagem: 'Usuário criado com sucesso!' })
         } catch (error) {
             return response.json({ erro: 'Falha no servidor ao tentar criar usuário.' }).status(500)
         }
@@ -26,9 +24,8 @@ class Usuarios {
         try {
             const usuario = await knex('usuarios').where({ nome, email }).first()
 
-            if (!usuario) {
-                return response.json({ erro: 'Usuário não encontrado!' }).status(400)
-            }
+            if (!usuario) { return response.json({ erro: 'Usuário não encontrado!' }).status(400) }
+
             return response.json(usuario)
         } catch (error) {
             return response.json({ erro: 'Falha no servidor ao tentar logar.' }).status(500)
@@ -39,7 +36,9 @@ class Usuarios {
         try {
             const usuarios = await knex('usuarios').select('*')
 
-            return response.json(usuarios)
+            if (usuarios) { return response.json(usuarios) }
+
+            return response.json({ mensagem: 'Ainda não há nenhum dado para ser listado.' })
         } catch (error) {
             return response.json({ erro: 'Falha no servidor ao tentar listar usuários.' }).status(500)
         }
