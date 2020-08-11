@@ -11,10 +11,11 @@ const fundoLogin = require('../../assets/fundoLogin.jpg')
 const logo = require('../../../assets/icon.png')
 
 const Login = () => {
+  const { goBack } = useNavigation()
+
   const [nome, setNome] = useState('')
   const [email, setEmail] = useState('')
 
-  const { goBack } = useNavigation()
   const { logar } = useContextLogin()
 
   async function entrar() {
@@ -44,13 +45,13 @@ const Login = () => {
           <View style={styles.containerInput}>
             <Text style={styles.txtInput}>Nome:</Text>
             <TextInput style={styles.input} placeholder="Digite seu nome"
-              onChange={event => setNome(event.nativeEvent.text)} />
+              onChangeText={text => setNome(text)} />
           </View>
 
           <View style={styles.containerInput}>
             <Text style={styles.txtInput}>E-mail:</Text>
             <TextInput style={styles.input} placeholder="Digite seu e-mail"
-              onChange={event => setEmail(event.nativeEvent.text)} />
+              onChangeText={text => setEmail(text)} />
           </View>
         </View>
 
