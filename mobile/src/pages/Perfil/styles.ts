@@ -24,7 +24,11 @@ const styles = StyleSheet.create({
   },
 
   imgUsuario: {
-    borderRadius: 30
+    backgroundColor: '#333',
+    borderRadius: 40,
+    resizeMode: 'cover',
+    height: 80,
+    width: 80
   },
 
   txtNomeUsuario: {

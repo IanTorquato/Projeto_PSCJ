@@ -6,6 +6,7 @@ import api from '../services/api'
 
 interface Usuario {
   id: number,
+  foto: string
   nome: string,
   email: string
 }

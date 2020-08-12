@@ -62,13 +62,7 @@ const Perfil: React.FC = () => {
     <ScrollView style={styles.scrollView}>
       <View style={styles.viewContainer}>
         <Svg width="100%" height={360} viewBox="0 0 500 500" fill="none">
-          <G>
-            <Path
-              d="M0 0h500v280.095a700.272 700.272 0 01-492.576 2.743L0 276.095V0z"
-              fill="#333"
-              fillOpacity={0.8}
-            />
-          </G>
+          <G><Path d="M0 0h500v280.095a700.272 700.272 0 01-492.576 2.743L0 276.095V0z" fill="#333" fillOpacity={0.8} /></G>
 
           <View style={styles.viewPerfilUsuario}>
             <View style={styles.viewEditarUsuario}>
@@ -80,7 +74,10 @@ const Perfil: React.FC = () => {
               </BaseButton>
             </View>
 
-            <FontAwesome5 name="user-circle" size={80} color="#e41e25" style={styles.imgUsuario}></FontAwesome5>
+            {usuario?.foto !== ''
+              ? <Image source={{ uri: usuario!.foto }} style={styles.imgUsuario} />
+              : <FontAwesome5 name="user-circle" size={80} color="#fff" />
+            }
 
             <Text style={styles.txtNomeUsuario}>Ana Clara V. Rodrigues</Text>
             <Text style={styles.txtEmailUsuario}>anaclaravargas16@gmail.com</Text>
@@ -124,7 +121,7 @@ const Perfil: React.FC = () => {
           </View>
         ))}
 
-        {missas !== [] ? <></> : (
+        {missas[0] !== undefined ? <></> : (
           <View style={styles.viewNadaDeMissas}>
             <FontAwesome5 name="sad-tear" size={80} />
 

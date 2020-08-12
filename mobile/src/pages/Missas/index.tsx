@@ -56,7 +56,7 @@ const Missas: React.FC = () => {
         Alert.alert('Erro', 'Erro na conexão...')
       }
       else {
-        Alert.alert('Erro', String(erro))
+        Alert.alert('Erro', erro)
       }
     }
   }
@@ -141,14 +141,14 @@ const Missas: React.FC = () => {
           </RectButton>
         ))}
 
-        {missas !== [] ? <></> : (
+        {missas[0] !== undefined ? <></> :
           <View style={styles.viewNadaDeMissas}>
             <FontAwesome5 name="sad-tear" size={80} />
 
-            <Text style={styles.txtNadaDeMissas}>Não nenhuma missa</Text>
+            <Text style={styles.txtNadaDeMissas}>Não há nenhuma missa</Text>
             <Text style={styles.txtNadaDeMissas}>Para listar aqui...</Text>
           </View>
-        )}
+        }
       </View>
     </ScrollView>
   )
