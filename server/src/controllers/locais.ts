@@ -14,7 +14,7 @@ class Locais {
                 return response.json(locaisSerializados)
             }
 
-            return response.json({ mensagem: 'Ainda não há nenhum dado para ser listado.' })
+            return response.json({ erro: 'Ainda não há nenhum dado para ser listado.' })
         } catch (error) {
             return response.json({ erro: 'Falha no servidor ao tentar listar locais.' }).status(500)
         }

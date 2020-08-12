@@ -36,7 +36,7 @@ class Missas {
 
                 if (missas[0]) { return response.json(missas) }
 
-                return response.json({ mensagem: 'Ainda não há nenhum dado para ser listado.' })
+                return response.json({ erro: 'Ainda não há nenhum dado para ser listado.' })
             } catch (error) {
                 console.log(error)
                 return response.json({ erro: 'Erro na filtragem de missas pelo usuário!' }).status(400)
@@ -51,7 +51,7 @@ class Missas {
 
                     if (missasLocal[0]) { return response.json(missasLocal) }
 
-                    return response.json({ mensagem: 'Ainda não há nenhum dado para ser listado.' })
+                    return response.json({ erro: 'Ainda não há nenhum dado para ser listado.' })
                 }
 
                 return response.json({ erro: 'Local inexistente!' }).status(400)
@@ -69,7 +69,7 @@ class Missas {
 
                     if (missas[0]) { return response.json(missas.slice(0, quantidadeMissas)) }
 
-                    return response.json({ mensagem: 'Ainda não há nenhum dado para ser listado.' })
+                    return response.json({ erro: 'Ainda não há nenhum dado para ser listado.' })
                 }
 
                 return response.json({ erro: 'Número de missas inválido!' }).status(400)
@@ -85,7 +85,7 @@ class Missas {
 
                 if (missas[0]) { return response.json(missas) }
 
-                return response.json({ mensagem: 'Ainda não há nenhum dado para ser listado.' })
+                return response.json({ erro: 'Ainda não há nenhum dado para ser listado.' })
             } catch (error) {
                 return response.json({ erro: 'Falha no servidor ao tentar listar dados da tabela "missas"!' }).status(500)
             }

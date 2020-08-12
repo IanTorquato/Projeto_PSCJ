@@ -37,7 +37,7 @@ class MissaUsuario {
 
             if (missaUsuario[0]) { response.json(missaUsuario) }
 
-            return response.json({ mensagem: 'Ainda não há nenhum dado para ser listado.' })
+            return response.json({ erro: 'Ainda não há nenhum dado para ser listado.' })
         } catch (error) {
             return response.json({ erro: 'Falha no servidor ao tentar listar o relacionamento missa-usuario.' }).status(500)
         }

@@ -10,7 +10,7 @@ class Usuarios {
 
             if (usuarioExistente) { return response.json({ erro: 'Este e-mail já está em uso!' }).status(400) }
 
-            await knex('usuarios').insert({ nome, foto: '', email })
+            await knex('usuarios').insert({ nome, email })
 
             return response.json({ mensagem: 'Usuário criado com sucesso!' })
         } catch (error) {
@@ -24,7 +24,7 @@ class Usuarios {
         try {
             const usuario = await knex('usuarios').where({ nome, email }).first()
 
-            if (!usuario) { return response.json({ erro: 'Usuário não encontrado!' }).status(400) }
+            if (!usuario) { return response.json({ erro: 'Falha ao fazer login! Por favor, tente novamente.' }).status(400) }
 
             return response.json(usuario)
         } catch (error) {
@@ -38,7 +38,7 @@ class Usuarios {
 
             if (usuarios[0]) { return response.json(usuarios) }
 
-            return response.json({ mensagem: 'Ainda não há nenhum dado para ser listado.' })
+            return response.json({ erro: 'Ainda não há nenhum dado para ser listado.' })
         } catch (error) {
             return response.json({ erro: 'Falha no servidor ao tentar listar usuários.' }).status(500)
         }
