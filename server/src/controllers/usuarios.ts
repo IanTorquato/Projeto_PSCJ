@@ -10,7 +10,7 @@ class Usuarios {
 
             if (usuarioExistente) { return response.json({ erro: 'Este e-mail já está em uso!' }).status(400) }
 
-            await knex('usuarios').insert({ nome, email })
+            await knex('usuarios').insert({ nome, foto: '', email })
 
             return response.json({ mensagem: 'Usuário criado com sucesso!' })
         } catch (error) {

@@ -16,7 +16,7 @@ export async function seed(Knex: Knex) {
     ])
 
     await Knex('usuarios').insert([
-        { id: 1, nome: "Ian Torquato", email: "iantorquato3@gmail.com" }
+        { id: 1, nome: "Ian Torquato", foto: '', email: "iantorquato3@gmail.com" }
     ])
 
     await Knex('missa_usuario').insert([
