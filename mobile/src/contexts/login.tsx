@@ -5,75 +5,75 @@ import { Alert } from 'react-native'
 import api from '../services/api'
 
 interface Usuario {
-  id: number,
-  foto: string
-  nome: string,
-  email: string
+	id: number,
+	foto: string
+	nome: string,
+	email: string
 }
 
 interface LoginContextData {
-  logado: boolean,
-  usuario: Usuario | null,
-  loading: boolean,
-  logar(usuario: Usuario): Promise<void>,
-  deslogar(): void
+	logado: boolean,
+	usuario: Usuario | null,
+	loading: boolean,
+	logar(usuario: Usuario): Promise<void>,
+	deslogar(): void
 }
 
 const LoginContext = createContext<LoginContextData>({} as LoginContextData)
 
 export const LoginProvider: React.FC = ({ children }) => {
-  const [stateUsuario, setStateUsuario] = useState<Usuario | null>(null)
-  const [stateLoading, setStateLoading] = useState(true)
+	const [stateUsuario, setStateUsuario] = useState<Usuario | null>(null)
+	const [stateLoading, setStateLoading] = useState(true)
 
-  useEffect(() => {
-    async function verificaUsuarioLogado() {
-      const usuarioLogado = await AsyncStorage.getItem('@PSCJ:user')
+	useEffect(() => {
+		async function verificaUsuarioLogado() {
+			const usuarioLogado = await AsyncStorage.getItem('@PSCJ:user')
 
-      if (usuarioLogado) {
-        setStateUsuario(JSON.parse(usuarioLogado))
-      }
+			if (usuarioLogado) {
+				setStateUsuario(JSON.parse(usuarioLogado))
+			}
 
-      setStateLoading(false)
-    }
+			setStateLoading(false)
+		}
 
-    verificaUsuarioLogado()
-  }, [])
+		verificaUsuarioLogado()
+	}, [])
 
-  async function logar(usuario: Usuario) {
-    try {
-      const { data } = await api.post(`/usuarios/login`, usuario)
+	async function logar(usuario: Usuario) {
+		try {
+			const { data } = await api.post(`/usuarios/login`, usuario)
 
-      if (data.nome && data.email) {
-        setStateUsuario(data)
+			if (data.nome && data.email) {
+				setStateUsuario(data)
 
-        AsyncStorage.setItem('@PSCJ:user', JSON.stringify(data))
-      } else (
-        Alert.alert('Erro', data.erro)
-      )
-    } catch (erro) {
-      if (String(erro) === 'Error: Network Error') {
-        Alert.alert('Erro', 'Erro na conexão...')
-      }
-      else {
-        Alert.alert('Erro', String(erro))
-      }
-    }
-  }
+				AsyncStorage.setItem('@PSCJ:user', JSON.stringify(data))
+			} else (
+				Alert.alert('Erro', data.erro)
+			)
+		} catch (erro) {
+			if (String(erro) === 'Error: Network Error') {
+				Alert.alert('Erro', 'Erro na conexão...')
+			}
+			else {
+				Alert.alert('Erro', String(erro))
+			}
+		}
+	}
 
-  async function deslogar() {
-    await AsyncStorage.clear()
-    setStateUsuario(null)
-  }
+	async function deslogar() {
+		await AsyncStorage.clear()
+		setStateUsuario(null)
+	}
 
-  return (
-    <LoginContext.Provider value={{ logado: !!stateUsuario, usuario: stateUsuario, loading: stateLoading, logar, deslogar }}>
-      {children}
-    </LoginContext.Provider>
-  )
+	return (
+		<LoginContext.Provider value={{ logado: !!stateUsuario, usuario: stateUsuario, loading: stateLoading, logar, deslogar }}>
+			{children}
+		</LoginContext.Provider>
+	)
 }
 
 export function useContextLogin() {
-  const context = useContext(LoginContext)
+	const context = useContext(LoginContext)
 
-  return context
+	return context
 }

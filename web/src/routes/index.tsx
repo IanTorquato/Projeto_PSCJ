@@ -5,9 +5,9 @@ import RoutesLogado from './logado.routes'
 import RoutesDeslogado from './deslogado.routes'
 
 const Routes = () => {
-  const { logado } = useContext(LoginContext)
+	const { logado } = useContext(LoginContext)
 
-  return logado ? <RoutesLogado /> : <RoutesDeslogado />
+	return logado ? <RoutesLogado /> : <RoutesDeslogado />
 }
 
 export default Routes

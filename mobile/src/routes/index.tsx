@@ -7,29 +7,29 @@ import RoutesLogado from '../routes/logado.routes'
 import RoutesDeslogado from '../routes/deslogado.routes'
 
 const Routes = () => {
-  const { logado, loading } = useContextLogin()
+	const { logado, loading } = useContextLogin()
 
-  if (loading) {
-    return (
-      <View style={styles.viewCarregando}>
-        <ActivityIndicator size={64} color="#fff" />
-      </View>
-    )
-  }
+	if (loading) {
+		return (
+			<View style={styles.viewCarregando}>
+				<ActivityIndicator size={64} color="#fff" />
+			</View>
+		)
+	}
 
-  return (
-    <NavigationContainer>
-      {logado ? <RoutesLogado /> : <RoutesDeslogado />}
-    </NavigationContainer>
-  )
+	return (
+		<NavigationContainer>
+			{logado ? <RoutesLogado /> : <RoutesDeslogado />}
+		</NavigationContainer>
+	)
 }
 
 const styles = StyleSheet.create({
-  viewCarregando: {
-    alignItems: 'center',
-    flex: 1,
-    justifyContent: 'center'
-  }
+	viewCarregando: {
+		alignItems: 'center',
+		flex: 1,
+		justifyContent: 'center'
+	}
 })
 
 export default Routes

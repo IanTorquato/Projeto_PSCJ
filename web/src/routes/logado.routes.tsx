@@ -7,14 +7,14 @@ import EditarMissa from '../pages/EditarMissa'
 import Contato from '../pages/Contato'
 
 const RoutesLogado = () => {
-  return (
-    <BrowserRouter>
-      <Route component={Home} path="/" exact />
-      <Route component={CadastrarMissa} path="/cadastrar-missa" />
-      <Route component={EditarMissa} path='/editar-missa' />
-      <Route component={Contato} path='/contato' />
-    </BrowserRouter>
-  )
+	return (
+		<BrowserRouter>
+			<Route component={Home} path="/" exact />
+			<Route component={CadastrarMissa} path="/cadastrar-missa" />
+			<Route component={EditarMissa} path='/editar-missa' />
+			<Route component={Contato} path='/contato' />
+		</BrowserRouter>
+	)
 }
 
 export default RoutesLogado

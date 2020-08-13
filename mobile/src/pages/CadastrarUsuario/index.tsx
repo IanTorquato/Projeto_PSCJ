@@ -40,7 +40,7 @@ const CadastrarUsuario = () => {
 			} else {
 				// Alert("Título", "Mensagem", [{Botões}], {Opções})
 				Alert.alert('Sucesso', data.mensagem,
-					[{ text: "Logar Agora", onPress: () => logar({ id: 0, nome, email }) }], { cancelable: false }
+					[{ text: "Logar Agora", onPress: () => logar({ id: 0, foto: '', nome, email }) }], { cancelable: false }
 				)
 			}
 		} catch (erro) {

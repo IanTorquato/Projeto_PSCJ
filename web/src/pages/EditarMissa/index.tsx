@@ -6,198 +6,191 @@ import Sucesso from '../../components/Sucesso'
 import api from '../../services/api'
 
 interface Missa {
-    id: number
-    local_id: number
-    data: string
-    hora: string
-    max_pessoas: number
-    pessoas_cadastradas: number
+	id: number
+	local_id: number
+	data: string
+	hora: string
+	max_pessoas: number
+	pessoas_cadastradas: number
 }
 
 interface DataMissa {
-    data: string
-    hora: string
+	data: string
+	hora: string
 }
 
 const EditarMissa = () => {
-    const [missas, setMissas] = useState<Missa[]>([])
-    const [missa_id, setMissa_id] = useState(0)
-    const [local_id, setLocal_id] = useState(0)
-    const [max_pessoas, setMax_pessoas] = useState(0)
-    const [dataMissa, setDataMissa] = useState<DataMissa>({} as DataMissa)
+	const [missas, setMissas] = useState<Missa[]>([])
+	const [missa_id, setMissa_id] = useState(0)
+	const [local_id, setLocal_id] = useState(0)
+	const [max_pessoas, setMax_pessoas] = useState(0)
+	const [dataMissa, setDataMissa] = useState<DataMissa>({} as DataMissa)
 
-    useEffect(() => {
-        api.get('missas').then(response => {
-            setMissas(response.data.map((missa: Missa) => {
-                const dataCortada = missa.data.split('/')
-                missa.data = `${dataCortada[2]}/${dataCortada[1]}/${dataCortada[0]}`
+	useEffect(() => {
+		api.get('missas').then(response => {
+			setMissas(response.data.map((missa: Missa) => {
+				const dataCortada = missa.data.split('/')
+				missa.data = `${dataCortada[2]}/${dataCortada[1]}/${dataCortada[0]}`
 
-                return missa
-            }))
-        })
-    }, [])
+				return missa
+			}))
+		})
+	}, [])
 
-    function clicouMissa(event: ChangeEvent<HTMLSelectElement>) {
-        setMissa_id(Number(event.target.value))
+	function clicouMissa(event: ChangeEvent<HTMLSelectElement>) {
+		setMissa_id(Number(event.target.value))
 
-        const { local_id, max_pessoas, data, hora } = missas[event.target.selectedIndex - 1] ||
-            { local_id: 0, max_pessoas: 0, data: '01/01/0001', hora: '00:00' }
+		const { local_id, max_pessoas, data, hora } = missas[event.target.selectedIndex - 1] ||
+			{ local_id: 0, max_pessoas: 0, data: '01/01/0001', hora: '00:00' }
 
-        setLocal_id(local_id)
-        setMax_pessoas(max_pessoas)
-        const setarData = { data, hora }
-        setDataMissa(setarData)
+		const setarData = { data, hora }
 
-        const selectLocal = document.querySelector<HTMLSelectElement>('.local')
-        const inputMaxP = document.querySelector<HTMLInputElement>('.maxPessoas')
-        const inputData = document.querySelector<HTMLInputElement>('.dataHora')
+		setLocal_id(local_id)
+		setMax_pessoas(max_pessoas)
+		setDataMissa(setarData)
 
-        if (selectLocal !== null) {
-            selectLocal.value = local_id.toString()
-        }
+		const selectLocal = document.querySelector<HTMLSelectElement>('.local')
+		const inputMaxP = document.querySelector<HTMLInputElement>('.maxPessoas')
+		const inputData = document.querySelector<HTMLInputElement>('.dataHora')
 
-        if (inputMaxP !== null) {
-            inputMaxP.value = max_pessoas.toString()
-        }
+		if (selectLocal !== null) {
+			selectLocal.value = local_id.toString()
+		}
 
-        if (inputData !== null) {
-            const dataCortada = data.split('/')
+		if (inputMaxP !== null) {
+			inputMaxP.value = max_pessoas.toString()
+		}
 
-            inputData.value = `${dataCortada[2]}-${dataCortada[1]}-${dataCortada[0]}T${hora}`
-        }
-    }
+		if (inputData !== null) {
+			const dataCortada = data.split('/')
 
-    function clicouLocal(event: ChangeEvent<HTMLSelectElement>) {
-        setLocal_id(Number(event.target.value))
-    }
+			inputData.value = `${dataCortada[2]}-${dataCortada[1]}-${dataCortada[0]}T${hora}`
+		}
+	}
 
-    function digitouMaxP(event: ChangeEvent<HTMLInputElement>) {
-        const maxP = Number(event.target.value)
-        setMax_pessoas(maxP)
-    }
+	function clicouLocal(event: ChangeEvent<HTMLSelectElement>) { setLocal_id(Number(event.target.value)) }
 
-    function clicouData(event: ChangeEvent<HTMLInputElement>) {
-        const dataHoraMissa = new Date(event.target.value)
+	function digitouMaxP(event: ChangeEvent<HTMLInputElement>) { setMax_pessoas(Number(event.target.value)) }
 
-        const anoMissa = dataHoraMissa.getFullYear()
-        let mesMissa = (dataHoraMissa.getMonth() + 1).toString()
-        let diaMissa = (dataHoraMissa.getDate()).toString()
-        let horaMissa = (dataHoraMissa.getHours()).toString()
-        let minutosMissa = (dataHoraMissa.getMinutes()).toString()
+	function clicouData(event: ChangeEvent<HTMLInputElement>) {
+		const dataHoraMissa = new Date(event.target.value)
 
-        function validaQuantNum(campo: string) {
-            if (campo.length === 1) {
-                campo = `0${campo}`
-            }
-            return campo
-        }
+		const anoMissa = dataHoraMissa.getFullYear()
+		let mesMissa = (dataHoraMissa.getMonth() + 1).toString()
+		let diaMissa = (dataHoraMissa.getDate()).toString()
+		let horaMissa = (dataHoraMissa.getHours()).toString()
+		let minutosMissa = (dataHoraMissa.getMinutes()).toString()
 
-        mesMissa = validaQuantNum(mesMissa)
-        diaMissa = validaQuantNum(diaMissa)
-        horaMissa = validaQuantNum(horaMissa)
-        minutosMissa = validaQuantNum(minutosMissa)
+		function validaQuantNum(campo: string) {
+			if (campo.length === 1) { campo = `0${campo}` }
 
-        setDataMissa({ data: `${diaMissa}/${mesMissa}/${anoMissa}`, hora: `${horaMissa}:${minutosMissa}` })
-    }
+			return campo
+		}
 
-    async function handleSubmit(event: FormEvent) {
-        event.preventDefault()
+		mesMissa = validaQuantNum(mesMissa)
+		diaMissa = validaQuantNum(diaMissa)
+		horaMissa = validaQuantNum(horaMissa)
+		minutosMissa = validaQuantNum(minutosMissa)
 
-        let { data, hora } = dataMissa
+		setDataMissa({ data: `${diaMissa}/${mesMissa}/${anoMissa}`, hora: `${horaMissa}:${minutosMissa}` })
+	}
 
-        // Verificações de Entrada de Dados
-        if (missa_id === 0) {
-            alert('[ERRO] O campo "Missa" é obrigatório!')
-            return
-        }
+	async function handleSubmit(event: FormEvent) {
+		event.preventDefault()
 
-        if (local_id === 0) {
-            alert('[ERRO] O campo "Local" é obrigatório!')
-            return
-        }
+		let { data, hora } = dataMissa
 
-        if (data === undefined) {
-            alert('[ERRO] O campo "Data e Horário" é obrigatório!')
-            return
-        }
-        if (max_pessoas <= 0) {
-            alert('[ERRO] O campo "Quantidade Máxima de Pessoas" não pode ser Nulo ou Negativo!')
-            return
-        }
+		// Verificações de Entrada de Dados
+		if (missa_id === 0) {
+			alert('[ERRO] O campo "Missa" é obrigatório!')
+			return
+		}
 
-        const dataCortada = data.split('/')
-        data = `${dataCortada[2]}/${dataCortada[1]}/${dataCortada[0]}`
-        const dadosMissa = { missa_id, local_id, data, hora, max_pessoas }
+		if (local_id === 0) {
+			alert('[ERRO] O campo "Local" é obrigatório!')
+			return
+		}
 
-        await api.put('missas', dadosMissa)
+		if (data === undefined) {
+			alert('[ERRO] O campo "Data e Horário" é obrigatório!')
+			return
+		}
+		if (max_pessoas <= 0) {
+			alert('[ERRO] O campo "Quantidade Máxima de Pessoas" não pode ser Nulo ou Negativo!')
+			return
+		}
 
-        window.scrollTo(0, 0)
-        window.onscroll = () => (window.scrollTo(0, 0))
-        const teste = document.body.querySelector<HTMLDivElement>('div.divSucesso')
-        if (teste) teste.style.zIndex = '1'
-    }
+		const dataCortada = data.split('/')
+		data = `${dataCortada[2]}/${dataCortada[1]}/${dataCortada[0]}`
+		const dadosMissa = { missa_id, local_id, data, hora, max_pessoas }
 
-    return (
-        <>
-            <div className="imgFundo">
-                <Sucesso />
-                <section className="secEditar">
-                    <form onSubmit={handleSubmit}>
-                        <h1>EDITAR MISSA</h1>
-                        <hr />
+		await api.put('missas', dadosMissa)
 
-                        <fieldset className="fieldsetEditar">
-                            <legend>
-                                <h2>Missas Cadastradas</h2>
-                            </legend>
+		window.scrollTo(0, 0)
+		window.onscroll = () => (window.scrollTo(0, 0))
+		const teste = document.body.querySelector<HTMLDivElement>('div.divSucesso')
+		if (teste) teste.style.zIndex = '1'
+	}
 
-                            <div className="field">
-                                <select name="missa" className="missa" onChange={clicouMissa}>
-                                    <option value="0">Selecione uma Missa</option>
-                                    {missas.map(missa => (
-                                        <option value={missa.id} key={missa.id}>
-                                            {missa.local_id === 1 ? 'Centro' : 'Termas'} - {missa.data.slice(0, 5)} - {
-                                                missa.hora}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
-                        </fieldset>
+	return (
+		<>
+			<div className="imgFundo">
+				<Sucesso />
+				<section className="secEditar">
+					<form onSubmit={handleSubmit}>
+						<h1>EDITAR MISSA</h1>
+						<hr />
 
-                        <fieldset className="fieldsetEditar">
-                            <legend>
-                                <h2>Local e Quantidade Máxima de Pessoas</h2>
-                            </legend>
+						<fieldset className="fieldsetEditar">
+							<legend>
+								<h2>Missas Cadastradas</h2>
+							</legend>
 
-                            <div className="field">
-                                <select name="local" className="local" onChange={clicouLocal}>
-                                    <option value="0" disabled selected hidden>Selecione um Local</option>
-                                    <option value="1">Centro</option>
-                                    <option value="2">Termas</option>
-                                </select>
+							<div className="field">
+								<select name="missa" className="missa" onChange={clicouMissa}>
+									<option value="0">Selecione uma Missa</option>
+									{missas.map(missa => (
+										<option value={missa.id} key={missa.id}>
+											{missa.local_id === 1 ? 'Centro' : 'Termas'} - {missa.data.slice(0, 5)} - {missa.hora}
+										</option>
+									))}
+								</select>
+							</div>
+						</fieldset>
 
-                                <input type="number" name="maxPessoas" className="maxPessoas" defaultValue={0}
-                                    onChange={digitouMaxP} />
-                            </div>
-                        </fieldset>
+						<fieldset className="fieldsetEditar">
+							<legend>
+								<h2>Local e Quantidade Máxima de Pessoas</h2>
+							</legend>
 
-                        <fieldset className="fieldsetEditar">
-                            <legend>
-                                <h2>Data e Horário</h2>
-                            </legend>
+							<div className="field">
+								<select name="local" className="local" onChange={clicouLocal}>
+									<option value="0" disabled selected hidden>Selecione um Local</option>
+									<option value="1">Centro</option>
+									<option value="2">Termas</option>
+								</select>
 
-                            <div className="field">
-                                <input type="datetime-local" name="dataHora" className="dataHora" onChange={clicouData} />
-                            </div>
-                        </fieldset>
+								<input type="number" name="maxPessoas" className="maxPessoas" defaultValue={0} onChange={digitouMaxP} />
+							</div>
+						</fieldset>
 
-                        <button type="submit" className="editarMissa">Editar Missa</button>
-                    </form>
-                </section>
-            </div>
-            <Footer />
-        </>
-    )
+						<fieldset className="fieldsetEditar">
+							<legend>
+								<h2>Data e Horário</h2>
+							</legend>
+
+							<div className="field">
+								<input type="datetime-local" name="dataHora" className="dataHora" onChange={clicouData} />
+							</div>
+						</fieldset>
+
+						<button type="submit" className="editarMissa">Editar Missa</button>
+					</form>
+				</section>
+			</div>
+			<Footer />
+		</>
+	)
 }
 
 export default EditarMissa

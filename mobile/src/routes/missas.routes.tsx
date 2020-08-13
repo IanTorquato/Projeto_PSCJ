@@ -7,12 +7,12 @@ import DetalhesMissa from '../pages/DetalhesMissa'
 const { Navigator, Screen } = createStackNavigator()
 
 const RotasMissas: React.FC = () => {
-  return (
-    <Navigator headerMode="none" screenOptions={{ cardStyle: { backgroundColor: '#000' } }}>
-      <Screen name="Missas" component={Missas} />
-      <Screen name="DetalhesMissa" component={DetalhesMissa} />
-    </Navigator>
-  )
+	return (
+		<Navigator headerMode="none" screenOptions={{ cardStyle: { backgroundColor: '#000' } }}>
+			<Screen name="Missas" component={Missas} />
+			<Screen name="DetalhesMissa" component={DetalhesMissa} />
+		</Navigator>
+	)
 }
 
 export default RotasMissas
