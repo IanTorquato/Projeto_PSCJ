@@ -1,4 +1,6 @@
 import express from 'express'
+import multer from 'multer'
+import configMulter from './config/multer'
 
 import LoginPascom from './controllers/loginPascom'
 import Locais from './controllers/locais'
@@ -13,6 +15,7 @@ const usuarios = new Usuarios()
 const missaUsuario = new MissaUsuario()
 
 const routes = express.Router()
+const upload = multer(configMulter)
 
 // Login Pascom
 routes.post('/login', loginPascom.loginPascom)
@@ -31,6 +34,7 @@ routes.delete('/missas/:id', missas.delete)
 routes.post('/usuarios', usuarios.create)
 routes.post('/usuarios/login', usuarios.loginUsuario)
 routes.get('/usuarios', usuarios.index)
+routes.put('/usuarios', upload.single('foto'), usuarios.update)
 
 // Missa_Usuário
 routes.post('/missa_usuario', missaUsuario.create)
