@@ -10,7 +10,7 @@ class Missas {
 
 			return response.json({ mensagem: 'Missa criada com sucesso!' })
 		} catch (error) {
-			return response.json({ erro: 'Falha no servidor ao tentar criar missa.' }).status(500)
+			return response.status(500).json({ erro: 'Falha no servidor ao tentar criar missa.' })
 		}
 	}
 
@@ -36,9 +36,9 @@ class Missas {
 
 				if (missas[0]) { return response.json(missas) }
 
-				return response.json({ erro: 'Ainda não há nenhum dado para ser listado.' }).status(400)
+				return response.status(400).json({ erro: 'Ainda não há nenhum dado para ser listado.' })
 			} catch (error) {
-				return response.json({ erro: 'Erro na filtragem de missas pelo usuário!' }).status(400)
+				return response.status(400).json({ erro: 'Erro na filtragem de missas pelo usuário!' })
 			}
 		}
 
@@ -50,12 +50,12 @@ class Missas {
 
 					if (missasLocal[0]) { return response.json(missasLocal) }
 
-					return response.json({ erro: 'Ainda não há nenhum dado para ser listado.' }).status(400)
+					return response.status(400).json({ erro: 'Ainda não há nenhum dado para ser listado.' })
 				}
 
-				return response.json({ erro: 'Local inexistente!' }).status(400)
+				return response.status(400).json({ erro: 'Local inexistente!' })
 			} catch (erro) {
-				return response.json({ erro: 'Erro na filtragem de missas pelo Local!' }).status(400)
+				return response.status(400).json({ erro: 'Erro na filtragem de missas pelo Local!' })
 			}
 		}
 
@@ -68,12 +68,12 @@ class Missas {
 
 					if (missas[0]) { return response.json(missas.slice(0, quantidadeMissas)) }
 
-					return response.json({ erro: 'Ainda não há nenhum dado para ser listado.' }).status(400)
+					return response.status(400).json({ erro: 'Ainda não há nenhum dado para ser listado.' })
 				}
 
-				return response.json({ erro: 'Número de missas inválido!' }).status(400)
+				return response.status(400).json({ erro: 'Número de missas inválido!' })
 			} catch (erro) {
-				return response.json({ erro: 'Erro na filtragem de missas por Quantidade!' }).status(400)
+				return response.status(400).json({ erro: 'Erro na filtragem de missas por Quantidade!' })
 			}
 		}
 
@@ -84,9 +84,9 @@ class Missas {
 
 				if (missas[0]) { return response.json(missas) }
 
-				return response.json({ erro: 'Ainda não há nenhum dado para ser listado.' }).status(400)
+				return response.status(400).json({ erro: 'Ainda não há nenhum dado para ser listado.' })
 			} catch (error) {
-				return response.json({ erro: 'Falha no servidor ao tentar listar dados da tabela "missas"!' }).status(500)
+				return response.status(500).json({ erro: 'Falha no servidor ao tentar listar dados da tabela "missas"!' })
 			}
 		}
 	}
@@ -99,9 +99,9 @@ class Missas {
 
 			if (missa) { return response.json(missa) }
 
-			return response.json({ erro: 'Missa não encontrada!' }).status(400)
+			return response.status(400).json({ erro: 'Missa não encontrada!' })
 		} catch (error) {
-			return response.json({ erro: 'Falha no servidor ao tentar listar uma única missa.' }).status(500)
+			return response.status(500).json({ erro: 'Falha no servidor ao tentar listar uma única missa.' })
 		}
 	}
 
@@ -113,7 +113,7 @@ class Missas {
 
 			return response.json({ mensagem: 'Missa atualizada com sucesso!' })
 		} catch (error) {
-			return response.json({ erro: 'Falha no servidor ao tentar atualizar missa.' }).status(500)
+			return response.status(500).json({ erro: 'Falha no servidor ao tentar atualizar missa.' })
 		}
 	}
 
@@ -133,11 +133,11 @@ class Missas {
 				return response.json({ mensagem: 'Missa deletada com sucesso!' })
 			}
 
-			return response.json({ erro: 'A missa que você deseja excluir não existe!' }).status(400)
+			return response.status(400).json({ erro: 'A missa que você deseja excluir não existe!' })
 		} catch (error) {
 			await trx.rollback()
 
-			return response.json({ erro: 'Falha no servidor ao tentar deletar missa.' }).status(500)
+			return response.status(500).json({ erro: 'Falha no servidor ao tentar deletar missa.' })
 		}
 	}
 }

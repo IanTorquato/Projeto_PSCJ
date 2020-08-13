@@ -8,13 +8,13 @@ class Usuarios {
 
 			const usuarioExistente = await knex('usuarios').where({ email }).first()
 
-			if (usuarioExistente) { return response.json({ erro: 'Este e-mail já está em uso!' }).status(400) }
+			if (usuarioExistente) { return response.status(400).json({ erro: 'Este e-mail já está em uso!' }) }
 
 			await knex('usuarios').insert({ nome, email })
 
 			return response.json({ mensagem: 'Usuário criado com sucesso!' })
 		} catch (error) {
-			return response.json({ erro: 'Falha no servidor ao tentar criar usuário.' }).status(500)
+			return response.status(500).json({ erro: 'Falha no servidor ao tentar criar usuário.' })
 		}
 	}
 
@@ -26,9 +26,9 @@ class Usuarios {
 
 			if (usuario) { return response.json(usuario) }
 
-			return response.json({ erro: 'Falha ao fazer login! Por favor, tente novamente.' }).status(400)
+			return response.status(400).json({ erro: 'Falha ao fazer login! Por favor, tente novamente.' })
 		} catch (error) {
-			return response.json({ erro: 'Falha no servidor ao tentar logar.' }).status(500)
+			return response.status(500).json({ erro: 'Falha no servidor ao tentar logar.' })
 		}
 	}
 
@@ -51,9 +51,9 @@ class Usuarios {
 				return response.json(usuariosSerializados)
 			}
 
-			return response.json({ erro: 'Ainda não há nenhum dado para ser listado.' }).status(400)
+			return response.status(400).json({ erro: 'Ainda não há nenhum dado para ser listado.' })
 		} catch (error) {
-			return response.json({ erro: 'Falha no servidor ao tentar listar usuários.' }).status(500)
+			return response.status(500).json({ erro: 'Falha no servidor ao tentar listar usuários.' })
 		}
 	}
 
@@ -67,14 +67,14 @@ class Usuarios {
 			const usuarioExistente = await knex('usuarios').where({ email }).first()
 
 			if (usuarioExistente && usuarioExistente.id !== +id) {
-				return response.json({ erro: 'Este e-mail já está em uso!' }).status(400)
+				return response.status(400).json({ erro: 'Este e-mail já está em uso!' })
 			}
 
 			await knex('usuarios').where({ id }).update({ foto, nome, email })
 
 			return response.json({ mensagem: 'Seu perfil foi atualizado com sucesso!' })
 		} catch (error) {
-			return response.json({ erro: 'Falha no servidor ao tentar atualizar seu perfil.' }).status(500)
+			return response.status(500).json({ erro: 'Falha no servidor ao tentar atualizar seu perfil.' })
 		}
 	}
 }

@@ -11,9 +11,9 @@ class MissaUsuario {
 			const relacionamentoExistente = await trx('missa_usuario').where({ missa_id, usuario_id }).first()
 
 			if (relacionamentoExistente) {
-				return response.json({
+				return response.status(400).json({
 					erro: 'Você já está cadastrado nesta missa! Se deseja alterar a quantidade de pessoas, vá até "Perfil".'
-				}).status(400)
+				})
 			}
 
 			const pessoasCadastradas = pessoas_cadastradas + quantidade_pessoas
@@ -27,7 +27,7 @@ class MissaUsuario {
 		} catch (error) {
 			await trx.rollback()
 
-			return response.json({ erro: 'Falha no servidor ao tentar criar o relacionamento missa-usuario.' }).status(500)
+			return response.status(500).json({ erro: 'Falha no servidor ao tentar criar o relacionamento missa-usuario.' })
 		}
 	}
 
@@ -37,9 +37,9 @@ class MissaUsuario {
 
 			if (missaUsuario[0]) { return response.json(missaUsuario) }
 
-			return response.json({ erro: 'Ainda não há nenhum dado para ser listado.' }).status(400)
+			return response.status(400).json({ erro: 'Ainda não há nenhum dado para ser listado.' })
 		} catch (error) {
-			return response.json({ erro: 'Falha no servidor ao tentar listar o relacionamento missa-usuario.' }).status(500)
+			return response.status(500).json({ erro: 'Falha no servidor ao tentar listar o relacionamento missa-usuario.' })
 		}
 	}
 }

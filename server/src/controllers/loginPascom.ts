@@ -13,9 +13,9 @@ class LoginPascom {
         return response.json({ user: { usuario, senha: senhaEncriptada } })
       }
 
-      return response.json({ erro: 'Verifique os dados e tente novamente!' }).status(400)
+      return response.status(400).json({ erro: 'Verifique os dados e tente novamente!' })
     } catch (error) {
-      return response.json({ erro: 'Falha no servidor ao tentar logar.' }).status(500)
+      return response.status(500).json({ erro: 'Falha no servidor ao tentar logar.' })
     }
   }
 }
