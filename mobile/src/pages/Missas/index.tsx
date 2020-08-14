@@ -33,13 +33,30 @@ const Missas: React.FC = () => {
 		}, [])
 	)
 
-	async function buscarMissasApi() {
-		try {
-			setValorSelecionado('')
+	function buscarMissasApi() {
+		setValorSelecionado('')
 
-			const { data } = await api.get('missas')
+		api.get('missas').then(({ data }) => {
+			setMissas(data.map((missa: Missa) => {
+				const dataCortada = missa.data.split('/')
 
-			if (!data.erro) {
+				missa.data = `${dataCortada[2]}/${dataCortada[1]}/${dataCortada[0]}`
+
+				return missa
+			}))
+		}).catch(({ response }) => {
+			Alert.alert('Erro', response.data.erro)
+		})
+	}
+
+	function listarMissasPorLocal(localId: string) {
+		if (localId === valorSelecionado) {
+			buscarMissasApi()
+		}
+		else {
+			setValorSelecionado(localId)
+
+			api.get(`missas?local_id=${localId}`).then(({ data }) => {
 				setMissas(data.map((missa: Missa) => {
 					const dataCortada = missa.data.split('/')
 
@@ -48,49 +65,9 @@ const Missas: React.FC = () => {
 					return missa
 				}))
 			}
-			else {
-				Alert.alert('Erro', data.erro)
-			}
-		} catch (erro) {
-			if (String(erro) === 'Error: Network Error') {
-				Alert.alert('Erro', 'Erro na conexão...')
-			}
-			else {
-				Alert.alert('Erro', erro)
-			}
-		}
-	}
-
-	async function listarMissasPorLocal(localId: string) {
-		try {
-			if (localId === valorSelecionado) {
-				buscarMissasApi()
-			}
-			else {
-				setValorSelecionado(localId)
-
-				const { data } = await api.get(`missas?local_id=${localId}`)
-
-				if (!data.erro) {
-					setMissas(data.map((missa: Missa) => {
-						const dataCortada = missa.data.split('/')
-
-						missa.data = `${dataCortada[2]}/${dataCortada[1]}/${dataCortada[0]}`
-
-						return missa
-					}))
-				}
-				else {
-					Alert.alert('Erro', data.erro)
-				}
-			}
-		} catch (erro) {
-			if (String(erro) === 'Error: Network Error') {
-				Alert.alert('Erro', 'Erro na conexão...')
-			}
-			else {
-				Alert.alert('Erro', String(erro))
-			}
+			).catch(({ response }) => {
+				Alert.alert('Erro', response.data.erro)
+			})
 		}
 	}
 
