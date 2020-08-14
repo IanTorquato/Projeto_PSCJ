@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet, ScrollView, Image, Alert } from 'react-native'
+import { View, Text, ScrollView, Image, Alert } from 'react-native'
 import Svg, { G, Path } from 'react-native-svg'
 import { FontAwesome5 } from '@expo/vector-icons'
 import { BaseButton } from 'react-native-gesture-handler'
@@ -75,12 +75,12 @@ const Perfil: React.FC = () => {
 						</View>
 
 						{usuario?.foto !== ''
-							? <Image source={{ uri: usuario!.foto }} style={styles.imgUsuario} />
+							? <Image source={{ uri: usuario?.foto }} style={styles.imgUsuario} />
 							: <FontAwesome5 name="user-circle" size={80} color="#fff" />
 						}
 
-						<Text style={styles.txtNomeUsuario}>Ana Clara V. Rodrigues</Text>
-						<Text style={styles.txtEmailUsuario}>anaclaravargas16@gmail.com</Text>
+						<Text style={styles.txtNomeUsuario}>{usuario?.nome}</Text>
+						<Text style={styles.txtEmailUsuario}>{usuario?.email}</Text>
 					</View>
 				</Svg>
 

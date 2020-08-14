@@ -24,7 +24,17 @@ class Usuarios {
 
 			const usuario = await knex('usuarios').where({ nome, email }).first()
 
-			if (usuario) { return response.json(usuario) }
+			if (usuario) {
+				if (usuario.foto) {
+					const usuarioSerializado = {
+						...usuario,
+						foto: `http://192.168.0.107:3333/uploads/fotosPerfis/${usuario.foto}`
+					}
+					return response.json(usuarioSerializado)
+				}
+
+				return response.json(usuario)
+			}
 
 			return response.status(400).json({ erro: 'Falha ao fazer login! Por favor, tente novamente.' })
 		} catch (error) {
