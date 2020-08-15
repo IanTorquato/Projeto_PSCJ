@@ -29,8 +29,15 @@ class Missas {
 		const localId = Number(local_id)
 		const quantidadeMissas = Number(quantMissas)
 
-		function ordenaPelaData(missas: any[]) {
-			missas.sort((a: any, b: any) => a.data >= b.data ? 1 : -1)
+		function ordenaPelaData(missas: Missa[]) {
+			missas.sort((a: Missa, b: Missa) => {
+				a.data > b.data && 1
+
+				a.data < b.data && -1
+
+				// Ordena missas pela hora, já que o dia é o mesmo
+				return a.hora >= b.hora ? 1 : -1
+			})
 
 			return missas
 		}
