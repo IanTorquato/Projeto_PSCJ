@@ -13,7 +13,7 @@ class LoginPascom {
         return response.json({ user: { usuario, senha: senhaEncriptada } })
       }
 
-      return response.status(400).json({ erro: 'Verifique os dados e tente novamente!' })
+      return response.status(400).json({ erro: 'Falha ao fazer login! Por favor, tente novamente.' })
     } catch (error) {
       return response.status(500).json({ erro: 'Falha no servidor ao tentar logar.' })
     }
