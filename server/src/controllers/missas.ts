@@ -52,7 +52,7 @@ class Missas {
 						.where({ usuario_id })
 				)
 
-				missas[0] && response.json(missas)
+				if (missas[0]) { return response.json(missas) }
 
 				return response.status(404).json({ erro: 'Ainda não há nenhum dado para ser listado.' })
 			} catch (error) {
@@ -65,11 +65,11 @@ class Missas {
 			try {
 				const localExistente = await knex('locais').where({ id: local_id }).first()
 
-				!localExistente && response.status(404).json({ erro: 'Este local não está cadastrado!' })
+				if (!localExistente) { return response.status(404).json({ erro: 'Este local não está cadastrado!' }) }
 
 				const missasLocal = ordenaPelaData(await knex('missas').where({ local_id }))
 
-				missasLocal[0] && response.json(missasLocal)
+				if (missasLocal[0]) { return response.json(missasLocal) }
 
 				return response.status(404).json({ erro: 'Ainda não há nenhum dado para ser listado.' })
 
@@ -81,11 +81,11 @@ class Missas {
 		// Filtrar missas por quantidade
 		else if (quantidadeMissas) {
 			try {
-				quantidadeMissas <= 0 && response.status(400).json({ erro: 'Número de missas inválido!' })
+				if (quantidadeMissas <= 0) { return response.status(400).json({ erro: 'Número de missas inválido!' }) }
 
 				const missas = ordenaPelaData(await knex('missas'))
 
-				missas[0] && response.json(missas.slice(0, quantidadeMissas))
+				if (missas[0]) { return response.json(missas.slice(0, quantidadeMissas)) }
 
 				return response.status(404).json({ erro: 'Ainda não há nenhum dado para ser listado.' })
 			} catch (erro) {
@@ -98,7 +98,9 @@ class Missas {
 			try {
 				const missas = ordenaPelaData(await knex('missas'))
 
-				missas[0] && response.json(missas)
+				if (missas[0]) {
+					return response.json(missas)
+				}
 
 				return response.status(404).json({ erro: 'Ainda não há nenhum dado para ser listado.' })
 			} catch (error) {
@@ -113,7 +115,7 @@ class Missas {
 		try {
 			const missa = await knex('missas').where({ id }).first()
 
-			missa && response.json(missa)
+			if (missa) { return response.json(missa) }
 
 			return response.status(404).json({ erro: 'Missa não encontrada!' })
 		} catch (error) {
@@ -122,10 +124,11 @@ class Missas {
 	}
 
 	async update(request: Request, response: Response) {
-		const { missa_id, local_id, data, hora, max_pessoas } = request.body
+		const { id } = request.params
+		const { local_id, data, hora, max_pessoas } = request.body
 
 		try {
-			await knex('missas').where({ id: missa_id }).update({ local_id, data, hora, max_pessoas })
+			await knex('missas').where({ id }).update({ local_id, data, hora, max_pessoas })
 
 			return response.json({ mensagem: 'Missa atualizada com sucesso!' })
 		} catch (error) {

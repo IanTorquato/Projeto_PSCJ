@@ -10,9 +10,11 @@ class MissaUsuario {
 
 			const relacionamentoExistente = await trx('missa_usuario').where({ missa_id, usuario_id }).first()
 
-			relacionamentoExistente && response.status(409).json({
-				erro: 'Você já está cadastrado nesta missa! Se deseja alterar a quantidade de pessoas, vá até "Perfil".'
-			})
+			if (relacionamentoExistente) {
+				return response.status(409).json({
+					erro: 'Você já está cadastrado nesta missa! Se deseja alterar a quantidade de pessoas, vá até "Perfil".'
+				})
+			}
 
 			const pessoasCadastradas = pessoas_cadastradas + quantidade_pessoas
 
@@ -33,7 +35,7 @@ class MissaUsuario {
 		try {
 			const missaUsuario = await knex('missa_usuario')
 
-			missaUsuario[0] && response.json(missaUsuario)
+			if (missaUsuario[0]) { return response.json(missaUsuario) }
 
 			return response.status(404).json({ erro: 'Ainda não há nenhum dado para ser listado.' })
 		} catch (error) {

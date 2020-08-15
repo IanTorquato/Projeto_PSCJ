@@ -27,14 +27,14 @@ routes.get('/locais', locais.index)
 routes.post('/missas', missas.create)
 routes.get('/missas', missas.index)
 routes.get('/missas/:id', missas.show)
-routes.put('/missas', missas.update)
+routes.put('/missas/:id', missas.update)
 routes.delete('/missas/:id', missas.delete)
 
 // Usuários
 routes.post('/usuarios', usuarios.create)
 routes.post('/usuarios/login', usuarios.loginUsuario)
 routes.get('/usuarios', usuarios.index)
-routes.put('/usuarios', upload.single('foto'), usuarios.update)
+routes.put('/usuarios/:id', upload.single('foto'), usuarios.update)
 
 // Missa_Usuário
 routes.post('/missa_usuario', missaUsuario.create)
