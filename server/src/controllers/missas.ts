@@ -31,12 +31,12 @@ class Missas {
 
 		function ordenaPelaData(missas: Missa[]) {
 			missas.sort((a: Missa, b: Missa) => {
-				a.data > b.data && 1
+				if (a.data > b.data) { return 1 }
 
-				a.data < b.data && -1
+				if (a.data < b.data) { return -1 }
 
 				// Ordena missas pela hora, já que o dia é o mesmo
-				return a.hora >= b.hora ? 1 : -1
+				else { return a.hora >= b.hora ? 1 : -1 }
 			})
 
 			return missas
@@ -100,7 +100,7 @@ class Missas {
 
 				missas[0] && response.json(missas)
 
-				return response.status(404).json({ erro: 'Ainda não há nenhum dado para ser listado.AQUI' })
+				return response.status(404).json({ erro: 'Ainda não há nenhum dado para ser listado.' })
 			} catch (error) {
 				return response.status(500).json({ erro: 'Falha no servidor ao tentar listar as missas cadastradas!' })
 			}
