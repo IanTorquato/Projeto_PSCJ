@@ -3,10 +3,4 @@ package-lock.json
 npm-debug.*
 yarn.lock
 
-server/uploads/fotosPerfis/*
-!server/uploads/fotosPerfis/.gitkeep
-server/uploads/fotosLocais/*
-!server/uploads/fotosLocais/.gitkeep
-server/src/database/database.sqlite
-
 mobile/.expo*
