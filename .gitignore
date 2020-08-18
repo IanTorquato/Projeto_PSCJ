@@ -4,5 +4,3 @@ npm-debug.*
 yarn.lock
 
 mobile/.expo*
-
-web/src/services/api.ts
