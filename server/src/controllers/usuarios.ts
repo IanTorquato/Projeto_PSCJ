@@ -71,21 +71,34 @@ class Usuarios {
 			const { id } = request.params
 			const { nome, email } = request.body
 
-			let foto = ''
-
-			if (request.file) { foto = request.file.filename }
-
 			const usuarioExistente = await knex('usuarios').where({ email }).first()
 
 			if (usuarioExistente && usuarioExistente.id !== +id) {
 				return response.status(400).json({ erro: 'Este e-mail já está em uso!' })
 			}
 
-			await knex('usuarios').where({ id }).update({ foto, nome, email })
+			await knex('usuarios').where({ id }).update({ nome, email })
 
-			return response.json({ mensagem: 'Seu perfil foi atualizado com sucesso!' })
+			return response.json({ mensagem: 'Perfil atualizado com sucesso!' })
 		} catch (error) {
 			return response.status(500).json({ erro: 'Falha no servidor ao tentar atualizar seu perfil.' })
+		}
+	}
+
+	async updateFoto(request: Request, response: Response) {
+		try {
+			// Na primeira versão do app o usuário só poderá atualizar a imagem de perfil uma única vez
+			// Esta verificação terá de ficar no aplicativo mobile, pois não há uma maneira de excluir fotos ainda
+
+			const { id } = request.params
+
+			if (!request.file) { return response.status(404).json({ erro: 'Você precisa enviar um arquivo de imagem!' }) }
+
+			await knex('usuarios').where({ id }).update({ foto: request.file.filename })
+
+			return response.json({ mensagem: 'Imagem atualizada com sucesso!' })
+		} catch (error) {
+			return response.status(500).json({ erro: 'Falha no servidor ao tentar atualizar sua foto de perfil.' })
 		}
 	}
 }

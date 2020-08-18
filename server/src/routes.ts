@@ -34,7 +34,8 @@ routes.delete('/missas/:id', missas.delete)
 routes.post('/usuarios', usuarios.create)
 routes.post('/usuarios/login', usuarios.loginUsuario)
 routes.get('/usuarios', usuarios.index)
-routes.put('/usuarios/:id', upload.single('foto'), usuarios.update)
+routes.put('/usuarios/:id', usuarios.update)
+routes.put('/usuarios/foto/:id', upload.single('foto'), usuarios.updateFoto)
 
 // Missa_Usuário
 routes.post('/missa_usuario', missaUsuario.create)
