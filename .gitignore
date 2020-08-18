@@ -1,8 +1,5 @@
 node_modules
 package-lock.json
 npm-debug.*
-yarn.lock
 
 mobile/.expo*
-
-web/src/services/api_node.ts
