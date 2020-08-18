@@ -3,7 +3,7 @@ import React, { useState, FormEvent, ChangeEvent } from 'react'
 import './styles.css'
 import Footer from '../../components/Footer'
 import Sucesso from '../../components/Sucesso'
-import api from '../../services/api'
+import api from '../../services/api_node'
 
 interface DataMissa {
 	data: string
