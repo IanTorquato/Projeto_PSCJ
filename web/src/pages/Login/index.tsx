@@ -10,11 +10,11 @@ const Login = () => {
 	function entrar(event: FormEvent) {
 		event.preventDefault()
 
-		const usuario = document.querySelector<HTMLInputElement>('input#usuario')?.value.trim()
+		const nome = document.querySelector<HTMLInputElement>('input#nome')?.value.trim()
 		const senha = document.querySelector<HTMLInputElement>('input#senha')?.value.trim()
 
-		if (usuario && senha) {
-			logar({ usuario, senha })
+		if (nome && senha) {
+			logar({ nome, senha })
 		} else {
 			alert('Preencha todos os campos para logar!')
 		}
@@ -25,8 +25,8 @@ const Login = () => {
 			<form onSubmit={entrar}>
 				<img src={logo} alt="Brasão da Paróquia" />
 				<div className="insereDados">
-					<label htmlFor="usuario">Usuário:</label>
-					<input type="text" id="usuario" placeholder="Insira o usuário" />
+					<label htmlFor="nome">Usuário:</label>
+					<input type="text" id="nome" placeholder="Insira o usuário" />
 				</div>
 				<div className="insereDados">
 					<label htmlFor="senha">Senha:</label>

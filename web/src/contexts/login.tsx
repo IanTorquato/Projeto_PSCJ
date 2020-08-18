@@ -3,7 +3,7 @@ import React, { createContext, useState } from 'react'
 import api from '../services/api'
 
 interface User {
-	usuario: string
+	nome: string
 	senha: string
 }
 
@@ -19,7 +19,7 @@ export const LoginProvider: React.FC = ({ children }) => {
 
 	async function logar(user: User) {
 		try {
-			const response = await api.post(`/login`, user)
+			const response = await api.post(`/pascom/login`, user)
 
 			if (response.data.user) {
 				localStorage.setItem('@PSCJ:user', JSON.stringify(response.data.user))
