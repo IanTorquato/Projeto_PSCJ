@@ -3,4 +3,4 @@ package-lock.json
 npm-debug.*
 
 mobile/.expo*
-mobile/api.ts
+mobile/src/services/api.ts
