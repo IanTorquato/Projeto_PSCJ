@@ -31,22 +31,17 @@ const Perfil: React.FC = () => {
 	)
 
 	async function buscarMissasDoUsuario() {
-		await api.get(`missas?usuario_id=${usuario?.id}`).then(({ data }) => {
-			if (!data.erro) {
-				setMissas(data.map((missa: Missa) => {
-					const dataCortada = missa.data.split('/')
+		api.get(`missas?usuario_id=${usuario?.id}`).then(({ data }) => {
+			setMissas(data.map((missa: Missa) => {
+				const dataCortada = missa.data.split('/')
 
-					missa.data = `${dataCortada[2]}/${dataCortada[1]}/${dataCortada[0]}`
+				missa.data = `${dataCortada[2]}/${dataCortada[1]}/${dataCortada[0]}`
 
-					return missa
-				}))
-			}
-			else {
-				Alert.alert('Erro', data.erro)
-			}
+				return missa
+			}))
+
 		}).catch(({ response }) => {
-			console.log(response.data)
-			Alert.alert('Erro', response.data.erro)
+			response.status !== 404 && Alert.alert('Erro', response.data.erro)
 		})
 	}
 
@@ -115,7 +110,7 @@ const Perfil: React.FC = () => {
 
 				{missas[0] !== undefined ? <></> : (
 					<View style={styles.viewNadaDeMissas}>
-						<FontAwesome5 name="sad-tear" size={80} />
+						<FontAwesome5 name="sad-tear" size={80} color="#d5d5d5" />
 
 						<Text style={styles.txtNadaDeMissas}>Você não possui</Text>
 						<Text style={styles.txtNadaDeMissas}>Missas cadastradas...</Text>

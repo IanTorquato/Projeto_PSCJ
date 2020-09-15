@@ -42,7 +42,7 @@ const Missas: React.FC = () => {
 				return missa
 			}))
 		}).catch(({ response }) => {
-			Alert.alert('Erro', response.data.erro)
+			response.status !== 404 && Alert.alert('Erro', response.data.erro)
 		})
 	}
 
@@ -117,7 +117,7 @@ const Missas: React.FC = () => {
 
 				{missas[0] !== undefined ? <></> :
 					<View style={styles.viewNadaDeMissas}>
-						<FontAwesome5 name="sad-tear" size={80} />
+						<FontAwesome5 name="sad-tear" size={80} color="#d5d5d5" />
 
 						<Text style={styles.txtNadaDeMissas}>Não há nenhuma missa</Text>
 						<Text style={styles.txtNadaDeMissas}>Para listar aqui...</Text>

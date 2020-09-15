@@ -115,6 +115,7 @@ const styles = StyleSheet.create({
 	viewNadaDeMissas: {
 		alignItems: 'center',
 		backgroundColor: '#444',
+		borderColor: '#d5d5d5',
 		borderRadius: 24,
 		borderStyle: 'solid',
 		borderWidth: 2,
@@ -123,6 +124,7 @@ const styles = StyleSheet.create({
 	},
 
 	txtNadaDeMissas: {
+		color: '#d5d5d5',
 		fontFamily: 'Roboto_400Regular',
 		fontSize: 24
 	}
