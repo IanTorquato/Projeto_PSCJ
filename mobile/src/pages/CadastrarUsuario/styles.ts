@@ -1,32 +1,30 @@
 import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
-	container: {
+	imgFundo: {
 		flex: 1
-	},
-
-	fundoLogin: {
-		alignItems: 'center',
-		flex: 1,
-		justifyContent: 'center',
-		paddingBottom: 48
 	},
 
 	btnVoltar: {
 		left: 16,
 		position: 'absolute',
-		top: 16
+		top: 16,
+		zIndex: 8
+	},
+
+	viewConteudo: {
+		alignItems: 'center'
 	},
 
 	imgLogo: {
 		height: 112,
 		resizeMode: 'contain',
-		marginTop: -80,
+		marginTop: 56,
 		width: 112
 	},
 
 	containerInputs: {
-		marginTop: 120
+		marginTop: '24%'
 	},
 
 	containerInput: {
@@ -56,7 +54,7 @@ const styles = StyleSheet.create({
 		height: 50,
 		justifyContent: 'center',
 		paddingHorizontal: 24,
-		marginTop: 80
+		marginTop: '24%'
 	},
 
 	txtBotao: {
