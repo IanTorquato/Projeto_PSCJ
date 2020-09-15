@@ -1,28 +1,28 @@
 import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1
-	},
-
-	fundoLogin: {
+	imgFundo: {
 		alignItems: 'center',
 		flex: 1
 	},
 
+	viewConteudo: {
+		alignItems: 'center'
+	},
+
 	imgLogo: {
 		height: 112,
+		marginTop: 48,
 		resizeMode: 'contain',
-		top: 48,
 		width: 112
 	},
 
 	fundoTxtSagrado: {
 		backgroundColor: '#e41e2577',
 		borderRadius: 16,
+		marginTop: '16%',
 		paddingBottom: 8,
-		top: 96,
-		width: 312
+		width: '90%'
 	},
 
 	txtSagrado: {
@@ -38,13 +38,16 @@ const styles = StyleSheet.create({
 	},
 
 	containerBtns: {
+		marginTop: '24%'
+	},
+
+	bordaBtns: {
 		backgroundColor: '#00000077',
 		borderColor: '#fff',
 		borderRadius: 8,
 		borderStyle: 'solid',
 		borderWidth: 1,
-		marginTop: 24,
-		top: 180
+		marginBottom: 16
 	},
 
 	botao: {

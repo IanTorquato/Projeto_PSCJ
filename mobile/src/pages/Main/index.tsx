@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text, View, ImageBackground, Image } from 'react-native'
-import { RectButton } from 'react-native-gesture-handler'
+import { RectButton, ScrollView } from 'react-native-gesture-handler'
 import { useNavigation } from '@react-navigation/native'
 
 import styles from './styles'
@@ -12,27 +12,31 @@ const Main = () => {
 	const { navigate } = useNavigation()
 
 	return (
-		<View style={styles.container}>
-			<ImageBackground source={fundoLogin} style={styles.fundoLogin}>
-				<Image source={logo} style={styles.imgLogo} />
+		<ImageBackground source={fundoLogin} style={styles.imgFundo}>
+			<ScrollView>
+				<View style={styles.viewConteudo}>
+					<Image source={logo} style={styles.imgLogo} />
 
-				<View style={styles.fundoTxtSagrado}>
-					<Text style={styles.txtSagrado}>Paróquia Sagrado Coração de Jesus</Text>
-				</View>
+					<View style={styles.fundoTxtSagrado}>
+						<Text style={styles.txtSagrado}>Paróquia Sagrado Coração de Jesus</Text>
+					</View>
 
-				<View style={styles.containerBtns}>
-					<RectButton onPress={() => { navigate('Login') }} style={styles.botao}>
-						<Text style={styles.txtBotoes}>Entrar</Text>
-					</RectButton>
-				</View>
+					<View style={styles.containerBtns}>
+						<View style={styles.bordaBtns} >
+							<RectButton onPress={() => { navigate('Login') }} style={styles.botao}>
+								<Text style={styles.txtBotoes}>Entrar</Text>
+							</RectButton>
+						</View>
 
-				<View style={styles.containerBtns}>
-					<RectButton onPress={() => { navigate('CadastrarUsuario') }} style={styles.botao}>
-						<Text style={styles.txtBotoes}>Cadastrar-se</Text>
-					</RectButton>
+						<View style={styles.bordaBtns} >
+							<RectButton onPress={() => { navigate('CadastrarUsuario') }} style={styles.botao}>
+								<Text style={styles.txtBotoes}>Cadastrar-se</Text>
+							</RectButton>
+						</View>
+					</View>
 				</View>
-			</ImageBackground>
-		</View>
+			</ScrollView>
+		</ImageBackground>
 	)
 }
 
