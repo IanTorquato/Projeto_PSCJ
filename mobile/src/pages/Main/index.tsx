@@ -1,12 +1,12 @@
 import React from 'react'
-import { Text, View, StyleSheet, ImageBackground, Image } from 'react-native'
+import { Text, View, ImageBackground, Image } from 'react-native'
 import { RectButton } from 'react-native-gesture-handler'
 import { useNavigation } from '@react-navigation/native'
 
+import styles from './styles'
+
 const fundoLogin = require('../../assets/fundoLogin.jpg')
 const logo = require('../../../assets/icon.png')
-
-import styles from './styles'
 
 const Main = () => {
 	const { navigate } = useNavigation()

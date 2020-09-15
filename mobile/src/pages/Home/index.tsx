@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native'
+import { View, Text, Image, ScrollView, TouchableOpacity } from 'react-native'
 import Svg, { G, Path } from "react-native-svg"
 import { FontAwesome5 } from '@expo/vector-icons'
 

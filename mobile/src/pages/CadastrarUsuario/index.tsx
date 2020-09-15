@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { Text, View, StyleSheet, TouchableOpacity, ImageBackground, Image, TextInput, Alert, KeyboardAvoidingView, Platform }
-	from 'react-native'
+import { Text, View, TouchableOpacity, ImageBackground, Image, TextInput, Alert, KeyboardAvoidingView } from 'react-native'
 import { RectButton } from 'react-native-gesture-handler'
 import { FontAwesome5 } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
@@ -9,10 +8,10 @@ import * as Yup from 'yup'
 import { useContextLogin } from '../../contexts/login'
 import api from '../../services/api'
 
+import styles from './styles'
+
 const fundoLogin = require('../../assets/fundoLogin.jpg')
 const logo = require('../../../assets/icon.png')
-
-import styles from './styles'
 
 const CadastrarUsuario = () => {
 	const [nome, setNome] = useState('')

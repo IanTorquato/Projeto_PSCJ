@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Text, View, StyleSheet, TouchableOpacity, Image, TextInput, Alert } from 'react-native'
+import { Text, View, TouchableOpacity, Image, TextInput, Alert } from 'react-native'
 import { FontAwesome5 } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import { RectButton } from 'react-native-gesture-handler'
