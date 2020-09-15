@@ -3,14 +3,15 @@ import { Text, View, TouchableOpacity, Image, TextInput, Alert } from 'react-nat
 import { FontAwesome5 } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import { RectButton } from 'react-native-gesture-handler'
+import * as Yup from 'yup'
 
-import api from '../../services/api'
+import api, { baseURL } from '../../services/api'
 import { useContextLogin } from '../../contexts/login'
 
 import styles from './styles'
 
-const imgCentro = require('../../assets/igrejaCentro.png')
-const imgTermas = require('../../assets/igrejaTermas.png')
+const imgCentro = `${baseURL}/uploads/fotosLocais/igrejaCentro.png`
+const imgTermas = `${baseURL}/uploads/fotosLocais/igrejaTermas.png`
 
 interface Missa {
 	id: number
@@ -29,27 +30,29 @@ const DetalhesMissa = ({ route }: any) => {
 
 	const { usuario } = useContextLogin()
 
-	async function atualizarQuantPessoas() {
-		if (String(quantidade_pessoas) === 'NaN') {
-			Alert.alert('Erro', 'Não banque o esperto :v\nDigite um número!')
-		}
-		else {
-			if (quantidade_pessoas + missa.pessoas_cadastradas > missa.max_pessoas) {
+	function atualizarQuantPessoas() {
+		const schemaQuantidadePessoas = Yup.object().shape({
+			quantidade_pessoas: Yup.number().required('O campo Nome é obrigatório!').min(1, 'O valor mínimo é 1!')
+		})
+
+		schemaQuantidadePessoas.validate({ quantidade_pessoas }).then(() => {
+			if ((quantidade_pessoas + missa.pessoas_cadastradas) > missa.max_pessoas) {
 				Alert.alert('Erro', `Restam apenas ${missa.max_pessoas - missa.pessoas_cadastradas} vagas nesta missa.`)
 			} else {
-				try {
-					const { id, pessoas_cadastradas } = missa
-					const dadosMissaUsuario = { missa_id: id, usuario_id: usuario?.id, quantidade_pessoas, pessoas_cadastradas }
+				const { id, pessoas_cadastradas } = missa
+				const dadosMissaUsuario = { missa_id: id, usuario_id: usuario?.id, quantidade_pessoas, pessoas_cadastradas }
 
-					const { data } = await api.post('missa_usuario', dadosMissaUsuario)
-					const { erro, mensagem } = data
-
-					erro ? Alert.alert('Erro', erro) : Alert.alert('Sucesso', mensagem)
-				} catch (erro) {
-					Alert.alert('Erro', erro)
-				}
+				api.post('missa_usuario', dadosMissaUsuario).then(({ data }) => {
+					Alert.alert('Sucesso', data.mensagem)
+					goBack()
+				}).catch(({ response }) => {
+					Alert.alert('Erro', response.data.erro)
+				})
 			}
 		}
+		).catch(({ errors }) => {
+			Alert.alert('Erro', errors[0])
+		})
 	}
 
 	return (
@@ -59,7 +62,7 @@ const DetalhesMissa = ({ route }: any) => {
 			</TouchableOpacity>
 
 			<View style={styles.viewDetalhesMissa}>
-				<Image source={missa.local_id === 1 ? imgCentro : imgTermas} style={styles.imgLocal} />
+				<Image source={{ uri: missa.local_id === 1 ? imgCentro : imgTermas }} style={styles.imgLocal} />
 
 				<View style={styles.viewDadosMissa}>
 					<Text style={styles.txtLocal}>{missa.local_id === 1 ? 'Centro' : 'Termas'}</Text>
@@ -67,6 +70,7 @@ const DetalhesMissa = ({ route }: any) => {
 					<View style={styles.viewContainDataHora}>
 						<View style={styles.viewDataHora}>
 							<FontAwesome5 name="circle" size={6} color="#ddd" solid />
+
 							<Text style={[styles.txtDataHora, styles.txtData]}>Data:
                 <Text style={styles.txtValueDataHora}> {missa.data.slice(0, 5)}</Text>
 							</Text>
@@ -74,6 +78,7 @@ const DetalhesMissa = ({ route }: any) => {
 
 						<View style={styles.viewDataHora}>
 							<FontAwesome5 name="circle" size={6} color="#ddd" solid />
+
 							<Text style={styles.txtDataHora}>Hora:
                 <Text style={styles.txtValueDataHora}> {missa.hora}</Text>
 							</Text>
@@ -86,6 +91,7 @@ const DetalhesMissa = ({ route }: any) => {
 
 			<View style={styles.viewQuantPessoas}>
 				<Text style={styles.txtQuantPessoas}>Quantidade de pessoas: </Text>
+
 				<TextInput style={styles.inputNumberQuantPessoas} maxLength={2} autoCorrect={false} defaultValue="1"
 					keyboardType="numeric" onChangeText={text => setQuantidadePessoas(Number(text))} />
 			</View>
