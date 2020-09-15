@@ -10,7 +10,7 @@ import api from '../../services/api'
 
 import styles from './styles'
 
-const fundoLogin = require('../../assets/fundoLogin.jpg')
+const imgFundo = require('../../assets/fundoApp.jpg')
 const logo = require('../../../assets/icon.png')
 
 const CadastrarUsuario = () => {
@@ -41,7 +41,7 @@ const CadastrarUsuario = () => {
 	}
 
 	return (
-		<ImageBackground source={fundoLogin} style={styles.imgFundo} >
+		<ImageBackground source={imgFundo} style={styles.imgFundo} >
 			<TouchableOpacity onPress={goBack} style={styles.btnVoltar}>
 				<FontAwesome5 name="arrow-circle-left" color="#fff" size={32} />
 			</TouchableOpacity>

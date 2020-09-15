@@ -40,24 +40,13 @@ export const LoginProvider: React.FC = ({ children }) => {
 	}, [])
 
 	async function logar(usuario: Usuario) {
-		try {
-			const { data } = await api.post(`/usuarios/login`, usuario)
+		api.post(`/usuarios/login`, usuario).then(({ data }) => {
+			setStateUsuario(data)
 
-			if (data.nome && data.email) {
-				setStateUsuario(data)
-
-				AsyncStorage.setItem('@PSCJ:user', JSON.stringify(data))
-			} else (
-				Alert.alert('Erro', data.erro)
-			)
-		} catch (erro) {
-			if (String(erro) === 'Error: Network Error') {
-				Alert.alert('Erro', 'Erro na conexão...')
-			}
-			else {
-				Alert.alert('Erro', String(erro))
-			}
-		}
+			AsyncStorage.setItem('@PSCJ:user', JSON.stringify(data))
+		}).catch(({ response }) => {
+			Alert.alert('Erro', response.data.erro)
+		})
 	}
 
 	async function deslogar() {

@@ -5,14 +5,14 @@ import { useNavigation } from '@react-navigation/native'
 
 import styles from './styles'
 
-const fundoLogin = require('../../assets/fundoLogin.jpg')
+const imgFundo = require('../../assets/fundoApp.jpg')
 const logo = require('../../../assets/icon.png')
 
 const Main = () => {
 	const { navigate } = useNavigation()
 
 	return (
-		<ImageBackground source={fundoLogin} style={styles.imgFundo}>
+		<ImageBackground source={imgFundo} style={styles.imgFundo}>
 			<ScrollView>
 				<View style={styles.viewConteudo}>
 					<Image source={logo} style={styles.imgLogo} />

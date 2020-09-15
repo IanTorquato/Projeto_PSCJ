@@ -9,33 +9,31 @@ import { useContextLogin } from '../../contexts/login'
 
 import styles from './styles'
 
-const fundoLogin = require('../../assets/fundoLogin.jpg')
+const imgFundo = require('../../assets/fundoApp.jpg')
 const logo = require('../../../assets/icon.png')
 
 const Login = () => {
-	const { goBack } = useNavigation()
-
 	const [nome, setNome] = useState('')
 	const [email, setEmail] = useState('')
 
+	const { goBack } = useNavigation()
 	const { logar } = useContextLogin()
 
 	async function entrar() {
-		try {
-			const schemaDadosCadastro = Yup.object().shape({
-				nome: Yup.string().required('O campo Nome é obrigatório!').min(3, 'O nome deve conter ao menos 3 caracteres!'),
-				email: Yup.string().required('O campo E-mail é obrigatório!').email('Digite um E-mail válido!')
-			})
+		const schemaDadosCadastro = Yup.object().shape({
+			nome: Yup.string().required('O campo Nome é obrigatório!').min(3, 'O nome deve conter ao menos 3 caracteres!'),
+			email: Yup.string().required('O campo E-mail é obrigatório!').email('Digite um E-mail válido!')
+		})
 
-			await schemaDadosCadastro.validate({ nome, email })
-			logar({ id: 0, foto: '', nome, email })
-		} catch (erro) {
-			Alert.alert('Erro', erro.errors[0])
-		}
+		schemaDadosCadastro.validate({ nome, email }).then(
+			() => { logar({ id: 0, foto: '', nome, email }) }
+		).catch(({ errors }) => {
+			Alert.alert('Erro', errors[0])
+		})
 	}
 
 	return (
-		<ImageBackground source={fundoLogin} style={styles.imgFundo}>
+		<ImageBackground source={imgFundo} style={styles.imgFundo}>
 			<TouchableOpacity onPress={goBack} style={styles.btnVoltar}>
 				<FontAwesome5 name="arrow-circle-left" color="#fff" size={32} />
 			</TouchableOpacity>
