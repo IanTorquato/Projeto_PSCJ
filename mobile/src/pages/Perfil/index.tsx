@@ -5,13 +5,13 @@ import { FontAwesome5 } from '@expo/vector-icons'
 import { BaseButton } from 'react-native-gesture-handler'
 import { useFocusEffect } from '@react-navigation/native'
 
-import api from '../../services/api'
+import api, { baseURL } from '../../services/api'
 import { useContextLogin } from '../../contexts/login'
 
 import styles from './styles'
 
-const imgCentro = require('../../assets/igrejaCentro.png')
-const imgTermas = require('../../assets/igrejaTermas.png')
+const imgCentro = `${baseURL}/uploads/fotosLocais/igrejaCentro.png`
+const imgTermas = `${baseURL}/uploads/fotosLocais/igrejaTermas.png`
 
 interface Missa {
 	id: number
@@ -27,15 +27,11 @@ const Perfil: React.FC = () => {
 	const { usuario } = useContextLogin()
 
 	useFocusEffect(
-		React.useCallback(() => {
-			buscarMissasDoUsuario()
-		}, [])
+		React.useCallback(() => { buscarMissasDoUsuario() }, [])
 	)
 
 	async function buscarMissasDoUsuario() {
-		try {
-			const { data } = await api.get(`missas?usuario_id=${usuario?.id}`)
-
+		await api.get(`missas?usuario_id=${usuario?.id}`).then(({ data }) => {
 			if (!data.erro) {
 				setMissas(data.map((missa: Missa) => {
 					const dataCortada = missa.data.split('/')
@@ -48,14 +44,10 @@ const Perfil: React.FC = () => {
 			else {
 				Alert.alert('Erro', data.erro)
 			}
-		} catch (erro) {
-			if (String(erro) === 'Error: Network Error') {
-				Alert.alert('Erro', 'Erro na conexão...')
-			}
-			else {
-				Alert.alert('Erro', String(erro))
-			}
-		}
+		}).catch(({ response }) => {
+			console.log(response.data)
+			Alert.alert('Erro', response.data.erro)
+		})
 	}
 
 	return (
@@ -88,7 +80,7 @@ const Perfil: React.FC = () => {
 
 				{missas.map(missa => (
 					<View style={styles.viewMissa} key={missa.id}>
-						<Image source={missa.local_id === 1 ? imgCentro : imgTermas} style={styles.imgLocal} />
+						<Image source={{ uri: missa.local_id === 1 ? imgCentro : imgTermas }} style={styles.imgLocal} />
 
 						<View style={styles.viewDadosMissa}>
 							<View style={styles.viewEditarMissa}>

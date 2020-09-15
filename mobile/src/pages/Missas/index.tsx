@@ -1,17 +1,16 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet, ScrollView, Image, Alert } from 'react-native'
+import { View, Text, ScrollView, Image, Alert } from 'react-native'
 import { RectButton } from 'react-native-gesture-handler'
 import { RadioButton } from 'react-native-paper'
 import { FontAwesome5 } from '@expo/vector-icons'
 import { useNavigation, useFocusEffect } from '@react-navigation/native'
 
-import api from '../../services/api'
+import api, { baseURL } from '../../services/api'
 
 import styles from './styles'
 
-const imgCentro = require('../../assets/igrejaCentro.png')
-const imgTermas = require('../../assets/igrejaTermas.png')
-
+const imgCentro = `${baseURL}/uploads/fotosLocais/igrejaCentro.png`
+const imgTermas = `${baseURL}/uploads/fotosLocais/igrejaTermas.png`
 
 interface Missa {
 	id: number
@@ -28,9 +27,7 @@ const Missas: React.FC = () => {
 	const [valorSelecionado, setValorSelecionado] = useState('')
 
 	useFocusEffect(
-		React.useCallback(() => {
-			buscarMissasApi()
-		}, [])
+		React.useCallback(() => { buscarMissasApi() }, [])
 	)
 
 	function buscarMissasApi() {
@@ -64,8 +61,8 @@ const Missas: React.FC = () => {
 
 					return missa
 				}))
-			}
-			).catch(({ response }) => {
+			}).catch(({ response }) => {
+				console.log(response.data)
 				Alert.alert('Erro', response.data.erro)
 			})
 		}
@@ -94,7 +91,7 @@ const Missas: React.FC = () => {
 
 				{missas.map(missa => (
 					<RectButton style={styles.viewMissa} key={missa.id} onPress={() => { navigate('DetalhesMissa', missa) }}>
-						<Image source={missa.local_id === 1 ? imgCentro : imgTermas} style={styles.imgLocal}></Image>
+						<Image source={{ uri: missa.local_id === 1 ? imgCentro : imgTermas }} style={styles.imgLocal}></Image>
 
 						<View style={styles.viewDadosMissa}>
 							<Text style={styles.txtLocal}>{missa.local_id === 1 ? 'Centro' : 'Termas'}</Text>
