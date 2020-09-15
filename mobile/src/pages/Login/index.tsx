@@ -19,15 +19,15 @@ const Login = () => {
 	const { goBack } = useNavigation()
 	const { logar } = useContextLogin()
 
-	async function entrar() {
+	function entrar() {
 		const schemaDadosCadastro = Yup.object().shape({
 			nome: Yup.string().required('O campo Nome é obrigatório!').min(3, 'O nome deve conter ao menos 3 caracteres!'),
 			email: Yup.string().required('O campo E-mail é obrigatório!').email('Digite um E-mail válido!')
 		})
 
-		schemaDadosCadastro.validate({ nome, email }).then(
-			() => { logar({ id: 0, foto: '', nome, email }) }
-		).catch(({ errors }) => {
+		schemaDadosCadastro.validate({ nome, email }).then(() => {
+			logar({ id: 0, foto: '', nome, email })
+		}).catch(({ errors }) => {
 			Alert.alert('Erro', errors[0])
 		})
 	}

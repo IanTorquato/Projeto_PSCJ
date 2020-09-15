@@ -20,7 +20,7 @@ const CadastrarUsuario = () => {
 	const { goBack } = useNavigation()
 	const { logar } = useContextLogin()
 
-	async function cadastrar() {
+	function cadastrar() {
 		const schemaDadosCadastro = Yup.object().shape({
 			nome: Yup.string().required('O campo Nome é obrigatório!').min(3, 'O nome deve conter ao menos 3 caracteres!'),
 			email: Yup.string().required('O campo E-mail é obrigatório!').email('Digite um E-mail válido!')

@@ -30,7 +30,7 @@ const Perfil: React.FC = () => {
 		React.useCallback(() => { buscarMissasDoUsuario() }, [])
 	)
 
-	async function buscarMissasDoUsuario() {
+	function buscarMissasDoUsuario() {
 		api.get(`missas?usuario_id=${usuario?.id}`).then(({ data }) => {
 			setMissas(data.map((missa: Missa) => {
 				const dataCortada = missa.data.split('/')
