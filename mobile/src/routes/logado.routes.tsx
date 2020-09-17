@@ -4,7 +4,7 @@ import { FontAwesome5 } from '@expo/vector-icons'
 
 import Home from '../pages/Home'
 import RotasMissas from './missas.routes'
-import Perfil from '../pages/Perfil'
+import RotasPerfil from './perfil.routes'
 
 const { Navigator, Screen } = createBottomTabNavigator()
 
@@ -18,7 +18,7 @@ const RoutesLogado = () => {
 					iconName = 'home'
 					size = 28
 				}
-				else if (route.name === 'Perfil') {
+				else if (route.name === 'RotasPerfil') {
 					iconName = 'user-alt'
 					size = 22
 				}
@@ -36,7 +36,7 @@ const RoutesLogado = () => {
 		>
 			<Screen name="Home" component={Home} />
 			<Screen name="RotasMissas" component={RotasMissas} options={{ tabBarLabel: 'Missas' }} />
-			<Screen name="Perfil" component={Perfil} />
+			<Screen name="RotasPerfil" component={RotasPerfil} options={{ tabBarLabel: 'Perfil' }} />
 		</Navigator>
 	)
 }

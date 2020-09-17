@@ -3,7 +3,7 @@ import { View, Text, ScrollView, Image, Alert } from 'react-native'
 import Svg, { G, Path } from 'react-native-svg'
 import { FontAwesome5 } from '@expo/vector-icons'
 import { BaseButton } from 'react-native-gesture-handler'
-import { useFocusEffect } from '@react-navigation/native'
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
 
 import api, { baseURL } from '../../services/api'
 import { useContextLogin } from '../../contexts/login'
@@ -18,12 +18,15 @@ interface Missa {
 	local_id: number
 	data: string
 	hora: string
+	max_pessoas: number
+	pessoas_cadastradas: number,
 	quantidade_pessoas: number
 }
 
 const Perfil: React.FC = () => {
 	const [missas, setMissas] = useState<Missa[]>([])
 
+	const { navigate } = useNavigation()
 	const { usuario } = useContextLogin()
 
 	useFocusEffect(
@@ -79,10 +82,7 @@ const Perfil: React.FC = () => {
 
 						<View style={styles.viewDadosMissa}>
 							<View style={styles.viewEditarMissa}>
-								<BaseButton onPress={() => {
-									Alert.alert('Erro',
-										'Infelizmente esta funcionalidade ainda não está disponivel')
-								}}>
+								<BaseButton onPress={() => { navigate('DetalhesMissaPerfil', missa) }}>
 									<FontAwesome5 name="edit" size={16} color="#000" />
 								</BaseButton>
 							</View>
