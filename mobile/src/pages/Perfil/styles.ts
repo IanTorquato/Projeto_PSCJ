@@ -89,10 +89,14 @@ const styles = StyleSheet.create({
 	},
 
 	viewEditarMissa: {
-		alignItems: 'flex-end',
-		marginBottom: -20,
-		marginRight: 8,
-		width: '100%'
+		flexDirection: 'row',
+		justifyContent: 'flex-end',
+		marginBottom: -16,
+		width: '98%'
+	},
+
+	btnExcluirMissa: {
+		marginRight: 8
 	},
 
 	txtLocal: {

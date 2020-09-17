@@ -48,6 +48,26 @@ const Perfil: React.FC = () => {
 		})
 	}
 
+	function excluirMissaUsuario(missa: Missa) {
+		Alert.alert('Corfirmar', 'Cancelar presença nesta missa?',
+			[{ text: 'Cancelar' }, {
+				text: 'Confirmar', onPress: () => {
+					const quantRemover = missa.quantidade_pessoas
+					const quantCadastradasAtual = missa.pessoas_cadastradas
+
+					const urlExcluir = `missa_usuario/${missa.id}/${usuario?.id}/${quantRemover}/${quantCadastradasAtual}`
+
+					api.delete(urlExcluir).then(({ data }) => {
+						Alert.alert('Sucesso', data.mensagem)
+						buscarMissasDoUsuario()
+					}).catch(({ response }) => {
+						Alert.alert('Erro', response.data.erro)
+						console.log(response)
+					})
+				}
+			}])
+	}
+
 	return (
 		<ScrollView style={styles.scrollView}>
 			<View style={styles.viewContainer}>
@@ -82,6 +102,10 @@ const Perfil: React.FC = () => {
 
 						<View style={styles.viewDadosMissa}>
 							<View style={styles.viewEditarMissa}>
+								<BaseButton style={styles.btnExcluirMissa} onPress={() => { excluirMissaUsuario(missa) }}>
+									<FontAwesome5 name="trash" size={16} color="#000" />
+								</BaseButton>
+
 								<BaseButton onPress={() => { navigate('DetalhesMissaPerfil', missa) }}>
 									<FontAwesome5 name="edit" size={16} color="#000" />
 								</BaseButton>
