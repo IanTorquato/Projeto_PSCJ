@@ -28,7 +28,7 @@ const CadastrarUsuario = () => {
 
 		schemaDadosCadastro.validate({ nome, email }).then(usuario => {
 			api.post('usuarios', usuario).then(({ data }) => {
-				// Alert("Título", "Mensagem", [{Botões}], {Opções})
+				// Alert("Título", "Mensagem", [{text: 'txtBtn', onPress: função}], {Opções (cancelable: false)})
 				Alert.alert('Sucesso', data.mensagem,
 					[{ text: "Logar Agora", onPress: () => logar({ id: 0, foto: '', nome, email }) }], { cancelable: false }
 				)

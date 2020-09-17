@@ -87,8 +87,8 @@ const styles = StyleSheet.create({
 	},
 
 	viewQuantPessoas: {
+		alignItems: 'center',
 		flexDirection: 'row',
-		//justifyContent: 'center',
 		marginTop: 32
 	},
 
@@ -96,15 +96,6 @@ const styles = StyleSheet.create({
 		color: '#fff',
 		fontFamily: 'Roboto_400Regular',
 		fontSize: 18
-	},
-
-	inputNumberQuantPessoas: {
-		backgroundColor: '#ddd',
-		borderRadius: 8,
-		fontSize: 16,
-		height: 32,
-		textAlign: 'center',
-		width: 40
 	},
 
 	btnPronto: {

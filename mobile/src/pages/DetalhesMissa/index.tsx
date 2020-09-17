@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { Text, View, TouchableOpacity, Image, TextInput, Alert } from 'react-native'
+import { Text, View, TouchableOpacity, Image, Alert } from 'react-native'
+import NumericInput from 'react-native-numeric-input'
 import { FontAwesome5 } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import { RectButton } from 'react-native-gesture-handler'
-import * as Yup from 'yup'
 
 import api, { baseURL } from '../../services/api'
 import { useContextLogin } from '../../contexts/login'
@@ -31,28 +31,25 @@ const DetalhesMissa = ({ route }: any) => {
 	const { usuario } = useContextLogin()
 
 	function atualizarQuantPessoas() {
-		const schemaQuantidadePessoas = Yup.object().shape({
-			quantidade_pessoas: Yup.number().required('O campo Nome é obrigatório!').min(1, 'O valor mínimo é 1!')
-		})
-
-		schemaQuantidadePessoas.validate({ quantidade_pessoas }).then(() => {
-			if ((quantidade_pessoas + missa.pessoas_cadastradas) > missa.max_pessoas) {
-				Alert.alert('Erro', `Restam apenas ${missa.max_pessoas - missa.pessoas_cadastradas} vagas nesta missa.`)
-			} else {
-				const { id, pessoas_cadastradas } = missa
-				const dadosMissaUsuario = { missa_id: id, usuario_id: usuario?.id, quantidade_pessoas, pessoas_cadastradas }
-
-				api.post('missa_usuario', dadosMissaUsuario).then(({ data }) => {
-					Alert.alert('Sucesso', data.mensagem)
-					goBack()
-				}).catch(({ response }) => {
-					Alert.alert('Erro', response.data.erro)
-				})
-			}
+		if ((quantidade_pessoas + missa.pessoas_cadastradas) > missa.max_pessoas) {
+			return Alert.alert('Erro', `Restam apenas ${missa.max_pessoas - missa.pessoas_cadastradas} vagas nesta missa.`)
 		}
-		).catch(({ errors }) => {
-			Alert.alert('Erro', errors[0])
-		})
+
+		// Alert("Título", "Mensagem", [{text: 'txtBtn', onPress: função}], {Opções (cancelable: false)})
+		Alert.alert('Corfirmar', 'Deseja se cadastrar nesta missa?',
+			[{ text: 'Cancelar' }, {
+				text: 'Confirmar', onPress: () => {
+					const { id, pessoas_cadastradas } = missa
+					const dadosMissaUsuario = { missa_id: id, usuario_id: usuario?.id, quantidade_pessoas, pessoas_cadastradas }
+
+					api.post('missa_usuario', dadosMissaUsuario).then(({ data }) => {
+						Alert.alert('Sucesso', data.mensagem)
+						goBack()
+					}).catch(({ response }) => {
+						Alert.alert('Erro', response.data.erro)
+					})
+				}
+			}])
 	}
 
 	return (
@@ -92,8 +89,8 @@ const DetalhesMissa = ({ route }: any) => {
 			<View style={styles.viewQuantPessoas}>
 				<Text style={styles.txtQuantPessoas}>Quantidade de pessoas: </Text>
 
-				<TextInput style={styles.inputNumberQuantPessoas} maxLength={2} autoCorrect={false} defaultValue="1"
-					keyboardType="numeric" onChangeText={text => setQuantidadePessoas(Number(text))} />
+				<NumericInput type="up-down" initValue={1} minValue={1} maxValue={20} totalWidth={56} totalHeight={40} editable={false} rounded
+					borderColor="#595959" containerStyle={{ backgroundColor: '#fff' }} onChange={num => setQuantidadePessoas(num)} />
 			</View>
 
 			<RectButton style={styles.btnPronto} onPress={atualizarQuantPessoas}>
