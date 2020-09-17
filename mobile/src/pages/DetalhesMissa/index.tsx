@@ -14,42 +14,64 @@ const imgCentro = `${baseURL}/uploads/fotosLocais/igrejaCentro.png`
 const imgTermas = `${baseURL}/uploads/fotosLocais/igrejaTermas.png`
 
 interface Missa {
+	// Id da missa ou da missa_usuario
 	id: number
 	local_id: number
 	data: string
 	hora: string
 	max_pessoas: number
-	pessoas_cadastradas: number
+	pessoas_cadastradas: number,
+	quantidade_pessoas?: number
 }
 
 const DetalhesMissa = ({ route }: any) => {
-	const { goBack } = useNavigation()
-
 	const [missa, setMissa] = useState<Missa>(route.params)
-	const [quantidade_pessoas, setQuantidadePessoas] = useState(1)
+	const [quantidade_pessoas, setQuantidadePessoas] = useState(route.params.quantidade_pessoas || 1)
 
+	const { goBack } = useNavigation()
 	const { usuario } = useContextLogin()
+
+	const quantidade_pessoas_antes = route.params.quantidade_pessoas
 
 	function atualizarQuantPessoas() {
 		if ((quantidade_pessoas + missa.pessoas_cadastradas) > missa.max_pessoas) {
 			return Alert.alert('Erro', `Restam apenas ${missa.max_pessoas - missa.pessoas_cadastradas} vagas nesta missa.`)
 		}
 
-		// Alert("Título", "Mensagem", [{text: 'txtBtn', onPress: função}], {Opções (cancelable: false)})
-		Alert.alert('Corfirmar', 'Deseja se cadastrar nesta missa?',
-			[{ text: 'Cancelar' }, {
-				text: 'Confirmar', onPress: () => {
-					const { id, pessoas_cadastradas } = missa
-					const dadosMissaUsuario = { missa_id: id, usuario_id: usuario?.id, quantidade_pessoas, pessoas_cadastradas }
+		const { id, pessoas_cadastradas } = missa
 
-					api.post('missa_usuario', dadosMissaUsuario).then(({ data }) => {
-						Alert.alert('Sucesso', data.mensagem)
-						goBack()
-					}).catch(({ response }) => {
-						Alert.alert('Erro', response.data.erro)
-					})
-				}
-			}])
+		if (!route.params.quantidade_pessoas) {
+			// Alert("Título", "Mensagem", [{text: 'txtBtn', onPress: função}], {Opções (cancelable: false)})
+			Alert.alert('Corfirmar', 'Deseja se cadastrar nesta missa?',
+				[{ text: 'Cancelar' }, {
+					text: 'Confirmar', onPress: () => {
+						const dadosMissaUsuario = { quantidade_pessoas, quantidade_pessoas_atual: pessoas_cadastradas }
+
+						api.post(`missa_usuario/${id}/${usuario?.id}`, dadosMissaUsuario).then(({ data }) => {
+							Alert.alert('Sucesso', data.mensagem)
+							goBack()
+						}).catch(({ response }) => {
+							Alert.alert('Erro', response.data.erro)
+						})
+					}
+				}])
+		} else {
+			Alert.alert('Corfirmar', 'Deseja editar a quantidade de pessoas?',
+				[{ text: 'Cancelar' }, {
+					text: 'Confirmar', onPress: () => {
+						const dadosMissaUsuario = {
+							quantidade_pessoas_antes, quantidade_pessoas, quantidade_pessoas_atual: pessoas_cadastradas
+						}
+
+						api.put(`missa_usuario/${id}/${usuario?.id}`, dadosMissaUsuario).then(({ data }) => {
+							Alert.alert('Sucesso', data.mensagem)
+							goBack()
+						}).catch(({ response }) => {
+							Alert.alert('Erro', response.data.erro)
+						})
+					}
+				}])
+		}
 	}
 
 	return (
@@ -89,8 +111,9 @@ const DetalhesMissa = ({ route }: any) => {
 			<View style={styles.viewQuantPessoas}>
 				<Text style={styles.txtQuantPessoas}>Quantidade de pessoas: </Text>
 
-				<NumericInput type="up-down" initValue={1} minValue={1} maxValue={20} totalWidth={56} totalHeight={40} editable={false} rounded
-					borderColor="#595959" containerStyle={{ backgroundColor: '#fff' }} onChange={num => setQuantidadePessoas(num)} />
+				<NumericInput type="up-down" minValue={1} maxValue={20} totalWidth={56} totalHeight={40} editable={false} rounded
+					borderColor="#595959" containerStyle={{ backgroundColor: '#fff' }} onChange={num => setQuantidadePessoas(num)}
+					initValue={route.name !== 'DetalhesMissaPerfil' ? 1 : missa.quantidade_pessoas} />
 			</View>
 
 			<RectButton style={styles.btnPronto} onPress={atualizarQuantPessoas}>
