@@ -1,5 +1,5 @@
 <h1> Projeto-Missas-PSCJ </h1>
-<h2> align="center"> Agendamento de missas da Paróquia Sagrado Coração de Jesus durante a Pandemia. </h2>
+<h2 align="center"> Agendamento de missas da Paróquia Sagrado Coração de Jesus durante a Pandemia. </h2>
 
 <h3> <a href="https://www.figma.com/file/D4HIhGUd6EHTLy0Ebvqf4H/Mobile?node-id=0%3A1" target="_blank">Design Figma</a> </h3>
 
