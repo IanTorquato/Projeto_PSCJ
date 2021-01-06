@@ -7,18 +7,22 @@
 			},
 			"package": "com.iantorquato.missaspscj"
 		},
-		"assetBundlePatterns": ["**/*"],
+		"assetBundlePatterns": [
+			"**/*"
+		],
 		"backgroundColor": "#000000",
 		"githubUrl": "https://github.com/IanTorquato",
 		"icon": "./assets/icon.png",
 		"name": "Missas Gravatal",
 		"orientation": "portrait",
-		"platforms": ["android"],
+		"platforms": [
+			"android"
+		],
 		"primaryColor": "#000000",
 		"slug": "PSCJ",
 		"splash": {
 			"backgroundColor": "#000000",
-			"image": "./assets/load.png",
+			"image": "./assets/splashScreen.png",
 			"resizeMode": "contain"
 		},
 		"updates": {
