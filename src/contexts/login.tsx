@@ -26,7 +26,7 @@ export const LoginProvider: React.FC = ({ children }) => {
 	const [stateLoading, setStateLoading] = useState(true)
 
 	useEffect(() => {
-		async function verificaUsuarioLogado() {
+		(async () => {
 			const usuarioLogado = await AsyncStorage.getItem('@PSCJ:user')
 
 			if (usuarioLogado) {
@@ -34,9 +34,7 @@ export const LoginProvider: React.FC = ({ children }) => {
 			}
 
 			setStateLoading(false)
-		}
-
-		verificaUsuarioLogado()
+		})()
 	}, [])
 
 	async function logar(usuario: Usuario) {
