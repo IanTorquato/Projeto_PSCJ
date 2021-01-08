@@ -1,6 +1,9 @@
 import React, { createContext, useState, useEffect, useContext } from 'react'
 import AsyncStorage from '@react-native-community/async-storage'
 import { Alert } from 'react-native'
+import { AxiosResponse } from 'axios'
+import base64 from 'react-native-base64'
+import { compareAsc, fromUnixTime } from 'date-fns'
 
 import api from '../services/api'
 
@@ -12,13 +15,20 @@ interface DadosLogin {
 interface Usuario extends DadosLogin {
 	id: number
 	foto: string
+	created_at: string
+	updated_at: string
+}
+
+interface ResponseData {
+	usuario: Usuario
+	token: string
 }
 
 interface LoginContextData {
 	usuario: Usuario | null,
 	loading: boolean,
 	logar(dadosLogin: DadosLogin): Promise<void>,
-	deslogar(): Promise<void>
+	deslogar(): void
 }
 
 const LoginContext = createContext<LoginContextData>({} as LoginContextData)
@@ -29,27 +39,43 @@ const LoginProvider: React.FC = ({ children }) => {
 
 	useEffect(() => {
 		(async () => {
-			const usuarioLogado = await AsyncStorage.getItem('@PSCJ:user')
+			const [userStorage, tokenStorage] = await AsyncStorage.multiGet(['@PSCJ:user', '@PSCJ:token'])
 
-			if (usuarioLogado) { setUsuario(JSON.parse(usuarioLogado)) }
+			const user = userStorage[1]
+			const token = tokenStorage[1]
 
-			setLoading(false)
+			if (user && token) {
+				const { exp } = JSON.parse(base64.decode(token.split('.')[1]))
+
+				const dataVencimentoToken = fromUnixTime(exp)
+
+				if (compareAsc(dataVencimentoToken, new Date()) > 0) {
+					api.defaults.headers.Authorization = `Bearer ${token}`
+
+					setUsuario(JSON.parse(user))
+					setLoading(false)
+				} else {
+					await AsyncStorage.clear().then(() => setUsuario(null))
+					setLoading(false)
+					Alert.alert('Tempo esgotado', 'Infelizmente, sua sessão expirou.   Por favor faça Login novamente.')
+				}
+			}
 		})()
 	}, [])
 
 	async function logar(dadosLogin: DadosLogin) {
-		api.post(`/login_usuario`, dadosLogin).then(({ data }) => {
-			setUsuario(data)
+		api.post(`/login_usuario`, dadosLogin).then(({ data }: AxiosResponse<ResponseData>) => {
+			setUsuario(data.usuario)
 
-			AsyncStorage.setItem('@PSCJ:user', JSON.stringify(data))
+			AsyncStorage.setItem('@PSCJ:user', JSON.stringify(data.usuario))
+			AsyncStorage.setItem('@PSCJ:token', data.token)
 		}).catch(({ response }) => {
 			Alert.alert('Erro', response.data.erro)
 		})
 	}
 
-	async function deslogar() {
-		await AsyncStorage.clear()
-		setUsuario(null)
+	function deslogar() {
+		AsyncStorage.clear().then(() => setUsuario(null))
 	}
 
 	return (

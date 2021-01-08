@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const baseURL = 'https://url-do-banco'
+export const baseURL = 'https://url-da-api'
 
 const api = axios.create({ baseURL })
 
