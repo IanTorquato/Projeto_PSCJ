@@ -7,11 +7,11 @@ import RoutesLogado from '../routes/logado.routes'
 import RoutesDeslogado from '../routes/deslogado.routes'
 
 const Routes = () => {
-	const { loading, logado } = useContextLogin()
+	const { loading, usuario } = useContextLogin()
 
 	return (
 		<NavigationContainer>
-			{!loading && hideAsync() && (logado ? <RoutesLogado /> : <RoutesDeslogado />)}
+			{!loading && hideAsync() && (!!usuario ? <RoutesLogado /> : <RoutesDeslogado />)}
 		</NavigationContainer>
 	)
 }

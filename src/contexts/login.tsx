@@ -4,42 +4,42 @@ import { Alert } from 'react-native'
 
 import api from '../services/api'
 
-interface Usuario {
-	id: number,
-	foto: string
-	nome: string,
+interface DadosLogin {
+	nome: string
 	email: string
 }
 
+interface Usuario extends DadosLogin {
+	id: number
+	foto: string
+}
+
 interface LoginContextData {
-	logado: boolean,
 	usuario: Usuario | null,
 	loading: boolean,
-	logar(usuario: Usuario): Promise<void>,
-	deslogar(): void
+	logar(dadosLogin: DadosLogin): Promise<void>,
+	deslogar(): Promise<void>
 }
 
 const LoginContext = createContext<LoginContextData>({} as LoginContextData)
 
-export const LoginProvider: React.FC = ({ children }) => {
-	const [stateUsuario, setStateUsuario] = useState<Usuario | null>(null)
-	const [stateLoading, setStateLoading] = useState(true)
+const LoginProvider: React.FC = ({ children }) => {
+	const [usuario, setUsuario] = useState<Usuario | null>(null)
+	const [loading, setLoading] = useState(true)
 
 	useEffect(() => {
 		(async () => {
 			const usuarioLogado = await AsyncStorage.getItem('@PSCJ:user')
 
-			if (usuarioLogado) {
-				setStateUsuario(JSON.parse(usuarioLogado))
-			}
+			if (usuarioLogado) { setUsuario(JSON.parse(usuarioLogado)) }
 
-			setStateLoading(false)
+			setLoading(false)
 		})()
 	}, [])
 
-	async function logar(usuario: Usuario) {
-		api.post(`/usuarios/login`, usuario).then(({ data }) => {
-			setStateUsuario(data)
+	async function logar(dadosLogin: DadosLogin) {
+		api.post(`/login_usuario`, dadosLogin).then(({ data }) => {
+			setUsuario(data)
 
 			AsyncStorage.setItem('@PSCJ:user', JSON.stringify(data))
 		}).catch(({ response }) => {
@@ -49,18 +49,16 @@ export const LoginProvider: React.FC = ({ children }) => {
 
 	async function deslogar() {
 		await AsyncStorage.clear()
-		setStateUsuario(null)
+		setUsuario(null)
 	}
 
 	return (
-		<LoginContext.Provider value={{ logado: !!stateUsuario, usuario: stateUsuario, loading: stateLoading, logar, deslogar }}>
+		<LoginContext.Provider value={{ usuario, loading, logar, deslogar }}>
 			{children}
 		</LoginContext.Provider>
 	)
 }
 
-export function useContextLogin() {
-	const context = useContext(LoginContext)
+const useContextLogin = () => useContext(LoginContext)
 
-	return context
-}
+export { LoginProvider, useContextLogin }

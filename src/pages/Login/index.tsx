@@ -26,7 +26,7 @@ const Login = () => {
 		})
 
 		schemaDadosCadastro.validate({ nome, email }).then(() => {
-			logar({ id: 0, foto: '', nome, email })
+			logar({ nome, email })
 		}).catch(({ errors }) => {
 			Alert.alert('Erro', errors[0])
 		})
