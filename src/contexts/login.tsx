@@ -53,13 +53,14 @@ const LoginProvider: React.FC = ({ children }) => {
 					api.defaults.headers.Authorization = `Bearer ${token}`
 
 					setUsuario(JSON.parse(user))
-					setLoading(false)
 				} else {
 					await AsyncStorage.clear().then(() => setUsuario(null))
-					setLoading(false)
+
 					Alert.alert('Tempo esgotado', 'Infelizmente, sua sessão expirou.   Por favor faça Login novamente.')
 				}
 			}
+
+			setLoading(false)
 		})()
 	}, [])
 
