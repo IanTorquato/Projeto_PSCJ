@@ -5,12 +5,14 @@ import { FontAwesome5 } from '@expo/vector-icons'
 import Home from '../pages/Home'
 import RotasMissas from './missas.routes'
 import RotasPerfil from './perfil.routes'
-
-const { Navigator, Screen } = createBottomTabNavigator()
+import { cores } from '../styles'
 
 const RoutesLogado = () => {
+	const { Navigator, Screen } = createBottomTabNavigator()
+	const { preto } = cores.neutras
+
 	return (
-		<Navigator screenOptions={({ route }) => ({
+		<Navigator sceneContainerStyle={{ backgroundColor: preto }} screenOptions={({ route }) => ({
 			tabBarIcon: ({ color, size }) => {
 				let iconName = 'ios-list'
 
@@ -25,7 +27,7 @@ const RoutesLogado = () => {
 				else if (route.name === 'RotasMissas') { iconName = 'list-ul' }
 
 				return <FontAwesome5 name={iconName} size={size} color={color} />
-			},
+			}
 		})}
 			tabBarOptions={{
 				activeTintColor: '#eee',
