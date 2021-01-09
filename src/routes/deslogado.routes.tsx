@@ -1,9 +1,9 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 
-import Main from '../pages/Main'
+import Inicial from '../pages/Inicial'
 import Login from '../pages/Login'
-import CadastrarUsuario from '../pages/CadastrarUsuario'
+import Cadastro from '../pages/Cadastro'
 import { cores } from '../styles'
 
 const RoutesDeslogado = () => {
@@ -12,9 +12,9 @@ const RoutesDeslogado = () => {
 
 	return (
 		<Navigator headerMode="none" screenOptions={{ cardStyle: { backgroundColor: preto } }}>
-			<Screen name="Main" component={Main} />
+			<Screen name="Inicial" component={Inicial} />
 			<Screen name="Login" component={Login} />
-			<Screen name="CadastrarUsuario" component={CadastrarUsuario} />
+			<Screen name="Cadastro" component={Cadastro} />
 		</Navigator>
 	)
 }
