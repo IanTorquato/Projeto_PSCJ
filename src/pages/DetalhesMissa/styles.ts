@@ -38,7 +38,6 @@ const styles = StyleSheet.create({
 
 	txtLocal: {
 		color: '#fff',
-		fontFamily: 'Lora_400Regular',
 		fontSize: 24
 	},
 
@@ -75,7 +74,6 @@ const styles = StyleSheet.create({
 		borderTopColor: '#44a4eb',
 		borderTopWidth: 1,
 		color: '#44a4eb',
-		fontFamily: 'Cinzel_400Regular',
 		fontSize: 32,
 		marginTop: 40,
 		paddingVertical: 8,

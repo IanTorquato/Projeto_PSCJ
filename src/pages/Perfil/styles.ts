@@ -51,7 +51,6 @@ const styles = StyleSheet.create({
 		borderTopColor: '#e41e25',
 		borderTopWidth: 1,
 		color: '#e41e25',
-		fontFamily: 'Cinzel_400Regular',
 		fontSize: 24,
 		marginBottom: 32,
 		marginTop: -88,

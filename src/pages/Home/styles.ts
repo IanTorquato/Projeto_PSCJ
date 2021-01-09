@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native'
 const styles = StyleSheet.create({
 	viewContainer: {
 		alignItems: 'center',
-		backgroundColor: '#444',
 		flex: 1
 	},
 
@@ -52,7 +51,6 @@ const styles = StyleSheet.create({
 
 	txtTituloParticipar: {
 		color: '#fff',
-		fontFamily: 'Lora_400Regular',
 		fontSize: 24,
 		fontStyle: 'italic',
 		paddingBottom: 16,
@@ -71,7 +69,6 @@ const styles = StyleSheet.create({
 
 	txtParaParticipar: {
 		color: '#fff',
-		fontFamily: 'Lora_400Regular',
 		fontSize: 16,
 		marginLeft: 8
 	}

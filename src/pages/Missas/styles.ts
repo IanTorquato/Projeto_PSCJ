@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
 		borderTopColor: '#ffb02c',
 		borderTopWidth: 1,
 		color: '#ffb02c',
-		fontFamily: 'Cinzel_400Regular',
 		fontSize: 40,
 		paddingVertical: 8,
 		textAlign: 'center',
