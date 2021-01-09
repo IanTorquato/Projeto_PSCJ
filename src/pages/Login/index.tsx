@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
-import { Text, View, TouchableOpacity, ImageBackground, Image, TextInput, Alert, KeyboardAvoidingView } from 'react-native'
-import { RectButton, ScrollView } from 'react-native-gesture-handler'
-import { FontAwesome5 } from '@expo/vector-icons'
+import { Text, View, TouchableOpacity, Image, Alert } from 'react-native'
+import { AntDesign } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import * as Yup from 'yup'
 
 import { useContextLogin } from '../../contexts/login'
+import InputText from '../../components/InputText'
+import BotaoPrimario from '../../components/BotaoPrimario'
 
 import styles from './styles'
 
-const imgFundo = require('../../assets/fundoApp.jpg')
 const logo = require('../../../assets/icon.png')
 
 const Login = () => {
@@ -26,42 +26,31 @@ const Login = () => {
 		})
 
 		schemaDadosCadastro.validate({ nome, email }).then(() => {
-			logar({ nome, email })
+			// logar({ nome, email })
 		}).catch(({ errors }) => {
 			Alert.alert('Erro', errors[0])
 		})
 	}
 
+	// KeyboardAvoidingView
+
 	return (
-		<ImageBackground source={imgFundo} style={styles.imgFundo}>
+		<View style={styles.viewConteudo}>
 			<TouchableOpacity onPress={goBack} style={styles.btnVoltar}>
-				<FontAwesome5 name="arrow-circle-left" color="#fff" size={32} />
+				<AntDesign name="left" color="#fff" size={32} />
 			</TouchableOpacity>
 
-			<ScrollView>
-				<View style={styles.viewConteudo}>
-					<Image source={logo} style={styles.imgLogo} />
+			<Image source={logo} style={styles.imgLogo} />
 
-					<KeyboardAvoidingView style={styles.containerInputs}>
-						<View style={styles.containerInput}>
-							<Text style={styles.txtInput}>Nome:</Text>
-							<TextInput style={styles.input} placeholder="Digite seu nome"
-								onChangeText={text => setNome(text.trim())} />
-						</View>
+			<Text style={styles.txtSagrado}>Paróquia Sagrado Coração de Jesus</Text>
 
-						<View style={styles.containerInput}>
-							<Text style={styles.txtInput}>E-mail:</Text>
-							<TextInput style={styles.input} placeholder="Digite seu e-mail"
-								onChangeText={text => setEmail(text.trim())} />
-						</View>
-					</KeyboardAvoidingView>
+			<View style={styles.viewInputs}>
+				<InputText placeholder="Nome Completo" onChangeText={text => setNome(text.trim())} inputVoid={nome} />
+				<InputText placeholder="E-mail" onChangeText={text => setEmail(text.trim())} inputVoid={email} />
+			</View>
 
-					<RectButton style={styles.botao} onPress={entrar}>
-						<Text style={styles.txtBotao}>Entrar</Text>
-					</RectButton>
-				</View>
-			</ScrollView>
-		</ImageBackground>
+			<BotaoPrimario onPress={entrar} text="Entrar" styleComplements={{ marginTop: 64 }} />
+		</View>
 	)
 }
 
