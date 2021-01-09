@@ -21,7 +21,7 @@ const Inicial = () => {
 			<View style={styles.containerBtns}>
 				<BotaoPrimario text="Entrar" onPress={() => navigate('Login')} styleComplements={{ width: 280 }} />
 
-				<BotaoSecundario text="Cadastrar-se" onPress={() => navigate('CadastrarUsuario')}
+				<BotaoSecundario text="Cadastrar-se" onPress={() => navigate('Cadastro')}
 					styleComplements={{ width: 280 }} />
 			</View>
 		</View>
