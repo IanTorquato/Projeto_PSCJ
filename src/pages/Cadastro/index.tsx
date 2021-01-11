@@ -51,7 +51,8 @@ const CadastrarUsuario = () => {
 			<Text style={styles.txtSagrado}>Paróquia Sagrado Coração de Jesus</Text>
 
 			<View style={styles.viewInputs}>
-				<InputText textPlaceholder="Nome Completo" onChangeText={text => setNome(text.trim())} inputValueEmpty={nome} />
+				<InputText textPlaceholder="Nome Completo" onChangeText={text => setNome(text.trim())} inputValueEmpty={nome}
+					autoCapitalize="words" />
 				<InputText textPlaceholder="E-mail" onChangeText={text => setEmail(text.trim())} inputValueEmpty={email}
 					keyboardType="email-address" autoCapitalize="none" />
 			</View>
