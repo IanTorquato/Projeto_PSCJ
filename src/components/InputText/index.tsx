@@ -5,14 +5,16 @@ import styles from './styles'
 
 interface PropsInputText extends Readonly<TextInputProps> {
 	placeholder: string
-	inputVoid: string
+	inputValueEmpty: string
 }
 
-const InputText: React.FC<PropsInputText> = ({ placeholder, inputVoid, ...rest }) => {
+const InputText: React.FC<PropsInputText> = ({ placeholder, inputValueEmpty, ...rest }) => {
 	const [inputFocus, setInputFocus] = useState(false)
 
 	function setStylesTxtInput() {
-		return (inputFocus || inputVoid) ? { ...styles.txtInputText, ...styles.txtInputTextHover } : { ...styles.txtInputText }
+		return (inputFocus || inputValueEmpty)
+			? { ...styles.txtInputText, ...styles.txtInputTextHover }
+			: { ...styles.txtInputText }
 	}
 
 	return (

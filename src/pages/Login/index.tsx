@@ -25,10 +25,10 @@ const Login = () => {
 			email: Yup.string().required('O campo E-mail é obrigatório!').email('Digite um E-mail válido!')
 		})
 
-		schemaDadosCadastro.validate({ nome, email }).then(() => {
-			// logar({ nome, email })
+		schemaDadosCadastro.validate({ nome, email }, { abortEarly: false }).then(() => {
+			logar({ nome, email })
 		}).catch(({ errors }) => {
-			Alert.alert('Erro', errors[0])
+			Alert.alert('Erro', errors.reduce((stringReturn: string, erro: string) => stringReturn += `\n\n${erro}`))
 		})
 	}
 
@@ -45,8 +45,8 @@ const Login = () => {
 			<Text style={styles.txtSagrado}>Paróquia Sagrado Coração de Jesus</Text>
 
 			<View style={styles.viewInputs}>
-				<InputText placeholder="Nome Completo" onChangeText={text => setNome(text.trim())} inputVoid={nome} />
-				<InputText placeholder="E-mail" onChangeText={text => setEmail(text.trim())} inputVoid={email} />
+				<InputText placeholder="Nome Completo" onChangeText={text => setNome(text.trim())} inputValueEmpty={nome} />
+				<InputText placeholder="E-mail" onChangeText={text => setEmail(text.trim())} inputValueEmpty={email} />
 			</View>
 
 			<BotaoPrimario onPress={entrar} text="Entrar" styleComplements={{ marginTop: 64 }} />
