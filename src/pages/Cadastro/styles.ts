@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
 	btnVoltar: {
 		left: 16,
 		position: 'absolute',
-		top: 8,
+		top: 16,
 		zIndex: 8
 	},
 
