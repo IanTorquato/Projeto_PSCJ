@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
-import { Text, View, TouchableOpacity, ImageBackground, Image, TextInput, Alert, KeyboardAvoidingView } from 'react-native'
-import { RectButton, ScrollView } from 'react-native-gesture-handler'
-import { FontAwesome5 } from '@expo/vector-icons'
+import { Text, View, TouchableOpacity, Image, Alert } from 'react-native'
+import { AntDesign } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import * as Yup from 'yup'
 
 import { useContextLogin } from '../../contexts/login'
 import api from '../../services/api'
+import InputText from '../../components/InputText'
+import BotaoPrimario from '../../components/BotaoPrimario'
 
 import styles from './styles'
 
-const imgFundo = require('../../assets/fundoApp.jpg')
 const logo = require('../../../assets/icon.png')
 
 const CadastrarUsuario = () => {
@@ -26,50 +26,37 @@ const CadastrarUsuario = () => {
 			email: Yup.string().required('O campo E-mail é obrigatório!').email('Digite um E-mail válido!')
 		})
 
-		schemaDadosCadastro.validate({ nome, email }).then(usuario => {
+		schemaDadosCadastro.validate({ nome, email }, { abortEarly: false }).then(usuario => {
 			api.post('usuarios', usuario).then(({ data }) => {
 				// Alert("Título", "Mensagem", [{text: 'txtBtn', onPress: função}], {Opções (cancelable: false)})
 				Alert.alert('Sucesso', data.mensagem,
-					[{ text: "Logar Agora", onPress: () => logar({ id: 0, foto: '', nome, email }) }], { cancelable: false }
+					[{ text: "Logar Agora", onPress: () => logar({ nome, email }) }], { cancelable: false }
 				)
 			}).catch(({ response }) => {
 				Alert.alert('Erro', response.data.erro)
 			})
 		}).catch(({ errors }) => {
-			Alert.alert('Erro', errors[0])
+			Alert.alert('Erro', errors.reduce((stringReturn: string, erro: string) => stringReturn += `\n\n${erro}`))
 		})
 	}
 
 	return (
-		<ImageBackground source={imgFundo} style={styles.imgFundo} >
+		<View style={styles.viewConteudo}>
 			<TouchableOpacity onPress={goBack} style={styles.btnVoltar}>
-				<FontAwesome5 name="arrow-circle-left" color="#fff" size={32} />
+				<AntDesign name="left" color="#fff" size={32} />
 			</TouchableOpacity>
 
-			<ScrollView>
-				<View style={styles.viewConteudo}>
-					<Image source={logo} style={styles.imgLogo} />
+			<Image source={logo} style={styles.imgLogo} />
 
-					<KeyboardAvoidingView style={styles.containerInputs}>
-						<View style={styles.containerInput}>
-							<Text style={styles.txtInput}>Nome:</Text>
-							<TextInput style={styles.input} placeholder="Digite seu nome"
-								onChangeText={text => setNome(text.trim())} />
-						</View>
+			<Text style={styles.txtSagrado}>Paróquia Sagrado Coração de Jesus</Text>
 
-						<View style={styles.containerInput}>
-							<Text style={styles.txtInput}>E-mail:</Text>
-							<TextInput style={styles.input} placeholder="Digite seu e-mail"
-								onChangeText={text => setEmail(text.trim())} />
-						</View>
-					</KeyboardAvoidingView>
+			<View style={styles.viewInputs}>
+				<InputText placeholder="Nome Completo" onChangeText={text => setNome(text.trim())} inputValueEmpty={nome} />
+				<InputText placeholder="E-mail" onChangeText={text => setEmail(text.trim())} inputValueEmpty={email} />
+			</View>
 
-					<RectButton style={styles.botao} onPress={cadastrar} >
-						<Text style={styles.txtBotao}>Cadastrar-se</Text>
-					</RectButton>
-				</View>
-			</ScrollView>
-		</ImageBackground>
+			<BotaoPrimario onPress={cadastrar} text="Cadastrar-se" styleComplements={{ marginTop: 64 }} />
+		</View>
 	)
 }
 
