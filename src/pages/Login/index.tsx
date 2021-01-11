@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Text, View, TouchableOpacity, Image, Alert } from 'react-native'
+import { Text, View, TouchableOpacity, Image, Alert, KeyboardAvoidingView } from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import * as Yup from 'yup'
@@ -35,7 +35,7 @@ const Login = () => {
 	// KeyboardAvoidingView
 
 	return (
-		<View style={styles.viewConteudo}>
+		<KeyboardAvoidingView keyboardVerticalOffset={48} behavior="position" contentContainerStyle={styles.viewConteudo}>
 			<TouchableOpacity onPress={goBack} style={styles.btnVoltar}>
 				<AntDesign name="left" color="#fff" size={32} />
 			</TouchableOpacity>
@@ -45,12 +45,13 @@ const Login = () => {
 			<Text style={styles.txtSagrado}>Paróquia Sagrado Coração de Jesus</Text>
 
 			<View style={styles.viewInputs}>
-				<InputText placeholder="Nome Completo" onChangeText={text => setNome(text.trim())} inputValueEmpty={nome} />
-				<InputText placeholder="E-mail" onChangeText={text => setEmail(text.trim())} inputValueEmpty={email} />
+				<InputText textPlaceholder="Nome Completo" onChangeText={text => setNome(text.trim())} inputValueEmpty={nome} />
+				<InputText textPlaceholder="E-mail" onChangeText={text => setEmail(text.trim())} inputValueEmpty={email}
+					keyboardType="email-address" autoCapitalize="none" />
 			</View>
 
 			<BotaoPrimario onPress={entrar} text="Entrar" styleComplements={{ marginTop: 64 }} />
-		</View>
+		</KeyboardAvoidingView>
 	)
 }
 

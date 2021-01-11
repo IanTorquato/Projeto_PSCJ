@@ -4,11 +4,11 @@ import { Text, TextInput, View, TextInputProps } from 'react-native'
 import styles from './styles'
 
 interface PropsInputText extends Readonly<TextInputProps> {
-	placeholder: string
+	textPlaceholder: string
 	inputValueEmpty: string
 }
 
-const InputText: React.FC<PropsInputText> = ({ placeholder, inputValueEmpty, ...rest }) => {
+const InputText: React.FC<PropsInputText> = ({ textPlaceholder, inputValueEmpty, ...rest }) => {
 	const [inputFocus, setInputFocus] = useState(false)
 
 	function setStylesTxtInput() {
@@ -22,7 +22,7 @@ const InputText: React.FC<PropsInputText> = ({ placeholder, inputValueEmpty, ...
 			<TextInput {...rest} style={styles.inputText} onFocus={() => setInputFocus(true)}
 				onBlur={() => setInputFocus(false)} />
 
-			<Text style={setStylesTxtInput()}>{placeholder}</Text>
+			<Text style={setStylesTxtInput()}>{textPlaceholder}</Text>
 		</View>
 	)
 }
