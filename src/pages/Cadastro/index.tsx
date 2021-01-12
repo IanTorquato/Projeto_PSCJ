@@ -52,9 +52,9 @@ const CadastrarUsuario = () => {
 
 			<View style={styles.viewInputs}>
 				<InputText textPlaceholder="Nome Completo" onChangeText={text => setNome(text.trim())} inputValueEmpty={nome}
-					autoCapitalize="words" />
+					autoCapitalize="words" autoCompleteType="name" />
 				<InputText textPlaceholder="E-mail" onChangeText={text => setEmail(text.trim())} inputValueEmpty={email}
-					keyboardType="email-address" autoCapitalize="none" />
+					keyboardType="email-address" autoCapitalize="none" autoCompleteType="email" />
 			</View>
 
 			<BotaoPrimario onPress={cadastrar} text="Cadastrar-se" styleComplements={{ marginTop: 64 }} />
