@@ -3,7 +3,7 @@ import { StatusBar } from 'react-native'
 import { preventAutoHideAsync } from 'expo-splash-screen'
 
 import { useFonts, Cookie_400Regular } from '@expo-google-fonts/cookie'
-import { CormorantGaramond_400Regular } from '@expo-google-fonts/cormorant-garamond'
+import { CormorantGaramond_400Regular, CormorantGaramond_700Bold } from '@expo-google-fonts/cormorant-garamond'
 import { Merriweather_400Regular } from '@expo-google-fonts/merriweather'
 import { Oswald_400Regular } from '@expo-google-fonts/oswald'
 import { Roboto_400Regular } from '@expo-google-fonts/roboto'
@@ -20,7 +20,10 @@ export default function App() {
 		(async () => await preventAutoHideAsync().catch(error => console.log(error)))()
 	}, [])
 
-	const [fontsLoaded, error] = useFonts({ Cookie_400Regular, CormorantGaramond_400Regular, Merriweather_400Regular, Oswald_400Regular, Roboto_400Regular, ShadowsIntoLightTwo_400Regular })
+	const [fontsLoaded, error] = useFonts({
+		Cookie_400Regular, CormorantGaramond_400Regular, CormorantGaramond_700Bold,
+		Merriweather_400Regular, Oswald_400Regular, Roboto_400Regular, ShadowsIntoLightTwo_400Regular
+	})
 
 	error && console.log(error)
 
