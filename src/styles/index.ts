@@ -38,6 +38,9 @@ const fontes = {
 	cormorant: {
 		fontFamily: 'CormorantGaramond_400Regular'
 	},
+	cormorantBold: {
+		fontFamily: 'CormorantGaramond_700Bold'
+	},
 	merriweather: {
 		fontFamily: 'Merriweather_400Regular'
 	},
