@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Text, View, TouchableOpacity, Image, Alert } from 'react-native'
+import { Text, View, TouchableOpacity, Image, Alert, KeyboardAvoidingView } from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 import * as Yup from 'yup'
@@ -41,7 +41,7 @@ const CadastrarUsuario = () => {
 	}
 
 	return (
-		<View style={styles.viewConteudo}>
+		<KeyboardAvoidingView keyboardVerticalOffset={48} behavior="position" contentContainerStyle={styles.viewConteudo}>
 			<TouchableOpacity onPress={goBack} style={styles.btnVoltar}>
 				<AntDesign name="left" color="#fff" size={32} />
 			</TouchableOpacity>
@@ -58,7 +58,7 @@ const CadastrarUsuario = () => {
 			</View>
 
 			<BotaoPrimario onPress={cadastrar} text="Cadastrar-se" styleComplements={{ marginTop: 64 }} />
-		</View>
+		</KeyboardAvoidingView>
 	)
 }
 

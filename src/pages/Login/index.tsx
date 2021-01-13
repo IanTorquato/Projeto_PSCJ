@@ -32,8 +32,6 @@ const Login = () => {
 		})
 	}
 
-	// KeyboardAvoidingView
-
 	return (
 		<KeyboardAvoidingView keyboardVerticalOffset={48} behavior="position" contentContainerStyle={styles.viewConteudo}>
 			<TouchableOpacity onPress={goBack} style={styles.btnVoltar}>
