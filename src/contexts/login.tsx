@@ -66,6 +66,7 @@ const LoginProvider: React.FC = ({ children }) => {
 
 	async function logar(dadosLogin: DadosLogin) {
 		api.post(`/login_usuario`, dadosLogin).then(({ data }: AxiosResponse<ResponseData>) => {
+			api.defaults.headers.Authorization = `Bearer ${data.token}`
 			setUsuario(data.usuario)
 
 			AsyncStorage.setItem('@PSCJ:user', JSON.stringify(data.usuario))
