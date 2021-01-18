@@ -3,9 +3,9 @@ import { Text, View, Image } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
 import BotaoPrimario from '../../components/BotaoPrimario'
+import BotaoSecundario from '../../components/BotaoSecundario'
 
 import styles from './styles'
-import BotaoSecundario from '../../components/BotaoSecundario'
 
 const logo = require('../../../assets/icon.png')
 
