@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { Alert, Image, ScrollView, Text, View } from 'react-native'
-import { Picker } from '@react-native-community/picker'
-import { RectButton } from 'react-native-gesture-handler'
+import { Alert, Image, Linking, ScrollView, Text, View } from 'react-native'
+// import { Picker } from '@react-native-community/picker'
+import { RectButton, TouchableNativeFeedback } from 'react-native-gesture-handler'
 import { FontAwesome5 } from '@expo/vector-icons'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 import api from '../../services/api'
 import CabecalhoApp from '../../components/CabecalhoApp'
 import BotaoPrimario from '../../components/BotaoPrimario'
-import { Missa, Local } from '../../utils/interfaces'
+import { Missa } from '../../utils/interfaces'
 import { formatDiaMesHora } from '../../utils/tratandoDatas'
 import retornaCorDoCicloTernario from '../../utils/cicloCores'
 import { cores } from '../../styles'
@@ -38,6 +38,63 @@ const Home = () => {
 		// 		Alert.alert(response?.data.erro || 'Falha ao listar locais.')
 		// 	})
 	}, [])
+
+	const encaminharParaWhatsapp = () => {
+		Linking.canOpenURL("whatsapp://send").then(supported => {
+			!!supported
+				? Alert.alert('Deseja continuar?', 'Você será redirecionado para o Whatsapp.', [
+					{ text: 'Cancelar' },
+					{ text: 'Continuar', onPress: () => Linking.openURL('whatsapp://send?phone=554836422121') }
+				])
+				: Alert.alert('Whatsapp não disponínel!', 'Gostaria de abri-lo pelo navegador?', [
+					{ text: 'Cancelar' },
+					{ text: 'Continuar', onPress: () => Linking.openURL('https://api.whatsapp.com/send?phone=554836422121') }
+				])
+		})
+	}
+
+	const encaminharParaFacebook = () => {
+		Linking.canOpenURL('fb://').then(supported => {
+			!!supported
+				? Alert.alert('Deseja continuar?', 'Você será redirecionado para o Facebook.', [
+					{ text: 'Cancelar' },
+					{ text: 'Continuar', onPress: () => Linking.openURL('fb://page/108271214142847') }
+				])
+				: Alert.alert('Facebook não disponínel!', 'Gostaria de abri-lo pelo navegador?', [
+					{ text: 'Cancelar' },
+					{ text: 'Continuar', onPress: () => Linking.openURL('https://www.facebook.com/santuariogravatal') }
+				])
+		})
+	}
+
+	const encaminharParaInstagram = () => {
+		Linking.canOpenURL('instagram://user').then(supported => {
+			!!supported
+				? Alert.alert('Deseja continuar?', 'Você será redirecionado para o Instagram.', [
+					{ text: 'Cancelar' },
+					{ text: 'Continuar', onPress: () => Linking.openURL('instagram://user?username=santuariogravatal') }
+				])
+				: Alert.alert('Instagram não disponínel!', 'Gostaria de abri-lo pelo navegador?', [
+					{ text: 'Cancelar' },
+					{ text: 'Continuar', onPress: () => Linking.openURL('https://www.instagram.com/santuariogravatal') }
+				])
+		})
+	}
+
+	const encaminharParaYoutube = () => {
+		Linking.canOpenURL('vnd.youtube://').then(supported => {
+			!!supported
+				? Alert.alert('Deseja continuar?', 'Você será redirecionado para o Youtube.', [
+					{ text: 'Cancelar' },
+					{ text: 'Continuar', onPress: () => Linking.openURL('vnd.youtube://c/TVtubaoficial') }
+				])
+				: Alert.alert('Youtube não disponínel!', 'Gostaria de abri-lo pelo navegador?', [
+					{ text: 'Cancelar' },
+					{ text: 'Continuar', onPress: () => Linking.openURL('https://www.youtube.com/c/TVtubaoficial') }
+				])
+		})
+	}
+
 
 	return (
 		<ScrollView style={styles.viewHome} showsHorizontalScrollIndicator={true}>
@@ -148,8 +205,32 @@ const Home = () => {
 						<FontAwesome5 name="mask" color={branco} size={24} />
 					</View>
 
-					<Text style={styles.txtOrientacao}>As ofertas são feitas no fim da missa;</Text>
+					<Text style={styles.txtOrientacao}>As ofertas são feitas no fim da missa.</Text>
 				</View>
+			</View>
+
+			<Text style={styles.txtTitulosHome}>Contato</Text>
+
+			<View style={styles.viewContato}>
+				<View style={styles.viewAlinhaRedesSociais}>
+					<RectButton style={{ ...styles.viewRedeSocial, ...styles.viewWhatsapp }} onPress={encaminharParaWhatsapp}>
+						<FontAwesome5 name="whatsapp" color="#fff" size={32} />
+					</RectButton>
+
+					<RectButton style={{ ...styles.viewRedeSocial, ...styles.viewFacebook }} onPress={encaminharParaFacebook}>
+						<FontAwesome5 name="facebook-f" color="#fff" size={32} />
+					</RectButton>
+
+					<RectButton style={{ ...styles.viewRedeSocial, ...styles.viewInstagram }} onPress={encaminharParaInstagram}>
+						<FontAwesome5 name="instagram" color="#fff" size={32} />
+					</RectButton>
+
+					<RectButton style={{ ...styles.viewRedeSocial, ...styles.viewYoutube }} onPress={encaminharParaYoutube}>
+						<FontAwesome5 name="youtube" color="#fff" size={32} />
+					</RectButton>
+				</View>
+
+				<Text style={styles.txtCopyright}>© 2021 - {new Date().getFullYear()} por Paróquia Sagrado Coração de Jesus</Text>
 			</View>
 		</ScrollView>
 	)

@@ -3,7 +3,8 @@ import { StyleSheet } from 'react-native'
 import { cores, fontes } from '../../styles'
 
 const { amareloClaro } = cores.principais
-const { branco, cinzaMuitoEscuro } = cores.neutras
+const { branco, cinzaClaro, cinzaMuitoEscuro } = cores.neutras
+const { whatsapp, facebook, instagram, youtube } = cores.redesSociais
 
 const { cormorant, cormorantBold, merriweather, oswald, roboto, shadows } = fontes
 
@@ -132,6 +133,47 @@ const styles = StyleSheet.create({
 		...cormorant,
 		fontSize: 20,
 		marginLeft: 8
+	},
+
+	viewContato: {
+		alignItems: 'center'
+	},
+
+	viewAlinhaRedesSociais: {
+		flexDirection: 'row',
+		marginBottom: 32
+	},
+
+	viewRedeSocial: {
+		alignItems: 'center',
+		borderRadius: 100,
+		height: 48,
+		justifyContent: 'center',
+		marginHorizontal: 16,
+		width: 48
+	},
+
+	viewWhatsapp: {
+		backgroundColor: whatsapp,
+	},
+
+	viewFacebook: {
+		backgroundColor: facebook,
+	},
+
+	viewInstagram: {
+		backgroundColor: instagram,
+	},
+
+	viewYoutube: {
+		backgroundColor: youtube,
+	},
+
+	txtCopyright: {
+		color: cinzaClaro,
+		fontSize: 12,
+		marginBottom: 16,
+		...roboto
 	}
 })
 
