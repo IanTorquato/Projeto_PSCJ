@@ -12,4 +12,10 @@ interface Missa {
 	local_url: string
 }
 
-export default Missa
+interface Local {
+	id: number
+	nome: string
+	imagem: string
+}
+
+export { Missa, Local }
