@@ -2,14 +2,13 @@ import { StyleSheet } from 'react-native'
 
 import { cores, fontes } from '../../styles'
 
-const { branco, preto } = cores.neutras
+const { branco } = cores.neutras
 
 const { cookie } = fontes
 
 const styles = StyleSheet.create({
 	viewConteudo: {
-		alignItems: 'center',
-		backgroundColor: preto
+		alignItems: 'center'
 	},
 
 	imgLogo: {
@@ -23,12 +22,16 @@ const styles = StyleSheet.create({
 		color: branco,
 		...cookie,
 		fontSize: 48,
-		textAlign: 'center',
+		maxWidth: 280,
+		textAlign: 'center'
 	},
 
-	containerBtns: {
-		height: 112,
-		justifyContent: 'space-between',
+	btnsInicio: {
+		width: 280
+	},
+
+	btnEntrar: {
+		marginBottom: 16,
 		marginTop: 136
 	}
 })

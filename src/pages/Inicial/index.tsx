@@ -18,12 +18,10 @@ const Inicial = () => {
 
 			<Text style={styles.txtSagrado}>Paróquia Sagrado Coração de Jesus</Text>
 
-			<View style={styles.containerBtns}>
-				<BotaoPrimario text="Entrar" onPress={() => navigate('Login')} styleComplements={{ width: 280 }} />
+			<BotaoPrimario text="Entrar" onPress={() => navigate('Login')}
+				styleComplements={{ ...styles.btnsInicio, ...styles.btnEntrar }} />
 
-				<BotaoSecundario text="Cadastrar-se" onPress={() => navigate('Cadastro')}
-					styleComplements={{ width: 280 }} />
-			</View>
+			<BotaoSecundario text="Cadastrar-se" onPress={() => navigate('Cadastro')} styleComplements={styles.btnsInicio} />
 		</View>
 	)
 }
