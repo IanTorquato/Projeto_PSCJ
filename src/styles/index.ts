@@ -52,7 +52,7 @@ const fontes = {
 	},
 	shadows: {
 		fontFamily: 'ShadowsIntoLightTwo_400Regular',
-		letterSpacing: '8%'
+		letterSpacing: 1.4
 	}
 }
 
