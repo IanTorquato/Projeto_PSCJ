@@ -9,13 +9,13 @@ import styles from './styles'
 const logo = require('../../../assets/icon.png')
 
 const CabecalhoApp: React.FC = () => {
-	const { usuario } = useContextLogin()
+	const { usuario, deslogar } = useContextLogin()
 
 	const { navigate } = useNavigation()
 
 	return (
 		<View style={styles.viewCabecalho}>
-			<View style={styles.viewPSCJ}>
+			<View style={styles.viewPSCJ} onTouchEnd={deslogar}>
 				<Image source={logo} style={styles.imgLogo} />
 				<Text style={styles.txtPSCJ}>PSCJ</Text>
 			</View>
