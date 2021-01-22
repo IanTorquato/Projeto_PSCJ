@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		height: 64,
 		justifyContent: 'space-between',
+		marginBottom: 32,
 		padding: 8
 	},
 

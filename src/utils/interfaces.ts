@@ -1,4 +1,4 @@
-export default interface Missa {
+interface Missa {
 	id: number
 	nome: string
 	local_id: number
@@ -11,3 +11,5 @@ export default interface Missa {
 	local_nome: string
 	local_url: string
 }
+
+export default Missa
