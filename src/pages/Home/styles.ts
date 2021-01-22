@@ -12,12 +12,6 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 16
 	},
 
-	viewTitulo: {
-		alignItems: 'center',
-		flexDirection: 'row',
-		justifyContent: 'space-between'
-	},
-
 	txtTitulosHome: {
 		color: branco,
 		fontSize: 32,
@@ -26,12 +20,17 @@ const styles = StyleSheet.create({
 		marginBottom: 24
 	},
 
-	txtTeste: {
-		color: branco,
-		fontSize: 14,
-		paddingBottom: 24,
-		...roboto
-	},
+	// viewPickerLocalidades: {
+	// 	alignItems: 'center',
+	// 	flexDirection: 'row'
+	// },
+
+	// pickerLocalidades: {
+	// 	color: branco,
+	// 	height: 24,
+	// 	paddingBottom: 24,
+	// 	width: 152
+	// },
 
 	viewMissas: {
 		marginHorizontal: -4

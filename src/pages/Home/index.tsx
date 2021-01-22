@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Alert, Image, ScrollView, Text, View } from 'react-native'
+import { Picker } from '@react-native-community/picker'
 import { RectButton } from 'react-native-gesture-handler'
 import { FontAwesome5 } from '@expo/vector-icons'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
@@ -7,7 +8,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 import api from '../../services/api'
 import CabecalhoApp from '../../components/CabecalhoApp'
 import BotaoPrimario from '../../components/BotaoPrimario'
-import Missa from '../../utils/interfaces'
+import { Missa, Local } from '../../utils/interfaces'
 import { formatDiaMesHora } from '../../utils/tratandoDatas'
 import retornaCorDoCicloTernario from '../../utils/cicloCores'
 import { cores } from '../../styles'
@@ -16,7 +17,11 @@ import styles from './styles'
 
 const Home = () => {
 	const [missas, setMissas] = useState<Missa[]>([])
+	// const [locais, setLocais] = useState<Local[]>([])
+	// const [localSelecionado, setLocalSelecionado] = useState(0)
+
 	const { branco } = cores.neutras
+	// const { vermelhoClaro } = cores.principais
 
 	useEffect(() => {
 		api.get('missas?quantidade_missas=6')
@@ -25,16 +30,32 @@ const Home = () => {
 				console.log(response)
 				Alert.alert(response?.data.erro || 'Falha ao listar missas.')
 			})
+
+		// api.get('locais')
+		// 	.then(({ data }) => setLocais(data))
+		// 	.catch(({ response }) => {
+		// 		console.log(response)
+		// 		Alert.alert(response?.data.erro || 'Falha ao listar locais.')
+		// 	})
 	}, [])
 
 	return (
 		<ScrollView style={styles.viewHome} showsHorizontalScrollIndicator={true}>
 			<CabecalhoApp />
 
-			<View style={styles.viewTitulo}>
-				<Text style={styles.txtTitulosHome}>Próximas Missas</Text>
-				<Text style={styles.txtTeste}>Filtarar Lolicadades</Text>
-			</View>
+			<Text style={styles.txtTitulosHome}>Próximas Missas</Text>
+
+			{/* <View style={styles.viewPickerLocalidades}>
+				<FontAwesome5 name="map-marker-alt" color={vermelhoClaro} size={16} />
+
+				<Picker style={styles.pickerLocalidades} selectedValue={localSelecionado} prompt="Locais"
+					onValueChange={value => setLocalSelecionado(+value)}>
+
+					<Picker.Item label="Localidades" value="0" />
+
+					{locais.map(local => <Picker.Item label={local.nome} value={local.id} key={local.id} />)}
+				</Picker>
+			</View> */}
 
 			{!missas[0] ? <Text style={styles.txtNomeMissa}>Nada de missas aqui!</Text> : (
 				<ScrollView style={styles.viewMissas} horizontal showsHorizontalScrollIndicator={false}>
