@@ -7,7 +7,7 @@ import BotaoSecundario from '../../components/BotaoSecundario'
 
 import styles from './styles'
 
-const logo = require('../../../assets/icon.png')
+const logo = require('../../assets/logo.png')
 
 const Inicial = () => {
 	const { navigate } = useNavigation()

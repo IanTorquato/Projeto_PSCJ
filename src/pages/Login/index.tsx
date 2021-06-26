@@ -10,7 +10,7 @@ import BotaoPrimario from '../../components/BotaoPrimario'
 
 import styles from './styles'
 
-const logo = require('../../../assets/icon.png')
+const logo = require('../../assets/logo.png')
 
 const Login = () => {
 	const [nome, setNome] = useState('')

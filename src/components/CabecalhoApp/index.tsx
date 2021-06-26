@@ -6,7 +6,7 @@ import { useContextLogin } from '../../contexts/login'
 
 import styles from './styles'
 
-const logo = require('../../../assets/icon.png')
+const logo = require('../../assets/logo.png')
 
 const CabecalhoApp: React.FC = () => {
 	const { usuario, deslogar } = useContextLogin()
