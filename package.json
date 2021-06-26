@@ -1,45 +1,45 @@
 {
-	"dependencies": {
-		"@expo-google-fonts/cookie": "^0.1.0",
-		"@expo-google-fonts/cormorant-garamond": "^0.1.0",
-		"@expo-google-fonts/merriweather": "^0.1.0",
-		"@expo-google-fonts/oswald": "^0.1.0",
-		"@expo-google-fonts/roboto": "^0.1.0",
-		"@expo-google-fonts/shadows-into-light-two": "^0.1.0",
-		"@react-native-community/async-storage": "^1.11.0",
-		"@react-native-community/masked-view": "^0.1.10",
-		"@react-native-community/picker": "1.6.0",
-		"@react-navigation/native": "^5.6.1",
-		"@react-navigation/stack": "^5.6.2",
-		"axios": "^0.21.1",
-		"date-fns": "^2.16.1",
-		"expo": "^38.0.9",
-		"expo-splash-screen": "^0.5.0",
-		"expo-status-bar": "^1.0.0",
-		"react": "~16.11.0",
-		"react-native": "https://github.com/expo/react-native/archive/sdk-38.0.0.tar.gz",
-		"react-native-base64": "^0.2.1",
-		"react-native-gesture-handler": "^1.6.1",
-		"react-native-numeric-input": "^1.8.3",
-		"react-native-paper": "^4.0.1",
-		"react-native-reanimated": "^1.9.0",
-		"react-native-safe-area-context": "^3.0.2",
-		"react-native-screens": "^2.9.0",
-		"react-native-svg": "^12.1.0",
-		"yup": "^0.29.3"
-	},
-	"devDependencies": {
-		"@babel/core": "^7.11.1",
-		"@types/react": "^16.9.46",
-		"@types/react-native": "^0.62.18",
-		"@types/react-native-base64": "^0.1.0",
-		"@types/yup": "^0.29.4",
-		"typescript": "^3.9.7"
-	},
-	"main": "node_modules/expo/AppEntry.js",
-	"private": true,
-	"scripts": {
-		"eject": "expo eject",
-		"dev": "expo start"
-	}
+  "dependencies": {
+    "@expo-google-fonts/cookie": "^0.1.0",
+    "@expo-google-fonts/cormorant-garamond": "^0.1.0",
+    "@expo-google-fonts/merriweather": "^0.1.0",
+    "@expo-google-fonts/oswald": "^0.1.0",
+    "@expo-google-fonts/roboto": "^0.1.0",
+    "@expo-google-fonts/shadows-into-light-two": "^0.1.0",
+    "@react-native-community/async-storage": "^1.11.0",
+    "@react-native-community/masked-view": "^0.1.10",
+    "@react-native-community/picker": "1.6.0",
+    "@react-navigation/native": "^5.6.1",
+    "@react-navigation/stack": "^5.6.2",
+    "axios": "^0.21.1",
+    "date-fns": "^2.16.1",
+    "expo": "^38.0.9",
+    "expo-splash-screen": "^0.5.0",
+    "expo-status-bar": "^1.0.0",
+    "react": "~16.11.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.0.tar.gz",
+    "react-native-base64": "^0.2.1",
+    "react-native-gesture-handler": "^1.6.1",
+    "react-native-numeric-input": "^1.8.3",
+    "react-native-paper": "^4.0.1",
+    "react-native-reanimated": "^1.9.0",
+    "react-native-safe-area-context": "^3.0.2",
+    "react-native-screens": "^2.9.0",
+    "react-native-svg": "^12.1.0",
+    "yup": "^0.29.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@types/react": "^16.9.46",
+    "@types/react-native": "^0.62.18",
+    "@types/react-native-base64": "^0.1.0",
+    "@types/yup": "^0.29.4",
+    "typescript": "^3.9.7"
+  },
+  "main": "node_modules/expo/AppEntry.js",
+  "private": true,
+  "scripts": {
+    "eject": "expo eject",
+    "dev": "expo start"
+  }
 }

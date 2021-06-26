@@ -10,20 +10,20 @@ import styles from './styles'
 const logo = require('../../assets/logo.png')
 
 const Inicial = () => {
-	const { navigate } = useNavigation()
+  const { navigate } = useNavigation()
 
-	return (
-		<View style={styles.viewConteudo}>
-			<Image source={logo} style={styles.imgLogo} />
+  return (
+    <View style={styles.viewConteudo}>
+      <Image source={logo} style={styles.imgLogo} />
 
-			<Text style={styles.txtSagrado}>Paróquia Sagrado Coração de Jesus</Text>
+      <Text style={styles.txtSagrado}>Paróquia Sagrado Coração de Jesus</Text>
 
-			<BotaoPrimario text="Entrar" onPress={() => navigate('Login')}
-				styleComplements={{ ...styles.btnsInicio, ...styles.btnEntrar }} />
+      <BotaoPrimario text="Entrar" onPress={() => navigate('Login')}
+        styleComplements={{ ...styles.btnsInicio, ...styles.btnEntrar }} />
 
-			<BotaoSecundario text="Cadastrar-se" onPress={() => navigate('Cadastro')} styleComplements={styles.btnsInicio} />
-		</View>
-	)
+      <BotaoSecundario text="Cadastrar-se" onPress={() => navigate('Cadastro')} styleComplements={styles.btnsInicio} />
+    </View>
+  )
 }
 
 export default Inicial

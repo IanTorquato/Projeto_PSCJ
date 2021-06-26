@@ -7,35 +7,35 @@ const { branco, cinzaMuitoEscuro } = cores.neutras
 const { cormorant } = fontes
 
 const styles = StyleSheet.create({
-	viewCabecalho: {
-		backgroundColor: cinzaMuitoEscuro,
-		flexDirection: 'row',
-		height: 64,
-		justifyContent: 'space-between',
-		marginBottom: 32,
-		padding: 8
-	},
+  viewCabecalho: {
+    backgroundColor: cinzaMuitoEscuro,
+    flexDirection: 'row',
+    height: 64,
+    justifyContent: 'space-between',
+    marginBottom: 32,
+    padding: 8
+  },
 
-	viewPSCJ: {
-		alignItems: 'center',
-		flexDirection: 'row'
-	},
+  viewPSCJ: {
+    alignItems: 'center',
+    flexDirection: 'row'
+  },
 
-	imgLogo: {
-		height: 48,
-		width: 48
-	},
+  imgLogo: {
+    height: 48,
+    width: 48
+  },
 
-	txtPSCJ: {
-		color: branco,
-		...cormorant,
-		fontSize: 24
-	},
+  txtPSCJ: {
+    color: branco,
+    ...cormorant,
+    fontSize: 24
+  },
 
-	imgAvatar: {
-		height: 48,
-		width: 48
-	}
+  imgAvatar: {
+    height: 48,
+    width: 48
+  }
 })
 
 export default styles

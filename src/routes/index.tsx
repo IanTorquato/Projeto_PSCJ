@@ -7,13 +7,13 @@ import RoutesLogado from '../routes/logado.routes'
 import RoutesDeslogado from '../routes/deslogado.routes'
 
 const Routes = () => {
-	const { loading, usuario } = useContextLogin()
+  const { loading, usuario } = useContextLogin()
 
-	return (
-		<NavigationContainer>
-			{!loading && hideAsync() && (!!usuario ? <RoutesLogado /> : <RoutesDeslogado />)}
-		</NavigationContainer>
-	)
+  return (
+    <NavigationContainer>
+      {!loading && hideAsync() && (!!usuario ? <RoutesLogado /> : <RoutesDeslogado />)}
+    </NavigationContainer>
+  )
 }
 
 export default Routes
